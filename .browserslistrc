@@ -1,0 +1,8 @@
+# # Browsers that we support
+# For additional information regarding the format and rule options, please see:
+# https://github.com/browserslist/browserslist#queries
+
+> 0.4% in US
+last 6 versions
+Firefox ESR
+not dead
