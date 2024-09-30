@@ -1,5 +1,6 @@
 {
-  "name": "foundation-sass-use",
+  "private": true,
+  "name": "gulp-compile",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -8,18 +9,19 @@
     "build": "gulp build --production"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.20",
+    "browserlist": "^1.0.1",
     "foundation-sites": "^6.8.1",
     "gulp": "^5",
-    "gulp-cleaner-css": "^4.3.2",
-    "gulp-mode": "^1.1.0",
-    "gulp-postcss": "^10.0.0",
     "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^2.6.5",
     "jquery": "^3.7.1",
     "motion-ui": "^2.0.5",
-    "postcss": "^8.4.47",
-    "sass-embedded": "^1.79.4",
     "what-input": "^5.2.12"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "gulp-mode": "^1.1.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "sass-embedded": "^1.79.4"
   }
 }
