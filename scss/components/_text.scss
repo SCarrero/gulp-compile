@@ -5,29 +5,29 @@
 h1,
 .h1 {
   @include fluid-type(35px, 45px, xlarge);
-  line-height: calc(50/45);
+  line-height: math.div(50, 45);
   font-weight: $global-weight-light;
+  .hero-roofline & {
+    margin-bottom: 0.14em;
+  }
   &.jumbo {
     line-height: math.div(80, 65);
     @include fluid-type(35px, 65px, xlarge);
     font-weight: $global-weight-light;
   }
-  .hero-roofline & {
-    margin-bottom: 0.14em;
-  }
 }
 .split-hero h1 {
-  @include fluid-type(35px, 45px, xlarge);
   line-height: math.div(50, 45);
   margin-bottom: 0.33em;
-  @include breakpoint(large) {
-    @include fluid-type(28px, 45px, xlarge);
-  }
   &.h2 {
     font-size: rem-calc(28);
     @include breakpoint(xlarge) {
       font-size: rem-calc(32);
     }
+  }
+  @include fluid-type(35px, 45px, xlarge);
+  @include breakpoint(large) {
+    @include fluid-type(28px, 45px, xlarge);
   }
 }
 h2, .h2 {
