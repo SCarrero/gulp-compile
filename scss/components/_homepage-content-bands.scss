@@ -1,0 +1,21 @@
+.caret-downside-large {
+  position: absolute;
+  bottom: 0;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 4.75rem;
+    height: 4.75rem;
+    bottom: -2rem;
+    left: 1.25rem;
+    transform: rotate(37deg) skewX(-18deg);
+    z-index: 0;
+    background: inherit;
+    @include breakpoint(large) {
+      width: 6.75rem;
+      height: 6.75rem;
+      bottom: -3rem;
+    }
+  }
+}
+

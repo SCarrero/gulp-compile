@@ -1,0 +1,550 @@
+h2,
+h3,
+h4,
+h5,
+h6 {
+  > a {
+    display: inline-block;
+  }
+  > a:not(:hover):not(:focus) {
+    text-decoration: none;
+  }
+}
+a {
+  text-underline-offset: 0.15rem;
+}
+a:visited {
+  color: $anchor-color-visited;
+}
+// Deleted background-sheer now that it's not used.
+// to do, move to nav scss later
+html:not(.white) .main-nav .menu .active,
+html:not(.white) .main-nav .menu :hover {
+  color: map-get($colors, blue5);
+}
+header a,
+footer a {
+  @include disable-mouse-outline;
+}
+[data-whatinput="touch"] header a:focus,
+[data-whatinput="touch"] header button:focus,
+[data-whatintent="mouse"] header a:focus,
+[data-whatintent="mouse"] header button:focus {
+  outline: none !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.no-tap-hightlight {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // hides the color overlay on mobile tap -- automatically applied to links in nav
+}
+
+// Anchors on backgrounds moved to backgrounds.scss.
+
+.accent-white {
+  &:visited {
+    color: rgba($white, 0.75);
+  }
+  &:hover,
+  &:focus {
+    color: $white;
+  }
+}
+.accent-black {
+  &:hover,
+  &:focus {
+    color: $dark-gray;
+    > .media-object-section.main-section > p.intro > a {
+      text-decoration: underline;
+    }
+  }
+}
+
+.no-decoration {
+  text-decoration: none;
+  &:link,
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+}
+footer a:not(:hover):not(:focus) {
+  text-decoration: none;
+}
+
+a,
+a:hover,
+a:focus {
+  [class*="background-"] {
+    h2, h3, h4, h5 {
+      color: inherit;
+    }
+  }
+}
+a {
+  .card,
+  .media-object-section.main-section {
+    color: $body-font-color;
+    h2, h3, h4 {
+      color: $anchor-color;
+    }
+  }
+  &:visited {
+    .card,
+    .media-object-section.main-section  {
+      h2, h3, h4 {
+        color: $anchor-color-visited;
+      }
+    }
+  }
+  &:hover,
+  &:focus {
+    .card,
+    .media-object-section.main-section {
+      h2, h3, h4 {
+        color: $anchor-color-hover;
+      }
+    }
+  }
+  sup {
+    display: inline-block;
+  }
+  .button-row-content {
+    h3 {
+      color: $anchor-color;
+    }
+  }
+  &:visited {
+    .button-row-content {
+      h3 {
+        color: $anchor-color-visited;
+      }
+    }
+  }
+  &:hover,
+  &:focus {
+    .button-row-content {
+      h3 {
+        color: $anchor-color-hover;
+      }
+    }
+  }
+}
+.block-link {
+  display: block;
+  text-decoration: none;
+  color: initial;
+  h3.accent-primary {
+    color: $anchor-color;
+  }
+  &:visited {
+    .card {
+      h2, h3, h4 {
+        color: $anchor-color-visited;
+      }
+    }
+    [class*="background-"] h3.accent-primary {
+      color: $anchor-color-visited;
+    }
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    color: initial;
+    h2, h3, h4,
+    [class*="background-"] h3.accent-primary {
+      color: $anchor-color-hover;
+    }
+  }
+}
+.video-modal {
+  position: relative;
+  display: inline-block;
+}
+
+.video-length {
+  position: absolute;
+  display: inline-block;
+  min-width: rem-calc(90);
+  color: $white;
+  padding: 0.7em 0.4em 0.6em 2em;
+  z-index: 101;
+  left: 1px;
+  bottom: 1px;
+  background: rgba($primary-color, 0.92);
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    background: transparent
+      icon(play, "none", 28px, 28px, 0, 0, 200, 200, $white, "14") no-repeat top
+      left / contain;
+    width: 1.35em;
+    height: 1.35em;
+    left: rem-calc(9);
+    bottom: rem-calc(9);
+  }
+}
+a .play-button, a.play-button {
+  position: absolute;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  font-size: rem-calc(16px);
+  letter-spacing: rem-calc(1px);
+  color: $white;
+  font-weight: $global-weight-medium;
+  text-transform: uppercase;
+  &::after {
+    content:'';
+    background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='47' height='47'%3E%3Cg fill='none'%3E%3Ccircle cx='23' cy='23' r='23' fill='%23FFF'/%3E%3Cpath d='M18.5 14.8l13.7 9L18.5 33z' fill='%2314305F'/%3E%3C/g%3E%3C/svg%3E") no-repeat center center;
+    display: inline-block;
+    vertical-align: middle;
+    height: 3rem;
+    width: 3rem;
+    margin-left: 0.75rem;
+    transition: all 0.5s ease;
+  }
+  &:not(:hover) {
+    text-decoration: none;
+  }
+  &:hover {
+    &::after {
+      transform: scale(1.1);
+    }
+  }
+}
+.marker-buttonize {
+  display: block;
+  margin: 0.3125em 0.625em 0.3125em 0;
+  padding-left: 0.625em;
+  background: $white;
+  color: $dark-gray;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $dark-gray;
+    background-color: rgba($white, 0.8);
+    transition: background-color 0.25s ease-out;
+  }
+  .icon-deal-marker {
+    margin-bottom: 0;
+  }
+}
+
+@media screen {
+  .overlay {
+    display: inline-block;
+    background: $black;
+    color: $white;
+    &.mask::after {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      left: 0;
+      content: "";
+      background-color: rgba($black, 0.04);
+    }
+    img {
+      opacity: 1;
+      transition: opacity 0.2s ease;
+      width: 100%;
+    }
+    &:hover,
+    &:focus,
+    .card:hover & {
+      color: $white;
+      background: $black;
+      img {
+        opacity: 0.7;
+      }
+      &.mask::after {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .modal-launch {
+    position: relative;
+    background: transparent;
+    text-decoration: none;
+    font-size: 1rem;
+    min-width: rem-calc(150);
+    cursor:pointer;
+    img {
+      border: 1px solid $light-gray;
+      position: relative;
+      width: auto;
+    }
+    div {
+      display: inline-block;
+    }
+    p {
+      position: relative;
+      text-align: center;
+      display: block;
+      margin: rem-calc(8 0 28);
+      &::after {
+        position: relative;
+        display: inline-block;
+        content: "";
+        background: transparent icon(enlarge, "none", 74px, 74px, 0, 0, 74px, 74px) no-repeat center center / contain;
+        width: rem-calc(40);
+        height: rem-calc(40);
+        margin-left: rem-calc(4);
+        margin-bottom: - rem-calc(15);
+      }
+    }
+    &:hover,
+    &:focus {
+      p::after {
+        opacity: 0.85;
+      }
+    }
+  }
+}
+// Can probably ditch .overlay-contents if Covid page ever gets redesigned or removed.
+.overlay-contents {
+  color: $white;
+  padding: $gutter;
+  @include breakpoint(small only) {
+    background: map-get($colors, navy3);
+  }
+  @media screen and #{breakpoint(medium)} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 120;
+  }
+  @include breakpoint(large) {
+    padding: $gutter $gutter * 1.5;
+  }
+  @include breakpoint(xxlarge) {
+    padding: $gutter * 1.5 $gutter * 1.5 $gutter * 1.5 $gutter * 2;
+  }
+}
+.overlay {
+  position: relative;
+  // Can probably ditch .overlay-dark if Covid page ever gets redesigned or removed.
+  &.overlay-dark {
+    @media screen and #{breakpoint(medium)} {
+      img {
+        z-index: 100;
+      }
+      &::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 105;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%);
+        transition: background-image 0.3s ease 0s;
+      }
+      &:hover,
+      &:focus {
+        &::after {
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.3) 100%);
+        }
+      }
+    }
+  }
+  // Removed .overlay-gradient now that featured perspectives use cards.
+}
+@media print {
+  .video-length {
+    display: none;
+  }
+  @if $print-hrefs {
+    a[href] {
+      text-decoration-color: #ccc;
+    }
+    a[href]::after {
+      font-size: 11pt;
+      font-weight: 400;
+      text-transform: none;
+      content: " (" attr(href) ")";
+    }
+    // Don't show urls for jump links or links
+    // that use the `javascript:` protocol
+    a[href^="#"]::after,
+    a[href^="mailto"]::after,
+    a[href^="javascript:"]::after {
+      content: "";
+    }
+  }
+}
+
+.animated-arrow {
+  * {
+    fill: $anchor-color;
+    transition: all 0.2s ease-in-out;
+  }
+  a:hover & {
+    .arrowline {
+      transform: scale(1.44, 1);
+    }
+    .arrowhead {
+      transform: translateX(28.8%);
+    }
+  }
+}
+.animated-triangle-arrow {
+  .triangle-arrowline {
+    transform: scale(0, 1);
+    transform-origin: 75% 50%;
+    transition: all 0.2s ease-in-out;
+  }
+  a:hover & {
+    .triangle-arrowline {
+      transform: scale(1, 1);
+    }
+  }
+}
+
+.arrow-text,
+.arrow-text-white {
+  color: map-get($colors, blue5);
+  text-transform: uppercase;
+  font-size: rem-calc(13);
+  letter-spacing: rem-calc(0.5);
+  line-height: 0.4rem;
+  font-weight: $global-weight-medium;
+  &.left-align {
+    position: relative;
+    right: calc(100% - 2.6rem);
+    transition: right 0.25s ease;
+    // override to fix visible arrow in media room subnav card not hovered
+    .sub-nav a:not(:hover) .small-to-large.position-relative & {
+      @include breakpoint(xlarge only) {
+        right: 100%;
+      }
+    }
+    span {
+      color: transparent;
+      &::after {
+        width: rem-calc(36);
+      }
+    }
+  }
+  span {
+    color: transparent;
+    transition: color 0.2s ease;
+    &::after {
+      content: "";
+      position: relative;
+      display: inline-block;
+      transform: translateY(rem-calc(-4px));
+      width: rem-calc(26);
+      height: rem-calc(2px);
+      padding-left: 0;
+      background: map-get($colors, blue5);
+      transition: all 0.25s ease;
+    }
+  }
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    transform: translateY(0.1rem);
+    border-top: 0.4rem solid transparent;
+    border-bottom: 0.4rem solid transparent;
+    border-left: 0.4rem solid currentColor;
+  }
+}
+a:hover .arrow-text {
+  &.left-align {
+    right: 0;
+    span {
+      color: map-get($colors, blue5);
+    }
+  }
+  span {
+    color: map-get($colors, blue5);
+    &::after {
+      width: rem-calc(36);
+      margin-left: rem-calc(5);
+    }
+  }
+}
+
+.arrow-text-white {
+  color: $white;
+  span::after {
+    background: $white;
+  }
+}
+a:hover .arrow-text-white {
+  span {
+    color: $white;
+    &::after {
+      width: rem-calc(36);
+      margin-left: rem-calc(5);
+    }
+  }
+}
+a:hover .arrow-text {
+  &.left-align {
+    right: 0;
+    span {
+      color: map-get($colors, blue5);
+    }
+  }
+  span {
+    color: map-get($colors, blue5);
+    &::after {
+      width: rem-calc(36);
+      margin-left: rem-calc(5);
+    }
+  }
+}
+
+.animated-download {
+  display: inline-block;
+  position: relative;
+  border: rem-calc(2) solid map-get($colors, blue5);
+  border-top: 0;
+  height: rem-calc(18);
+  width: rem-calc(38);
+  span {
+    position: absolute;
+    display: inline-block;
+    left: calc(50% - #{rem-calc(.5)});
+    top: 0;
+    width: rem-calc(2);
+    height: rem-calc(14);
+    background: map-get($colors, blue5);
+    &::after {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      transform: translateX(-50%);
+      border-style: solid;
+      border-width: rem-calc(5px 6px 0 6px);
+      border-top: 0.4rem solid map-get($colors, blue5);
+      border-right: 0.4rem solid transparent;
+      border-left: 0.4rem solid transparent;
+    }
+  }
+}
+a:hover .animated-download span{
+  animation: bounce .75s forwards;
+}
+@keyframes bounce{
+  0%{
+    transform: translateY(0);
+  }
+  30%{
+    transform: translateY(-45%);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}

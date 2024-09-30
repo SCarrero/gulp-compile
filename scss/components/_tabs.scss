@@ -1,0 +1,154 @@
+@use 'sass:math';
+/// @param {Number} $n - Number of elements to display per row.
+@mixin block-tabs($n) {
+  display: flex;
+  flex-flow: row wrap;
+  > li:not(.tabs-title) {
+    width: percentage(math.div(1,$n));
+    text-align: center;
+  }
+  > .tabs-title {
+    width: percentage(math.div(1,$n));
+  }
+}
+.tabs {
+  position: relative;
+  background: none;
+  // Custom options for block tabs
+  @for $i from 1 through 3 {
+    &.small-up-#{$i} {
+      @include block-tabs($i);
+    }
+  }
+  @for $i from 1 through 4 {
+    &.medium-up-#{$i} {
+      @include breakpoint(medium) {
+        @include block-tabs($i);
+      }
+    }
+  }
+  @for $i from 1 through 6 {
+    &.large-up-#{$i} {
+      @include breakpoint(large) {
+        @include block-tabs($i);
+      }
+    }
+  }
+  @for $i from 1 through 8 {
+    &.xlarge-up-#{$i} {
+      @include breakpoint(xlarge) {
+        @include block-tabs($i);
+      }
+    }
+  }
+}
+.tabs-title {
+  margin: 0;
+  @include fluid-type(16px, 18px, medium);
+  font-weight: $global-weight-medium;
+  background: $tab-background;
+  border-style: solid;
+  border-color: $tab-background $white $white $white;
+  text-align: center;
+  border-width: rem-calc(2px 0 2px 0);
+  text-align: left;
+  display: block;
+  > a {
+    text-decoration: none;
+  }
+  &:not(.is-active) {
+    a:visited  {
+      color: $anchor-color;
+    }
+    a:focus,
+    a:hover  {
+      color: $anchor-color-hover;
+    }
+  }
+  &.is-active {
+    border-top-color: map-get($colors, blue3);
+    background: $tab-background-active;
+    a:visited  {
+      color: $anchor-color;
+    }
+  }
+  + .tabs-title {
+    border-left-width: rem-calc(2px);
+    .vertical & {
+      @include breakpoint(large) {
+        border-left-width: 0;
+      }
+    }
+  }
+}
+.tabs:not(.vertical) {
+  @include breakpoint(medium) {
+    .tabs-title {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      > a {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+.tabs.vertical,
+.accordion.vertical {
+  li.tabs-title {
+    text-align: left;
+    float: none;
+  }
+  > li:last-child.is-active {
+    @include breakpoint(large) {
+      border-bottom: rem-calc(2px) solid $light-gray;
+    }
+  }
+}
+// styles to support tabs that appear like pagination
+.tabs-pagination {
+  padding-top: 0.625rem;
+  .tabs {
+    margin: rem-calc(10 0 0);
+    background: none;
+    .tabs-title {
+      margin: 0.5rem 0.5rem 0 0;
+      border: 0;
+      text-align: center;
+      line-height: 1;
+      background: none;
+      &:hover,
+      &:focus {
+        background: none;
+      }
+      a {
+        font-size: rem-calc(20);
+        padding: rem-calc(3 4 2);
+        position: relative;
+        display:block;
+        width:rem-calc(22);
+        height:rem-calc(32);
+        border-width: 0;
+        // border-radius: 50%;
+        // background: $white;
+        text-align:center;
+        text-decoration:none;
+        &:focus {
+          @include disable-mouse-outline;
+        }
+      }
+      &.is-active a {
+        color: $anchor-color;
+        // background: $anchor-color;
+        border-bottom: rem-calc(2px) solid $anchor-color;
+        &:hover {
+          color: $anchor-color-hover;
+          // background: $anchor-color-hover;
+        }
+      }
+    }
+  }
+}

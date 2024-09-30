@@ -1,0 +1,50 @@
+
+.full {
+  width: 100%;
+  max-width: 100%;
+  &:not(.grid-container) img{
+    width: 100%;
+  }
+}
+.width-auto {
+  width: auto !important;
+}
+
+.image-shadow {
+  box-shadow: 5px 5px 25px 0px rgba(0,0,0,0.2);
+}
+img.avatar {
+  border-radius: 50%;
+  width: rem-calc(70);
+  margin: 0;
+}
+img.round,
+.round img {
+  border-radius: 50%;
+}
+body > img {   // preventing pixel image inserted by GTM from adding a gap below the page
+  position: absolute;
+  bottom: 0;
+  z-index:0;
+}
+// MF's class is .background-cover-center
+.background-image-feature {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.image-scaleup {
+  overflow: hidden;
+  img {
+    transition: transform 0.2s ease-in-out;
+  }
+  a:hover &,
+  a:focus & {
+    img {
+      transform: scale(1.1);
+    }
+  }
+  &.overflow-visible {
+    overflow: visible;
+  }
+}

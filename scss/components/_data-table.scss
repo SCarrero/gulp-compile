@@ -1,0 +1,391 @@
+$divider-color: map-get($colors, navy5);
+// fix for table hover striping affecting header rows
+table.hover:not(.unstriped) {
+  thead {
+    tr:nth-of-type(n):hover    {
+      background-color: $table-head-row-hover;
+
+    }
+  }
+}
+table {
+  border-collapse:separate;
+  border-spacing: 0;
+  border-bottom: 2px solid $divider-color;
+  td, th {
+    border: $table-border;
+  }
+  &.headerless {
+    border-top: 2px solid $divider-color;
+    //for headerless tables, override table display and stack the cells as blocks, only for small breakpoint
+    tfoot,
+    tbody {
+      @include breakpoint(small only) {
+        th,
+        td {
+          display: block;
+        }
+      }
+    }
+  }
+}
+thead th,
+tbody th,
+tfoot th {
+  font-weight: $global-weight-medium;
+}
+thead th{
+  a{
+    color:$white;
+    text-decoration:none;
+    font-weight: $global-weight-medium;
+    &:hover,
+    &:focus{
+      text-decoration: underline;
+      color: $white;
+    }
+  }
+}
+thead,
+tbody {
+  .row-subheader th {
+    font-weight: $global-weight-normal;
+  }
+}
+tbody th:not([class]) {
+  text-align: #{$global-left};
+}
+
+thead[class] th:not([class]) {
+  text-align: inherit;
+}
+
+table tfoot td {
+  font-weight: inherit;
+}
+table.stack {
+  &.show-header{
+    @include breakpoint(medium down) {
+      thead {
+        display: block;
+        th:not(:first-child ) {
+          display: none;
+        }
+      }
+    }
+  }
+  tfoot,
+  tbody  {
+    @include breakpoint(medium down) {
+      display: block;
+    }
+  }
+}
+table.large-stack {
+  @include breakpoint(large down) {
+    @include table-stack;
+    .show-header {
+      thead {
+        display: block;
+        th {
+          display: none;
+        }
+        th:first-child {
+          display: block;
+        }
+      }
+    }
+    tfoot,
+    tbody {
+      display: block;
+    }
+  }
+}
+.table-scroll {
+  .full.stack {
+    @include breakpoint(medium down){
+      width: 100%;
+    }
+  }
+  .full.large-stack {
+    @include breakpoint(large down){
+      width: 100%;
+    }
+  }
+}
+.stack .row-divided {
+  tr::before {
+    @include breakpoint(medium down){
+      content: "";
+      display: block;
+      width: 100%;
+      border-bottom: 2px solid;
+    }
+  }
+}
+.large-stack .row-divided {
+  tr::before {
+    @include breakpoint(large down){
+      content: "";
+      display: block;
+      border-bottom: 2px solid;
+    }
+  }
+}
+.research-table {
+  border-collapse:collapse;
+  border-bottom-width: 0;
+  .reduce {
+    line-height: 1.1;
+    display: inline-block;
+  }
+
+  thead tr th {
+    font-weight: $global-weight-normal;
+  }
+  strong {
+    font-weight: $global-weight-medium;
+  }
+  tbody {
+    tr:nth-child(n) {
+      background: #fff;
+      td {
+        border: 1px solid darken($light-gray, 5%);
+      }
+    }
+  }
+}
+tr.row-subheader {
+  th, td {
+    background: map-get($colors, blue5);
+    color: $white;
+  }
+  &:hover {
+    th, td {
+      background: lighten(map-get($colors, blue5), 3%);
+    }
+  }
+}
+.vertical-middle { vertical-align: middle; }
+.vertical-top { vertical-align: top; }
+.vertical-baseline {   vertical-align: baseline; }
+.vertical-bottom {   vertical-align: bottom; }
+.overflow-horizontal { overflow-x: auto; }
+
+
+table:not(.research-table) {
+  tbody tr:not(.row-subheader):not(:first-child):hover td,
+  tbody tr:not(.row-subheader):not(:first-child):hover th,
+  tfoot tr:hover td,
+  tfoot tr:hover th {
+    border-top: 1px solid $dark-gray;
+  }
+
+  tbody tr:not(.row-subheader):hover td,
+  tbody tr:not(.row-subheader):hover th,
+  tfoot tr:not(:last-child):hover td,
+  tfoot tr:not(:last-child):hover th {
+    border-bottom: 1px solid $dark-gray;
+  }
+}
+
+// Override default styles for UI Datepicker.
+.ui-datepicker {
+  table {
+  border-collapse:collapse;
+  border-spacing: 0px;
+  border-width: 0px;
+  color: $body-font-color;
+  }
+  thead {
+    border-width: 0px !important;
+    background-color: $white;
+    color: inherit;
+  }
+  tbody, tfoot {
+    border-width: 0px !important;
+    background-color: $white;
+  }
+  tr:hover td {
+    border-width: 0px !important;
+  }
+  th {
+    font-weight: $global-weight-medium;
+  }
+  td a,
+  td span {
+    color: inherit;
+    text-align: center;
+  }
+  &.ui-widget {
+    font-family: $body-font-family;
+  }
+  .ui-widget-header {
+    background: inherit;
+    color: $body-font-color;
+  }
+  .ui-state-default {
+    background: none;
+    border-width: 0;
+    color: inherit;
+  }
+  .ui-state-hover {
+    background: $light-gray;
+    border-width: 0;
+  }
+  .ui-datepicker-header {
+    border-width: 0;
+    background-color: $white;
+    color: inherit;
+  }
+  .ui-datepicker-title {
+    margin: 0 3em 0 0.5em;
+    text-align: left;
+    font-size: 1.1em;
+  }
+  .ui-datepicker-prev {
+    right: 1.65rem;
+    left: auto;
+    top: 0.15em;
+    width: 1.3em;
+  }
+  .ui-datepicker-next {
+    right: 0.2em;
+    top: 0.15em;
+    width: 1.3em;
+  }
+  .ui-datepicker-prev-hover,
+  .ui-datepicker-next-hover {
+    top: 0.15em;
+    background: $light-gray;
+  }
+  .ui-datepicker-month,
+  .ui-datepicker-year {
+    height: auto;
+    box-shadow: none;
+  }
+  .ui-datepicker-other-month {
+    background: $light-gray;
+  }
+  .ui-state-highlight {
+    background: map-get($colors, blue5);
+    color: $white;
+  }
+  .ui-icon.ui-icon-circle-triangle-e {
+    background: transparent icon(chevron-right, "none", 16px, 16px, 0, 0, 30, 30, $dark-gray, 3) no-repeat right center;
+    display: inline-block;
+  }
+  .ui-icon.ui-icon-circle-triangle-w {
+    background: transparent icon(chevron-left, "none", 16px, 16px, 0, 0, 30, 30, $dark-gray, 3) no-repeat right center;
+    display: inline-block;
+  }
+}
+// Override these when tables are used inside details sections.
+details table {
+  margin: 0;
+  font-size: 1rem;
+  border-bottom-width: 0;
+}
+table.grid-x {
+  display: flex;
+  @include xy-grid;
+  width: 100%;
+  box-sizing: border-box;
+  // Override the hover styles from regular tables.
+  &:not(.research-table) tbody > tr:not(.row-subheader) > td,
+  &:not(.research-table) tbody > tr:not(.row-subheader):hover  > td,
+  &:not(.research-table) tbody > tr:not(.row-subheader):not(:first-child):hover  > td {
+    border-width: 0;
+  }
+  thead,
+  tbody,
+  tfoot {
+    @include flex;
+    @include flex-direction(column);
+    @include xy-cell(full);
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  thead {
+    tr {
+      align-items: stretch;
+    }
+  }
+  tr {
+    @include flex;
+    @include xy-grid;
+    box-sizing: border-box;
+    border-width: 0;
+    width: 100%;
+    align-items: center;
+    th, td {
+      flex: 0 0 auto;
+      box-sizing: border-box;
+      &:not(:first-child) {
+        text-align: center;
+      }
+    }
+    > .auto {
+      @include xy-cell-base(auto);
+      @include xy-cell-size(auto, none);
+    }
+    > .medium-auto {
+      @include breakpoint(medium) {
+        @include xy-cell-base(auto);
+        @include xy-cell-size(auto, none);
+      }
+    }
+    > .large-auto {
+      @include breakpoint(large) {
+        @include xy-cell-base(auto);
+        @include xy-cell-size(auto, none);
+      }
+    }
+    > .shrink {
+      @include xy-cell-base(shrink);
+      @include xy-cell-size(shrink, none);
+    }
+    > .medium-shrink {
+      @include breakpoint(medium) {
+        @include xy-cell-base(shrink);
+        @include xy-cell-size(shrink, none);
+      }
+    }
+    > .large-shrink {
+      @include breakpoint(large) {
+        @include xy-cell-base(shrink);
+        @include xy-cell-size(shrink, none);
+      }
+    }
+    > td {
+      padding: rem-calc(5 15);
+    }
+    > td:has(input) {
+      padding: rem-calc(3);
+    }
+  }
+  div.cell.js-form-type-number {
+    display: flex;
+    flex-wrap: wrap;
+    label {
+      width: 100%;
+      &.visually-hidden {
+        width: auto;
+      }
+    }
+    &:has(.field-prefix) {
+      > input.form-number {
+        width: calc(100% - #{rem-calc(20)});
+      }
+    }
+    &:has(.field-suffix) {
+      > input.form-number {
+        width: calc(100% - #{rem-calc(20)});
+      }
+    }
+    &:has(.field-prefix):has(.field-suffix) input.form-number {
+      width: calc(100% - #{rem-calc(40)});
+    }
+  }
+}

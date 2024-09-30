@@ -1,0 +1,128 @@
+.footer {
+  font-size: rem-calc(17);
+  a {
+    display: inline-block;
+    &:not(:hover):not(:visited) {
+      color: currentColor;
+    }
+  }
+}
+.footer-bottom {
+  font-size: rem-calc(17);
+  color: $white;
+  min-height: rem-calc(40);
+  background: map-get($colors, navy5);
+  padding-top: rem-calc(8);
+  @include breakpoint(large) {
+    background: map-get($colors, navy5)
+    repeating-linear-gradient(147deg,
+    lighten(map-get($colors, navy5), 8%) 0%,
+    lighten(map-get($colors, navy5), 8%) 21.5%,
+    lighten(map-get($colors, navy5), 5%) 21.5%,
+    lighten(map-get($colors, navy5), 5%) 39.25%,
+    lighten(map-get($colors, navy5), 2%) 39.25%,
+    map-get($colors, navy5) 100%);
+  }
+  @include breakpoint(medium){
+    padding: rem-calc(0);
+    font-size: rem-calc(14);
+  }
+  a,
+  a:hover,
+  a:visited {
+    color: currentColor;
+  }
+  .copy-wrapper{
+    font-size: rem-calc(14);
+    @include breakpoint(medium){
+      margin: rem-calc(7 0 6);
+    }
+    &:not(li){
+      padding-top: rem-calc(4);
+    }
+  }
+  ul {
+    @include clearfix;
+    @include breakpoint(medium){
+      text-align: right;
+      margin-bottom: 0;
+    }
+  }
+  li {
+    @include breakpoint(small only) {
+      line-height: 2;
+    }
+    @include breakpoint(medium) {
+      display: inline-block;
+      + li {
+        margin-left: rem-calc(16);
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        padding: 0.25rem 0;
+      }
+    }
+    a.icon-privacy {
+      position: relative;
+      padding-right: 3.2rem;
+      &:after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        top: 0.15rem;
+        right: 0;
+        width: 2.9rem;
+        height: 1.45rem;
+        background: transparent icon(privacy, '', 60px, 30px, 0, 0, 30, 15) no-repeat right center/ contain;
+      }
+    }
+    &.icon {
+      @include breakpoint(small only) {
+        @include flex;
+        @include flex-align($x:spaced);
+        justify-content: space-between;
+        margin-bottom: 0;
+      }
+      @include breakpoint(medium) {
+        margin-right: rem-calc(-8); // to prevent the padding from twitter icon from affecting right alignment
+      }
+      a {
+        @include breakpoint(medium) {
+          padding: 0 0.5rem;
+        }
+        @include breakpoint(medium only) {
+          + a {
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  svg {
+    height: rem-calc(18);
+    width: auto;
+  }
+}
+.footer-top {
+  padding: rem-calc(40 20);
+  @include breakpoint(large){
+    padding-top: rem-calc(0);
+  }
+  &-section{
+    padding-top: rem-calc(40);
+    @include breakpoint(large){
+      padding-top: rem-calc(50);
+    }
+  }
+  .logo-wrapper{
+    @include breakpoint(large){
+      padding-top: rem-calc(50);
+    }
+  }
+}
+.footer-top-section :last-child {
+  margin-bottom: 0;
+}

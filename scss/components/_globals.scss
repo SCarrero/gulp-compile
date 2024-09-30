@@ -1,0 +1,52 @@
+// prevents empty space on iOS when nav is open and body is fixed
+html, body {
+  min-height: 100vh !important;
+}
+// prevent padding on svg from distorting the aspect ratio, and defaulting to middle alignment for inline svgs
+svg {
+  box-sizing: content-box;
+  vertical-align: middle;
+}
+.is-reveal-open #top { position: relative; }
+
+figure {
+  margin: 0; // reseting odd margins that are part of Foundation default
+  position: relative;
+  @include breakpoint (small only) {
+   margin-bottom: $global-margin;
+  }
+  img {
+   width: 100%;
+  }
+  img + figcaption,
+  figcaption + img {
+    margin-top: $global-margin;
+  }
+}
+
+blockquote {
+  cite {
+    display: inline;
+  }
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+hr {
+  opacity: 0.4;
+  @include breakpoint (medium) {
+    margin: rem-calc(30) auto;
+  }
+  .background-blue &,
+  .background-navy &,
+  .background-green &,
+  .background-red &,
+  .background-charcoal &,
+  .background-teal & {
+    border-color: $white;
+  }
+  .background-concrete &,
+  .background-white & {
+    border-color: $dark-gray;
+  }
+}

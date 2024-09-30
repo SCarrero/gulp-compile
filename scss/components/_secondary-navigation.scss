@@ -1,0 +1,134 @@
+// If a page has secondary nav, then remove the top margin of
+// page title component so it can go above the secondary nav wrapper.
+.secondary-nav-wrapper + .hero-roofline {
+  margin-top: 0;
+}
+.secondary-nav-wrapper + .page-title {
+  margin-top: 0;
+}
+
+.secondary-nav-wrapper {
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: $light-gray;
+  color: $body-font-color;
+  &.grid-container.fluid {
+    @include breakpoint(large down) {
+      padding: rem-calc(8 30 0);
+    }
+    @include breakpoint(large only) {
+      padding-left: rem-calc(40);
+    }
+  }
+  @include breakpoint(xlarge) {
+    margin-top: rem-calc(25);
+  }
+  li {
+    &:only-child > a {
+      @include breakpoint(xlarge){
+        white-space: nowrap;
+      }
+    }
+    li {
+      padding: rem-calc(0 15 0 15);
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+  > span {
+    padding: $menu-items-padding;
+    @include breakpoint(xlarge){
+      padding: rem-calc(22 0);
+    }
+
+  }
+  .menu a {
+    padding: $menu-items-padding;
+    @include breakpoint(xlarge){
+      padding: rem-calc(22 0);
+    }
+    // Link for current page.
+    &.is-active {
+      pointer-events: none;
+      cursor: default;
+    }
+    // Link for a parent page looks similar until interacted with.
+    &.is-parent:not(.button),
+    &.is-active:not(.button) {
+      color: $body-font-color;
+      &:hover,
+      &:focus {
+        color:$anchor-color-hover;
+      }
+      span {
+        border-bottom: rem-calc(2) solid $body-font-color;
+      }
+    }
+  }
+  // Overriding some rules in parent for .menu a, .menu .button
+  // Preventing user from changing color of buttons in the sewcondary nav.
+  .menu .button {
+    padding: rem-calc(9 14 8);
+    margin: 0.125rem 0;
+    font-size: rem-calc(15);
+    background-color: map-get($button-palette, secondary);
+    color: $white;
+    text-transform: initial;
+    letter-spacing: initial;
+    &:hover,
+    &:focus {
+      background-color: map-get($button-hover-palette, secondary);
+    }
+  }
+}
+// Handle parent link
+ul.menu.secondary-menu-parent {
+  align-items: stretch;
+  li {
+    display: flex;
+    align-items: center;
+    @include breakpoint(xlarge) {
+      .svg-spacer {
+        color: darken($light-gray, 9.5%);
+        height: 100%;
+        margin: 0 0.3125rem 0 1rem;
+        svg {
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+// Mobile secondary nav.
+.secondary-nav-mobile-wrapper {
+  width: 100%;
+  font-weight: 500;
+  font-size: 1rem;
+  button ~ .secondary-nav-spacer {
+    margin-bottom: 1rem;
+  }
+}
+.secondary-mobile {
+  position: relative;
+  z-index: 205;
+  font-weight: $global-weight-regular;
+  ul.menu {
+    background: $white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border: 0.0625rem solid rgba($dark-gray, 0.25);
+    border-top-width: 0;
+    li {
+      > a:not(.button) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      + li {
+        border-top: 0.0625rem solid rgba($dark-gray, 0.25);
+      }
+    }
+  }
+}

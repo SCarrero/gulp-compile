@@ -1,0 +1,138 @@
+/*! (c) Kruftwerk
+Overrides to simple-styleguide module.
+*/
+@import "../settings_corp";
+@import '../mixins';
+@import '../components/icons';
+
+/* This styles individual sections of the style guide */
+.fm-yellow {
+  background-color: #f6bb42;
+}
+.ss-section {
+  margin-bottom: 2rem;
+}
+.section-head {
+  margin: 2rem 0;
+  color: $black;
+  font-weight: $global-weight-regular;
+  p {
+    padding: 0 1.5rem;
+  }
+  h1 {
+    background: rgba(map-get($colors, orange1),0.10);
+    padding: 1.5rem;
+  }
+}
+
+#code-content {
+  padding-top: 1rem;
+}
+/* This styles the color blocks used in the color documentation. */
+.color-block {
+  height: rem-calc(100px);
+  margin-bottom: 0.42857rem;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  padding: 0.75rem;
+}
+
+/* This styles code blocks used for examples. */
+.ss-code {
+  max-height: 900px;
+  overflow: scroll;
+  code {
+    font-size: 0.9375rem;
+    color: $black;
+    display: block;
+    white-space: pre;
+    font-family: 'input-mono-compressed', Courier, monospace;
+    font-weight: 400;
+  }
+}
+.code-toggle {
+  margin-top: 2rem;
+  font-weight: bold;
+  color: $primary-color;
+  padding-left: 1.5rem;
+  background: transparent icon(chevron-down, $primary-color, 24, 16, 0, 100, 800, 300) no-repeat left center;
+  &.open {
+    background-image: icon(chevron-up, $primary-color, 24, 16, 0, 100, 800, 300);
+  }
+}
+/* highlight.js styles */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: #fcfefc;
+  color: #223;
+  padding: 0.5em;
+  -webkit-text-size-adjust: none;
+}
+.hljs-comment {
+  color: #677469;
+  font-weight: 300;
+}
+/*  Red */
+.hljs-tag,
+.hljs-decorator,
+.hljs-title,
+.hljs-sub {
+  color: #E1183B;
+}
+
+/*  Orange */
+.hljs-preprocessor,
+.hljs-built_in,
+.hljs-literal,
+.hljs-params,
+.hljs-constant {
+  color: #87711d;
+}
+
+/*  Yellow */
+.hljs-title,
+.hljs-pseudo {
+  color: #787208;
+}
+
+/*  Green */
+.hljs-number,
+.hljs-value,
+.hljs-string,
+.hljs-inheritance,
+.hljs-header,
+.hljs-symbol {
+  color: #3E763D;
+}
+
+/*  Aqua */
+.hljs-attribute,
+.hljs-attr {
+  color: #108198;
+  font-weight: 500;
+}
+/*  Brown */
+.hljs-hexcolor {
+  color: #603439;
+  text-transform: uppercase;
+}
+/*  Blue */
+.hljs-variable,
+.hljs-regexp,
+.hljs-name,
+.hljs-constant,
+.hljs-title,
+.hljs-pi,
+.hljs-doctype,
+.hljs-id {
+  color: #3d62f5;
+}
+
+/*  Purple */
+.hljs-keyword,
+.hljs-function,
+.hljs-class {
+  color: #9D2BEE;
+}
+.hljs-strong{font-weight:600}

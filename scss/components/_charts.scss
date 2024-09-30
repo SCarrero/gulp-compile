@@ -1,0 +1,23 @@
+.fifty-chart {
+  padding: 0 rem-calc(48);
+}
+
+.mortgage-rate-widget {
+  position: relative;
+  margin: 20px 0;
+  color: rgb(70, 70, 69);
+  font-family: canada-type-gibson,Arial,Lucida Sans Unicode,sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  box-sizing: border-box;
+
+  .highcharts-label.highcharts-tooltip.highcharts-color-0 {
+    span div {
+      font-family: inherit!important;
+    }
+
+    table {
+      font-family: inherit!important;
+    }
+  }
+}

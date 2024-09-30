@@ -1,0 +1,25 @@
+{
+  "name": "foundation-sass-use",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "watch": "gulp watch --development",
+    "build": "gulp build --production"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "foundation-sites": "^6.8.1",
+    "gulp": "^4",
+    "gulp-cleaner-css": "^4.3.2",
+    "gulp-mode": "^1.1.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "jquery": "^3.7.1",
+    "motion-ui": "^2.0.5",
+    "postcss": "^8.4.47",
+    "sass-embedded": "^1.77.8",
+    "what-input": "^5.2.12"
+  }
+}

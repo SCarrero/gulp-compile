@@ -1,0 +1,31 @@
+@charset 'utf-8';
+
+// --- Dependencies ---
+@use '../_vendor/sassy-lists/stylesheets/helpers/missing-dependencies';
+@use '../_vendor/sassy-lists/stylesheets/helpers/true';
+@use '../_vendor/sassy-lists/stylesheets/functions/contain';
+@use '../_vendor/sassy-lists/stylesheets/functions/purge';
+@use '../_vendor/sassy-lists/stylesheets/functions/remove';
+@use '../_vendor/sassy-lists/stylesheets/functions/replace';
+@use '../_vendor/sassy-lists/stylesheets/functions/to-list';
+
+// --- Settings ---
+// import your own `settings` here or
+// import and modify the default settings through
+// @import 'settings/settings';
+
+@import 'settings_corp';
+
+// Foundation scss from vendor dir.
+@import '../node_modules/foundation-sites/scss/foundation';
+
+@import '../node_modules/motion-ui/motion-ui';
+
+// Selectively import foundation and motion-ui features.
+@import 'dependencies';
+
+// Module-specific and other Drupal overrides
+@import 'drupal';
+
+// Itemized component SCSS files
+@import 'components';

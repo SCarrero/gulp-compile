@@ -1,0 +1,30 @@
+.mortgage-rates {
+  position: relative;
+  padding: rem-calc(30);
+  padding-bottom: 4rem;
+  @include breakpoint(large) {
+    padding: rem-calc(45);
+    padding-right: 0;
+  }
+  .button {
+    margin-top: rem-calc(20);
+    margin-bottom: rem-calc(65);
+  }
+  .rate {
+    margin-bottom: rem-calc(30);
+    @include breakpoint(medium) {
+      margin-bottom: rem-calc(60);
+    }
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+  .rate-percent {
+    padding-left: 0.5rem;
+    @include fluid-type(33px, 55px, xxlarge);
+    sup{
+      top: -0.45em;
+    }
+  }
+
+}

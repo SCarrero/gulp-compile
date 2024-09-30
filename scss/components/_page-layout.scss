@@ -1,0 +1,141 @@
+// -------- new grid-x template styles -----------
+//
+//.grid-container.full is 100% width
+// .grid-container.fluid is 100% width, with increased left/right padding as screen gets wider & wider
+//.grid-container is the content width of the existing 12-col layout
+
+.grid-container {
+  &.fluid {
+    @each $size, $amt in $grid-container-padding {
+      @if($amt >= map-get($grid-container-padding, large)){
+        .cell.grid-wrap-right-large {
+          @if $size != $-zf-zero-breakpoint {
+            @include breakpoint(#{$size}) {
+              padding-right: rem-calc($amt );
+            }
+          }
+        }
+        .cell.grid-wrap-left-large {
+          // not the opposite of grid-wrap-right-large
+          @if $size != $-zf-zero-breakpoint {
+            @include breakpoint(#{$size}) {
+              padding-left: rem-calc($amt);
+            }
+          }
+        }
+      }
+    }
+    .cell.match-split-hero-indent {
+      @include breakpoint(large) {
+        padding-left: 2rem;
+      }
+      @include breakpoint(xlarge) {
+        padding-left: 3rem;
+      }
+      @include breakpoint(xxlarge) {
+        padding-left: 4.25rem;
+      }
+    }
+
+    @include breakpoint(1600) {
+      padding-left: rem-calc(120);
+      padding-right: rem-calc(120);
+    }
+  }
+  &.fluid-at-xlarge {
+    @include breakpoint(xlarge) {
+      @include xy-grid-container(100%);
+    }
+    @include breakpoint(1600) {
+      padding-left: rem-calc(120);
+      padding-right: rem-calc(120);
+    }
+  }
+  &.full-large-down {
+    @include breakpoint(large down) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+  // Achieve a standard 12-col layout in a landing page.
+  &.standard {
+    padding-right: rem-calc(map-get($grid-container-padding, small) * 0.5);
+    padding-left: rem-calc(map-get($grid-container-padding, small) * 0.5);
+    max-width: rem-calc($grid-container);
+    @each $size, $amt in $grid-container-padding {
+      @if $size != $-zf-zero-breakpoint {
+        @include breakpoint(#{$size}) {
+          padding-left: rem-calc($amt * 0.5);
+          padding-right: rem-calc($amt * 0.5);
+        }
+      }
+    }
+  }
+  &.standard,
+  &.fluid {
+    // Fix for grid-padding-x losing its negative margin at this level.
+    > .grid-x:not(.grid-padding-x) > .cell > .grid-padding-x {
+      margin-right: -0.625rem;
+      margin-left: -0.625rem;
+    }
+  }
+  .full-until-xxlarge {
+    @include breakpoint(xxlarge) {
+      max-width: rem-calc($grid-container);
+      margin: 0 auto;
+      padding: rem-calc(0 map-get($grid-container-padding, xxlarge) * 0.5);
+    }
+  }
+}
+
+// Fix for grid-padding-x losing negative margin due to Drupal adding other
+// divs into the required Foundation nesting. So add .outdent to force it.
+.grid-padding-x.outdent {
+  margin-right: -0.625rem;
+  margin-left: -0.625rem;
+}
+
+.large-8.main-content {
+  padding-bottom: 2rem;
+  @include breakpoint(large) {
+    padding-right: rem-calc(60);
+    padding-bottom: 4rem;
+  }
+  @include breakpoint(xxlarge) {
+    padding-right: rem-calc(70);
+  }
+}
+aside.large-4 {
+  section,
+  .callout {
+    margin: 0;
+    padding: rem-calc(30);
+    @include breakpoint(xlarge) {
+      padding: rem-calc(40);
+    }
+  }
+}
+.medium-up-1-2 {
+  @include breakpoint(medium) {
+    > .cell:not(:first-child) {
+      max-width: 50%;
+    }
+  }
+}
+.sidebar-static {
+  @include breakpoint(large) {
+    padding-bottom: 14rem;
+  }
+}
+// Prevent visually hidden things from affecting layout while not active or focused.
+.visually-hidden:not(:active),
+.visually-hidden:not(:focus) {
+  margin: -1px;
+}
+// Replacement for centered since it's not part of grid-xy
+@include -zf-each-breakpoint { 
+  .cell.#{$-zf-size}-centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

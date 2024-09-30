@@ -1,0 +1,290 @@
+@import '../settings_corp';
+@import '../../node_modules/foundation-sites/scss/foundation';
+@import '../mixins';
+
+article {
+  min-height: 60vh;
+}
+.weight-regular em {
+  font-weight: $global-weight-medium;
+  font-style: normal;
+}
+.mb-has-child {
+  h2 {
+    font-size: 2rem;
+    small {
+      font-size: 1rem;
+    }
+  }
+}
+.mb-stack-title {
+  padding: rem-calc(2px 10px);
+}
+.hero-roofline {
+  min-height: rem-calc(160);
+  .hero-title {
+    margin-bottom: 0;
+  }
+  .hero-roofline-content {
+    @include breakpoint(medium){
+      padding-bottom: 3rem;
+    }
+  }
+}
+.mb-acc,
+.mb-acc *{
+  @include element-invisible;
+}
+.pull-right {
+  float: right;
+  &.mb-stack-close {
+    padding: rem-calc(10px 10px 0);
+  }
+}
+.mb-component-container {
+  padding-top: 1.5rem;
+}
+
+
+.mb-more-available {
+  position: relative;
+  display: inline;
+  &[aria-expanded="false"]::after {
+    @include css-triangle(0.35em, currentColor, down);
+    display: inline;
+    padding-left: 0.4rem;
+  }
+}
+.mb-more-available-is-open::after {
+  transform: rotate(-180deg);
+  transition: .5s;
+}
+.tabs li {
+  float: left;
+  margin: 0;
+  padding: 0;
+  font-weight: $global-weight-medium;
+  border-right: rem-calc(2px) solid $white;
+  &:first-child {
+    border-left: rem-calc(2px) solid $white;
+  }
+  > a {
+    display: block;
+    padding: 1.25em 0;
+    line-height: 1;
+    text-decoration: none;
+    border-top: rem-calc(2px) solid transparent;
+    @include breakpoint(small only) {
+      font-size: 1rem;
+      font-weight: $global-weight-regular;
+    }
+    &:hover,
+    &:focus {
+      color: $dark-gray;
+      border-color: currentColor;
+    }
+    &[aria-selected='true'] {
+      color: map-get($colors, blue5);
+      border-color: currentColor;
+      background: $white;
+    }
+  }
+}
+[data-whatinput='mouse'] .tabs li > a {
+  outline: 0;
+}
+.mb-text {
+  display: inline;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 0;
+  margin: 0;
+}
+.nav-stacked li {
+  margin: 0.125rem 0;
+}
+input[type="checkbox"]:checked + div {
+    color: map-get($colors, blue5);
+}
+.media-object {
+  width: 100%;
+}
+.icon-wrapper {
+  max-height: auto;
+  max-width: 7.5rem;
+  border: 1px solid $light-gray;
+}
+.main-section {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
+}
+label.checkbox {
+  padding: 0;
+}
+.sidebar {
+  font-size: 1rem;
+  + .sidebar {
+    margin-top: 1rem;
+  }
+  h4 {
+    margin-bottom: 0.4rem;
+    font-weight: $global-weight-regular;
+  }
+}
+.mb-scrollable-y{
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+.mb-preview-action{
+  padding-left:.5em
+}
+.mb-preview h1,
+.mb-preview h2,
+.mb-preview h3,
+.mb-preview h4,
+.mb-preview h5,
+.mb-preview h6{
+  font-size:1.1em;
+}
+.mb-html-preview-container #page-container{
+  margin: rem-calc(-20px);
+  margin-top:0;
+  position:relative
+}
+.ui-menu {
+  margin:0;
+  display:block;
+  outline:0;
+  border-radius:0;
+  list-style-type: none;
+  a{
+    display:block;
+    color:$anchor-color;
+    text-decoration: none;
+  }
+}
+.input-group a {
+  height: auto;
+}
+.ui-autocomplete{
+  border:1px solid #666;
+  background:$white;
+  position:absolute;
+  top:0;left:0;
+  cursor:default;
+  padding: 0.25rem 0;
+  font-size: 1rem;
+  max-width: 90%;
+  font-weight: $global-weight-regular;
+}
+.ui-front{
+  z-index:99999
+}
+.ui-state-focus{
+  background-color:$light-gray;
+}
+
+.icon-trash {
+  position: relative;
+  overflow: visible;
+  &::after {
+    content: "\00d7";
+    position: relative;
+    display: inline-block;
+    margin-left: 0.2em;
+    font-size: 1.25rem;
+  }
+}
+.ui-autocomplete-category {
+  background: $dark-gray;
+  color: $white;
+  padding-left: rem-calc(5px);
+  margin: 0;
+}
+.ui-autocomplete .mb-definition{
+  font-size:.8em;
+}
+.ui-autocomplete .ui-menu-item{
+  position:relative;
+  margin:0;
+  padding: rem-calc(0 5px);
+  + .ui-menu-item {
+    border-top: 1px solid $light-gray;
+  }
+}
+.ui-autocomplete .ui-state-active,
+.ui-autocomplete .ui-state-focus{
+  cursor:pointer;
+  background:$light-gray;
+}
+.ui-autocomplete .unmatched{
+  font-weight:$global-weight-light;
+}
+button:not([type]):not([data-action-object]) {
+  border-width: 0;
+  &::before {
+    display: none;
+    content: "";
+  }
+}
+.mb-stack{
+  width:100%;
+  background:$white;
+  max-width: rem-calc(map-get($breakpoints, xlarge));
+  margin: 0 auto;
+}
+.mb-stack-element{
+  box-shadow:0 0 10px #999;
+  border-top:0.5rem solid map-get($colors, green5);
+}
+.mb-stack-content{
+  position:relative
+}
+
+.mb-has-child .mb-stack .mb-stack-content,
+.mb-has-child .mb-stack-element .mb-stack-content{
+  display:block;
+}
+.mb-in-preview .mb-content,
+.mb-stack-element.mb-has-child>.mb-stack-close,
+.mb-stack-element.mb-has-child>.mb-stack-content,
+.mb-stack-element.mb-has-child>.mb-stack-title .hidden-when-mb-stack-has-child,
+.mb-stack.mb-has-child>.mb-stack-close,
+.mb-stack.mb-has-child>.mb-stack-content,
+.mb-stack.mb-has-child>.mb-stack-title .hidden-when-mb-stack-has-child{
+  display:none;
+}
+.mb-stack-element.mb-has-child>.mb-stack-title:hover,
+.mb-stack.mb-has-child>.mb-stack-title:hover{
+  cursor:pointer
+}
+.mb-preview > iframe {
+  min-height: rem-calc(600px);
+}
+@include breakpoint(large) {
+  .sidebar + .sidebar {
+    margin-top: 2rem;
+  }
+}
+p.overflow-ellipsis {
+  max-width: 97%;
+}
+.overflow-ellipsis,
+.mb-filters .nav-pills li label {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  position: relative;
+}
+ul.nav, ul.inline {
+  margin: 0;
+}
+.nav li {
+  list-style-type: none;
+}

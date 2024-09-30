@@ -1,0 +1,221 @@
+$animateSpeed: .2s;
+// **************************************//
+// -------   MOBILE MAIN NAV   ------- //
+// **************************************//
+
+.mobile-search-padding {
+  padding-left: 0;
+  padding-right: rem-calc(42px);
+}
+
+
+ .mobile-main-nav-wrapper {
+   background: $white;
+   .has-transition-overlap & {
+     min-height: 100vh;
+   }
+  .mobile-header-logo {
+    padding: rem-calc(15 0 15 30);
+    @include breakpoint(large only) {
+      padding-left: rem-calc(40);
+    }
+    // z-index: 312;
+    a {
+      padding: 0;
+    }
+    img {
+      width: rem-calc(121);
+      height: rem-calc(42);
+    }
+  }
+}
+
+.toggle-menu {
+  z-index: 211;
+}
+
+.top-bar {
+  position: relative;
+  button {
+    padding: rem-calc(7 10 5);
+  }
+}
+.mobile-icon-wrapper {
+  padding: rem-calc(15 10 15 0);
+  @include breakpoint(large only) {
+    padding-right: rem-calc(20);
+  }
+}
+.off-canvas.is-closed {
+  height: 0;
+}
+.mobile-main-nav {
+  font-size: rem-calc(18);
+  margin-top: rem-calc(125);
+  .drilldown {
+    // render above the parent menu
+    left:auto;
+  }
+  &.is-open {
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .is-drilldown {
+    min-height: calc(100vh - #{rem-calc(108)});// subtract top margin
+    max-width: 100%;
+    overflow: hidden;
+    > .drilldown {
+      overflow-y: auto;
+      height: calc(100vh - #{rem-calc(108)});// subtract top margin
+      .is-drilldown-submenu {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: calc(100vh - 6.75rem);
+        padding-bottom: 1.25rem;
+      }
+    }
+  }
+  > .is-drilldown{
+    > .drilldown {
+      overflow-y: initial;
+      .is-drilldown-submenu {
+      // render above the parent menu
+      left:100%;
+      }
+    }
+  }
+  @include clearfix();
+  a {
+    color: $black;
+  }
+  .vertical li {
+    &:not(.js-drilldown-back):not(.nested-close-button){
+      border-bottom: 1px solid darken($light-gray, 9.8%);
+    }
+    .header {
+      background-color: $light-gray;
+      color: map-get($colors, navy5);
+      font-weight: $global-weight-medium;
+    }
+    a.visible-for-keyboard {
+      opacity: 0;
+      background-color: $light-gray;
+      padding: rem-calc(18 0 18 30) !important;
+      &:focus,
+      &:active {
+        opacity: 1;
+      }
+    }
+  }
+  //Sub drilldown menu styles
+  li[data-is-parent-link] {
+    color: map-get($colors, navy4);
+    a {
+      color: inherit;
+      font-weight: $global-weight-medium;
+      background-color: $light-gray;
+    }
+  }
+}
+.drilldown .js-drilldown-back {
+  font-size: rem-calc(15);
+  background-color: $light-gray;
+  color: $anchor-color;
+  a {
+    text-transform: uppercase;
+    color: inherit;
+    background-color: inherit;
+    padding-bottom: rem-calc(4);
+    &::before {
+      margin-right: rem-calc(8);
+      margin-top: rem-calc(-2px);
+    }
+  }
+}
+
+.mobile-search-btn {
+  z-index: 211;
+  cursor: pointer;
+  transition: opacity $animateSpeed ease;
+  svg {
+    vertical-align: bottom;
+  }
+  .is-open-right & {
+    opacity: 0;
+  }
+}
+
+#body-wrapper.is-open-right {
+  @include breakpoint(large down){
+    position: fixed;
+    max-width: 100%;
+  }
+}
+
+.is-open-right .is-drilldown[style] {
+  max-width: 100%  !important;
+}
+.mobile-search-sub-nav {
+  display: none;
+  background-color: $light-gray;
+  position: absolute;
+  width: 100%;
+  z-index: 210;
+  box-shadow: $nav-drop-shadow;
+
+  &.expanded{
+    display: block;
+    top: 6.75rem;
+  }
+}
+
+// HAMBURGER MOBILE ICON
+.hamburger-icon {
+  width: rem-calc(19px);
+  height: rem-calc(19px);
+  position: relative;
+  transform: rotate(0deg);
+  transition: $animateSpeed;
+  cursor: pointer;
+}
+
+.hamburger-icon span {
+  display: block;
+  position: absolute;
+  height: rem-calc(2px);
+  width: 100%;
+  background: #000;
+  border-radius: rem-calc(2px);
+  opacity: 1;
+  left: 0;
+  transition: all $animateSpeed linear;
+  &:nth-child(1) {
+    top: rem-calc(5px);
+    .off-canvas-content.is-open-right & {
+      top: rem-calc(11px);
+      transform: rotate(135deg);
+    }
+  }
+  &:nth-child(2) {
+    top: rem-calc(11px);
+    .off-canvas-content.is-open-right & {
+      opacity: 0;
+    }
+  }
+  &:nth-child(3) {
+    top: rem-calc(17px);
+    .off-canvas-content.is-open-right & {
+      top: rem-calc(11px);
+      transform: rotate(-135deg);
+    }
+  }
+}
+// only way to override a built in default of Foundation
+.drilldown .is-drilldown-submenu-parent > a {
+  &::after {
+    #{$global-right}: 1.5rem;
+    @include breakpoint(large) {
+      #{$global-right}: 2rem;
+    }
+  }
+}

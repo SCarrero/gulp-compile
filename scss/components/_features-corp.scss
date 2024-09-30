@@ -1,0 +1,93 @@
+.release-featured,
+.research-featured,
+.investors-featured {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 4rem;
+  p + p {
+    margin-top: $global-margin * 1.5;
+  }
+}
+.tall-content-band {
+  padding-top: rem-calc(30);
+  padding-bottom: rem-calc(30);
+  @include breakpoint(medium) {
+    padding-top: rem-calc(45);
+    padding-bottom: rem-calc(45);
+  }
+  @include breakpoint(large) {
+    padding-top: rem-calc(130);
+    padding-bottom: rem-calc(130);
+  }
+  &.heading {
+    @include breakpoint(large) {
+      padding-top: rem-calc(110);
+    }
+  }
+}
+
+.medium-content-band {
+  padding-top: rem-calc(20);
+  padding-bottom: rem-calc(20);
+  @include breakpoint(large) {
+    padding-top: rem-calc(40);
+    padding-bottom: rem-calc(40);
+  }
+  @include breakpoint(xlarge) {
+    padding-top: rem-calc(55);
+    padding-bottom: rem-calc(55);
+  }
+  @include breakpoint(xxlarge) {
+    padding-top: rem-calc(80);
+    padding-bottom: rem-calc(80);
+  }
+}
+
+.large-content-band {
+  padding-top: rem-calc(30);
+  padding-bottom: rem-calc(30);
+  @include breakpoint(medium) {
+    padding-top: rem-calc(45);
+    padding-bottom: rem-calc(45);
+  }
+  @include breakpoint(large) {
+    padding-top: rem-calc(70);
+    padding-bottom: rem-calc(70);
+  }
+  @include breakpoint(xlarge) {
+    padding-top: rem-calc(85);
+    padding-bottom: rem-calc(85);
+  }
+  @include breakpoint(xxlarge) {
+    padding-top: rem-calc(95);
+    padding-bottom: rem-calc(95);
+  }
+}
+.caret-large {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    width: rem-calc(76);
+    height: rem-calc(76);
+    top: - rem-calc(30 + 38);
+    left: 3rem;
+    transform: rotate(37deg) skewX(-18deg);
+    background: linear-gradient(-45deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 50%);
+    @include breakpoint(medium) {
+      top: - rem-calc(45 + 38);
+    }
+    @include breakpoint(large) {
+      width: rem-calc(90);
+      height: rem-calc(90);
+      top: - rem-calc(130 + 45);
+    }
+    @include breakpoint(xlarge) {
+      width: rem-calc(108);
+      height: rem-calc(108);
+      top: - rem-calc(130 + 54);
+      left: 4rem;
+    }
+  }
+}

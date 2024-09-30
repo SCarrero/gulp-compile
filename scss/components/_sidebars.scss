@@ -1,0 +1,49 @@
+.sidebar {
+  position: relative;
+  width: 100%;
+  flex: 0 0 auto;
+  ul,
+  ol {
+    margin-bottom: 0;
+  }
+
+  > .row {
+    margin: rem-calc(0 -10);
+  }
+  > .row > .column > *:first-child {
+    margin-top: 0;
+  }
+  blockquote {
+    border-left-width: 0;
+    margin-bottom: 0;
+    padding: rem-calc(8 0 8 0);
+    figcaption & {
+      padding: 0;
+    }
+  }
+  hr {
+    margin: rem-calc(15 0 12);
+    opacity: 0.15;
+  }
+  .large-up-1 {
+    div:last-child > .card {
+      @include breakpoint(large) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+.sidebar-txt {
+	@include breakpoint(medium only) {
+    max-width: 83%;
+  }
+  :first-child {
+    margin-top: 0;
+  }
+}
+
+.sidebar-feature {
+  .row {
+    position: relative;
+  }
+}

@@ -1,0 +1,206 @@
+.media-object-section .background-image-feature {
+  @include breakpoint(small) {
+    padding-bottom: 74%;
+  }
+  @include breakpoint(medium only) {
+    height: 100%;
+  }
+}
+.media-object {
+  color: inherit;
+  width: 100%;
+  // &.large {
+  //   .media-object-section {
+  //     &:first-child {
+  //       @include breakpoint(medium){
+  //         padding-right: $gutter * 1.5;
+  //       }
+  //     }
+  //     &:last-child:not(:nth-child(2)) {
+  //       @include breakpoint(medium){
+  //         padding-left: $gutter * 1.5;
+  //       }
+  //     }
+  //   }
+  // }
+  &.large-50-50 {
+    @include breakpoint(medium only) {
+      min-height: rem-calc(220);
+      .media-object-section:first-child {
+        width: 35%;
+      }
+      .media-object-section:last-child {
+        width: 65%;
+      }
+
+    }
+    @include breakpoint(large){
+      .media-object-section {
+        width: 50%;
+      }
+    }
+    .media-feature-content {
+      padding: rem-calc(20 15 20 20);
+      // flex: 1;
+      // display: flex;
+      // justify-content: flex-start;
+      // flex-direction: column;
+      @include breakpoint(large){
+        padding: rem-calc(25 20 20 25);
+      }
+      @include breakpoint(xlarge){
+        padding: rem-calc(35 25 25 30);
+      }
+      @include breakpoint(xxlarge){
+        padding: rem-calc(60 35 30 60);
+        min-height: rem-calc(360);
+      }
+    }
+    // &.stack-for-small .media-object-section {
+    //   @include breakpoint(small only) {
+    //     padding-bottom: 0;
+    //   }
+    // }
+    &.stack-for-small  .media-feature-content {
+      @include breakpoint(small only) {
+        padding: rem-calc(20 15 20 20);
+      }
+    }
+  }
+
+  &.collapse {
+    .media-object-section {
+      &:first-child {
+        padding-#{$global-right}: 0;
+      }
+      &:last-child:not(:nth-child(2)) {
+        padding-#{$global-left}: 0;
+      }
+    }
+  }
+  &.medium-uncollapse {
+    .media-object-section {
+      &:first-child {
+        @include breakpoint(medium) {
+          padding-#{$global-right}: $gutter;
+        }
+      }
+      &:last-child:not(:nth-child(2)) {
+        @include breakpoint(medium) {
+          padding-#{$global-left}: $gutter;
+        }
+      }
+    }
+  }
+  &.blurb3-leads-image2 {   // such as insights, research pages
+    img {
+      width: 100%;
+      @include breakpoint (medium) {
+        width: rem-calc(210);
+      }
+      @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium) + 200px)){
+        width: rem-calc(290);
+      }
+      @include breakpoint (large) {
+        width: rem-calc(210);
+      }
+      @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, xlarge) - 80px)) {
+        width: rem-calc(280);
+      }
+      @media print {
+        width: rem-calc(110);
+      }
+    }
+    .callout.large & {  // such as research page feature
+      img {
+        @include breakpoint (medium) {
+          width: rem-calc(210 - ($gutter * 1.5));
+        }
+        @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium) + 200px)){
+          width: rem-calc(290 - ($gutter * 1.5));
+        }
+        @include breakpoint (large) {
+          width: rem-calc(210 - ($gutter * 2));
+        }
+        @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, xlarge) - 80px)) {
+          width: rem-calc(280 - ($gutter * 2));
+        }
+      }
+    }
+  }
+
+  .sidebar & {
+    &.image1-leads-blurb2 {  // such as perspectives
+      > :first-child {
+        display: none;
+      }
+      // img {
+      //   width: rem-calc(130);
+      //   // from small to 150px before medium
+      //   @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, small))) and (max-width: -zf-bp-to-em(map-get($breakpoints, medium) - 150px)) {
+      //     width: rem-calc(98);
+      //   }
+      //   // from large to 80px past large
+      //   @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, large))) and (max-width: -zf-bp-to-em(map-get($breakpoints, large) + 80px)) {
+      //     width: rem-calc(98);
+      //   }
+      //   @media print {
+      //     width: 50px;
+      //   }
+      // }
+    }
+  }
+  .section-divided {
+    border-bottom: 1px solid darken($light-gray, 5%);
+  }
+  // missing bit of code from Foundation
+  .media-object-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  // make all media object sections full width of when stacked for mobile
+  &.stack-for-#{$-zf-zero-breakpoint} .media-object-section {
+    @include breakpoint($-zf-zero-breakpoint only) {
+      flex-basis: 100%;
+      width: 100%;
+    }
+  }
+  &.no-margin.stack-for-#{$-zf-zero-breakpoint} > :last-child {
+    padding-bottom: 0;
+  }
+  .process {
+    position: relative;
+    background-color: inherit;
+    @include breakpoint(medium){
+      padding-right: 0;
+      + .media-object-section {
+        padding-left: rem-calc(30);
+      }
+      &:not(.last)::after {
+        content: '';
+        display: block;
+        width: rem-calc(32);
+        height: rem-calc(32);
+        position: absolute;
+        transform: translate(-50%, #{rem-calc(46)}) rotate(45deg);
+        background-color: inherit;
+        z-index: 200;
+        opacity: inherit;
+        bottom: 0;
+        left: 50%;
+      }
+    }
+  }
+}
+
+// override for list view where teaser text is short
+.research-articles-list-view {
+  .media-object {
+    justify-content: space-between;
+  }
+}
+
+audio.block {
+  min-height: 3.75rem;
+}

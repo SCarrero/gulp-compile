@@ -1,0 +1,10 @@
+.button-group {
+  .button {
+    margin: 0;
+  }
+  &.expanded{
+    .button {
+      flex: 1 1 0px;
+    }
+  }
+}

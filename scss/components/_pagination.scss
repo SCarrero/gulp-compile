@@ -1,0 +1,37 @@
+.pagination {
+  margin-top: rem-calc(20px);
+  @include flex;
+  justify-content: center;
+  a {
+    text-decoration: none;
+    &:visited {
+      color: $pagination-item-color;
+    }
+    &.disabled {
+      color: $pagination-item-color-disabled;
+    }
+  }
+  li {
+    // override foundation css; matches myhome.
+    font-size:.9375rem;
+    padding: 0;
+    margin: 0;
+    border: 1px solid $light-gray;
+    &:hover,
+    &:focus,
+    &.current {
+      // border-bottom: 1px solid map-get($colors, blue5);
+      padding: 0;
+    }
+    &.disabled {
+      background: $pagination-item-background-current;
+    }
+    > span.disabled {
+      display: inline-block;
+      background: $pagination-item-background-current !important;
+    }
+  }
+  + li {
+    border-left-width: 0;
+  }
+}

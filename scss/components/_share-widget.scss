@@ -1,0 +1,108 @@
+.share-wrapper {
+  padding-top: $global-padding;
+  padding-bottom: $global-padding;
+  .hero-blended > &,
+  .page-title > & {
+    background: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    position: absolute;
+    bottom: rem-calc(-17px);  // half of height of .share-widget
+    left: 0;
+    right: 0;
+    text-align: left;
+    max-width: $grid-container;
+    @include breakpoint(xlarge){
+      padding-right: rem-calc(map-get($grid-container-padding, xlarge) * 0.5);
+      padding-left: rem-calc(map-get($grid-container-padding, xlarge) * 0.5);
+    }
+    @include breakpoint(xxlarge){
+      padding-right: rem-calc(map-get($grid-container-padding, xxlarge) * 0.5);
+      padding-left: rem-calc(map-get($grid-container-padding, xxlarge) * 0.5);
+    }
+    // remove the below when we want this to grow to the left to match logo
+    // &.grid-container.fluid {
+    //   @include breakpoint(xlarge) {
+    //     padding-right: 3.75rem;
+    //     padding-left: 3.75rem;
+    //     max-width: 93.75rem;
+    //     margin: 0 auto;
+    //   }
+    //   @include breakpoint(xxlarge){
+    //     padding-left: 4.375rem;
+    //     padding-right: 4.375rem;
+    //     max-width: 93.75rem;
+    //     margin: 0 auto;
+    //   }
+
+    // }
+  }
+}
+.share-widget {
+  padding: rem-calc(0 8);
+  background: map-get($colors, green3);
+  color: map-get($colors, navy5);
+  height: 3.125rem;
+  display: inline-block;
+  position: relative;
+  border-radius: $button-radius;
+  float: left;
+  // z-index: 210;
+  font-weight: $global-weight-normal;
+  line-height: 1;
+  font-size: rem-calc(16px);
+  box-shadow: 0px 8px 8px -7px rgba($black,0.2);
+  .share-title {
+    float: left;
+    height: rem-calc(34px);
+    padding: .5rem .3125rem 0 .375rem;
+    & > * {
+      float: left;
+      display: block;
+      padding: rem-calc(9 3 0 0);
+      vertical-align: middle;
+
+    }
+
+    svg {
+      display: none;
+    }
+
+    @include breakpoint(400px) {
+      svg {
+        display: block;
+      }
+    }
+  }
+  a:hover,
+  button:hover {
+    opacity: 0.75;
+  }
+  .share-links {
+      background: linear-gradient(to right, rgba(0,0,0,0.13) 0%,rgba(0,0,0,0) 7%);
+      float:left;
+      height: 3.125rem;
+      padding: rem-calc(0 4px 0 8px);
+      & > * {
+        float: left;
+        display: block;
+        padding: .91rem .75rem .8rem;
+    }
+
+    button {
+      display: none;
+    }
+
+    @include breakpoint(370px) {
+      button {
+        display: block;
+      }
+    }
+
+    a,
+    button {
+      color: inherit;
+    }
+  }
+}
+.connect-link > svg { height: 1.75rem; width: 1.75rem; }

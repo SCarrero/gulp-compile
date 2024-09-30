@@ -1,0 +1,346 @@
+$hero-shade: darken(map-get($colors, blue5), 2%);
+
+// only apply color and backgrounds on screen, not in print
+.page-title,
+.hero-blended,
+.hero-photo,
+.hero-roofline,
+.hero-roofline-content,
+.split-hero {
+  @include breakpoint(xlarge) {
+    margin-top: rem-calc(25);
+  }
+}
+
+.page-title,
+.hero-blended {
+  font-size: rem-calc(20);
+  padding-top: rem-calc(30);
+  padding-bottom: rem-calc(20);
+  color: $white;
+  position: relative;
+  min-height: rem-calc(170);
+  @include breakpoint(medium) {
+    min-height: rem-calc(200);
+  }
+  @include title-background();
+  .hero-date {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+  > .row {
+    flex: 1 0;
+    // z-index: 100;
+  }
+  .intro {
+    padding-top: rem-calc(10);
+  }
+  p {
+    margin: 0;
+  }
+}
+.page-title {
+  padding: rem-calc(0 0 50);
+  h1 {
+    @include fluid-type(30px, 45px, xlarge);
+    line-height: 1.23;
+    margin: 0.25em 0;
+    font-weight: $global-weight-light;
+    max-width: 92%;
+  }
+  @include breakpoint(large) {
+    p,
+    h1 {
+      max-width: 80%;
+    }
+  }
+  @include breakpoint(xxlarge) {
+    p,
+    h1 {
+      max-width: 70%;
+    }
+  }
+  // Width goes back to 100% of parent cell for newer hero with button option.
+  .large-7 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      max-width: 100%;
+      margin-top: 0;
+      @include breakpoint(large) {
+        p,
+        h1 {
+          max-width: 100%;
+        }
+      }
+      @include breakpoint(xxlarge) {
+        p,
+        h1 {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+.hero-blended {
+  padding: rem-calc(0 0 50);
+  &.perspectives-detail-hero {
+    figcaption {
+      font-size: rem-calc(16);
+    }
+    figure {
+      padding-bottom: rem-calc(10);
+    }
+  }
+  .hero-blended-content {
+    @include fluid-type(18px, 22px, xlarge);
+    max-width: 92%;
+    @include breakpoint(large) {
+      max-width: 63%;
+    }
+    :first-child {
+      margin-top: 0;
+    }
+    :last-child:not(figure) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.hero-photo {
+  position: relative;
+  background-position: bottom right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: auto;
+  padding-top: 0;
+  img {
+    width: 100%;
+  }
+  .hero-photo-content {
+    padding-top: rem-calc(300);
+    @include breakpoint(medium) {
+      padding-top: rem-calc(400);
+    }
+    .callout {
+      margin: 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      @include breakpoint(large) {
+        max-width: rem-calc(500);
+      }
+    }
+  }
+}
+
+.hero-roofline {
+  position: relative;
+  overflow: hidden;
+
+  .roofline {
+    position: relative;
+    width: 100%;
+    @include breakpoint(medium) {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: rem-calc(177);
+        top: 0;
+        height: rem-calc(113);
+        right: rem-calc(-50);
+        background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108.17 68.91'%3E%3Cpolygon points='108.17 68.91 108.17 35.37 54.08 0 0 35.37 0 68.91 54.08 33.54 108.17 68.91' style='fill:%2395d055'/%3E%3C/svg%3E")
+          no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+
+  .hero-title {
+    margin-bottom: rem-calc(10);
+  }
+
+  .hero-roofline-content {
+    padding: 0 0 2.5rem;
+    @include fluid-type(18px, 22px, xlarge);
+    @include breakpoint(medium) {
+      max-width: calc(100% - 7.5rem);
+      padding-bottom: 3rem;
+    }
+    @include breakpoint(large) {
+      max-width: calc(92% - 7.5rem);
+      padding-bottom: 4rem;
+    }
+    @include breakpoint(xlarge) {
+      max-width: 72%;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+    // Use for sustainability navigation only
+    &.hero-nav-wrapper{
+      @include breakpoint(xlarge) {max-width: 82%;}
+      .hero-nav{
+        font-size: rem-calc(18);
+        a{
+          text-decoration: none;
+          &:hover,&:focus{
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+.split-hero {
+  // needed to customize chevron-v4 background a lot for this application
+  // can probably build out the functionality of those mixin functions more later
+  // just sticking this all in here for now to keep life simple...
+
+  background-color: map-get($colors, blue5);
+  background-image: repeating-linear-gradient(
+      147deg,
+      lighten(map-get($colors, blue5), 8%) 0%,
+      lighten(map-get($colors, blue5), 8%) 40%,
+      lighten(map-get($colors, blue5), 5%) 40%,
+      lighten(map-get($colors, blue5), 5%) 60%,
+      lighten(map-get($colors, blue5), 2%) 60%,
+      lighten(map-get($colors, blue5), 2%) 80%,
+      map-get($colors, blue5) 80%,
+      map-get($colors, blue5) 100%
+    ),
+    repeating-linear-gradient(
+      -147deg,
+      lighten(map-get($colors, blue5), 8%) 0%,
+      lighten(map-get($colors, blue5), 8%) 40%,
+      lighten(map-get($colors, blue5), 5%) 40%,
+      lighten(map-get($colors, blue5), 5%) 60%,
+      lighten(map-get($colors, blue5), 2%) 60%,
+      lighten(map-get($colors, blue5), 2%) 80%,
+      map-get($colors, blue5) 80%,
+      map-get($colors, blue5) 100%
+    ),
+    none;
+  background-size: 50% 80%, 50% 80%;
+  background-position: 0 0, 100% 0;
+  background-repeat: no-repeat;
+
+  @include breakpoint(xlarge) {
+    background: map-get($colors, blue5)
+      repeating-linear-gradient(
+        147deg,
+        lighten(map-get($colors, blue5), 8%) 0%,
+        lighten(map-get($colors, blue5), 8%) 12%,
+        lighten(map-get($colors, blue5), 5%) 12%,
+        lighten(map-get($colors, blue5), 5%) 22%,
+        lighten(map-get($colors, blue5), 2%) 22%,
+        map-get($colors, blue5) 100%
+      );
+  }
+
+  padding-bottom: rem-calc(50);
+  @include breakpoint(xlarge) {
+    padding-top: rem-calc(54px); // add padding to the hero to account for the header space
+    padding-bottom: rem-calc(60);
+    margin-top: rem-calc(-81);
+  }
+
+  .grid-x {
+    background: $white;
+  }
+  .cell:first-of-type {
+    padding: rem-calc(25px) rem-calc(20px);
+    @include breakpoint(large) {
+      padding: 2rem 1.5rem 1rem 2rem;
+      width: 38%;
+    }
+    @include breakpoint(xlarge) {
+      padding: 3rem 2.5rem 2rem 3rem;
+    }
+    @include breakpoint(xxlarge) {
+      padding: 4.25rem;
+    }
+    + .cell {
+      @include breakpoint(large) {
+        width: 62%;
+      }
+    }
+  }
+  h1 {
+    color: map-get($colors, navy5);
+  }
+  figure.avatar {
+    margin: 1.75rem 0;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.roofline-accent {
+  @include breakpoint(large) {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 4%;
+      right: 4%;
+      display: block;
+      width: rem-calc(36);
+      height: rem-calc(23);
+      background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108.17 68.91'%3E%3Cpolygon points='108.17 68.91 108.17 35.37 54.08 0 0 35.37 0 68.91 54.08 33.54 108.17 68.91' style='fill:%23FFFFFF'/%3E%3C/svg%3E")
+        no-repeat;
+    }
+  }
+}
+
+
+.split-hero.alt{
+  .roofline-accent.blue-roof{
+    background: $light-gray;
+    padding: 1.5625rem 1.25rem;
+    @include breakpoint(large){
+      padding: 5% 7% 2.5%;
+    }
+    &::after{
+      bottom: 4.5%;
+      background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108.17 68.91'%3E%3Cpolygon points='108.17 68.91 108.17 35.37 54.08 0 0 35.37 0 68.91 54.08 33.54 108.17 68.91' style='fill:%2300A3DC'/%3E%3C/svg%3E")
+        no-repeat;
+    }
+    h4{
+      max-width: rem-calc(430);
+      font-weight: $global-weight-medium;
+    }
+    p{
+      max-width: rem-calc(430);
+    }
+  }
+  img{
+    margin-bottom: rem-calc(25);
+  }
+}
+.hero-download{
+  @include breakpoint (large) {
+    padding: rem-calc(30 0 30) 20%;
+    margin-left: 19%;
+    position: relative;
+    &::before {
+      content: "";
+      border-left: 1px solid $white;
+      display: block;
+      position: absolute;
+      top:0;
+      bottom:0;
+      left: 0;
+    }
+  }
+  @include breakpoint (xlarge) {
+    padding: rem-calc(40 20 40) 25%;
+    margin-left: 25%;
+  }
+}

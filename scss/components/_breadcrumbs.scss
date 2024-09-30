@@ -1,0 +1,55 @@
+#breadcrumb-wrapper {
+  font-weight: $global-weight-regular;
+  margin-bottom: 1.25rem;
+  letter-spacing: rem-calc(1.24);
+  @include breakpoint(medium) {
+    margin-bottom: 1.25rem;
+  }
+  nav {
+    display: inline-block;
+    padding: rem-calc(1 20 11 0);
+  }
+  ol, li {
+    margin: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+.hero-roofline .breadcrumbs li,
+.page-title .breadcrumbs li  {
+  line-height: 2.9rem;
+}
+.hero-roofline .breadcrumbs li:has(.visually-hidden),
+.page-title .breadcrumbs li:has(.visually-hidden) {
+  padding-left: .85rem;
+}
+.hero-roofline .breadcrumbs li a,
+.page-title .breadcrumbs li a  {
+  padding: .85rem;
+}
+
+#breadcrumb-wrapper ol.breadcrumbs {
+  margin-left: -.85rem;
+}
+
+.breadcrumbs a:visited,
+.breadcrumbs a:focus {
+  color: inherit;
+}
+.page-title {
+  .breadcrumbs li {
+    background: darken(map-get($colors, blue5), 2%);
+    color: rgba($white, .85); // less that .85 fails accessibility
+    &:not(:last-child)::after {
+      color: inherit;
+    }
+  }
+  .breadcrumbs a {
+    color: $white;
+  }
+}
+.no-breadcrumbs {
+  height: rem-calc(45);
+}

@@ -1,0 +1,79 @@
+div[data-quickedit-field-id] {
+ width: 100%;
+}
+
+a div[data-quickedit-field-id] {
+  width: auto !important;
+}
+.toolbar.toolbar-oriented .toolbar-bar {
+  z-index: 902;
+}
+
+body.toolbar-vertical[style] {
+  // push body content down for vertical toolbar since it's sticky and overlaps our nav
+  padding-top: 4.6rem !important;
+}
+
+.layout-container {
+  position: relative;
+}
+
+//override vertical margins applied by form module -- using their media query of 768px.
+@media (min-width: 768px) {
+  .webform-flexbox {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+fieldset.webform-composite-hidden-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  legend {
+    margin-bottom: 0;
+  }
+}
+
+// Class added e.g. TB Megamenu <nolink> items to create space in
+// hover state columns.
+.spacer {
+  visibility: hidden;
+}
+
+// Flag unpublished or latest revision content:
+
+// Row content, e.g.
+.unpublished-content {
+  background: palegoldenrod !important;
+  // Overwrite possibly white text.
+  color: #333 !important;
+  a:not(.button) {
+    color: #333 !important;
+  }
+}
+.showing-unpublished-latest-revision {
+  background: lightpink !important;
+  // Overwrite possibly white text.
+  color: #333 !important;
+  a:not(.button) {
+    color: #333 !important;
+  }
+}
+
+// Images
+img.unpublished-content {
+  border: solid 5px palegoldenrod !important;
+}
+img.showing-unpublished-latest-revision {
+  border: solid 5px lightpink !important;
+}
+
+// Prevent child element background colors to hide
+// unpublished flag colors.
+.unpublished-content .card,
+.showing-unpublished-latest-revision .card {
+  background-color: transparent !important;
+}
+.unpublished-content .callout,
+.showing-unpublished-latest-revision .callout {
+  background-color: transparent !important;
+}

@@ -1,0 +1,369 @@
+// **************************************//
+// -------   GENERAL   ------- //
+// **************************************//
+.header-nav {
+  z-index: 250;
+  top: 0;
+  width: 100%;
+  overflow: visible;
+  &:not(.position-fixed){
+    position: relative;
+  }
+}
+.header-nav-content {
+  top: 0;
+  width: 100%;
+  transform: translate(0%, 0%);
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  overflow: visible;
+  min-height: rem-calc(120);
+  @include breakpoint(large) {
+    min-height: rem-calc(112);
+  }
+  @include breakpoint(xlarge) {
+    min-height: rem-calc(96);
+  }
+  .position-fixed & {
+    box-shadow: $nav-drop-shadow;
+    @include breakpoint(xlarge){
+      background: $white;
+      padding-bottom: rem-calc(18);
+    }
+  }
+  [data-whatintent="mouse"]  &.downscroll,
+  [data-whatintent="touch"]  &.downscroll {
+    transform: translate(0%, -100%);
+  }
+}
+.header-logo {
+  position: relative;
+  padding-top: rem-calc(17);
+  // The meganav logo is NOT a standard front-end image because the homepage design
+  // requires the logo colors be white by default, and 2-color on hover of meganav.
+  svg {
+    width:rem-calc(164);
+    height:rem-calc(38);
+    &.transition-active * {
+      transition: all .15s ease-in-out;
+    }
+    .a{
+      fill:#00a5e5;
+    }
+    .b{
+      fill: #85bd3c;
+    }
+  }
+
+  .white & {
+    a:not(.expanded) {
+      svg {
+        .a,
+        .b {
+          fill: #fff;
+        }
+      }
+    }
+  }
+  .white .position-fixed & {
+    a:not(.expanded) {
+      svg {
+        .a{
+          fill:#00a5e5;
+        }
+        .b{
+          fill: #85bd3c;
+        }
+      }
+    }
+  }
+}
+
+// **************************************//
+// -------   MAIN NAV   ------- //
+// **************************************//
+
+.main-nav-wrapper {
+  background: $white;
+  z-index: 3;
+  position: relative;
+  .white & {
+    background: transparent;
+  }
+}
+
+.main-nav{
+  @include breakpoint (xlarge){
+    .top-bar-right {
+      a {
+        text-decoration: none;
+        display: inline-block;
+        //overiding $global-menu-padding
+        // more padding left than right, to reduce chance of clipping item to left when mousing left to get to subnav items
+        padding: rem-calc(30 15 8 25);
+        font-size: 1.125rem;
+        text-decoration: none;
+        &:not(.hover) {
+          color: $black;
+        }
+        .white .off-canvas-content:not(.nav-expanded-overlay) .header-nav:not(.position-fixed) & {
+          color: $white;
+        }
+        span {
+          border-bottom: rem-calc(3) solid transparent;
+          padding-bottom: rem-calc(2);
+        }
+        &.active span {
+          border-bottom-color: currentColor;
+        }
+        &.first {
+          padding-left: 6rem;
+          @include breakpoint(xxlarge) {
+            padding-left: 13rem;
+          }
+        }
+        &.post-divider {
+          padding-left: rem-calc(40);
+        }
+        &.last {
+          padding-right: 0;
+        }
+        &:hover {
+          z-index: 380;
+        }
+      }
+    }
+  }
+}
+
+// **************************************//
+// -------   SUB NAVS   ------- //
+// **************************************//
+// also .dropdown-pane if you're searching for that
+.sub-nav{
+  @include breakpoint(xlarge){
+    border: none;
+    position: relative;
+    width: 100%;
+    left: 0 !important;
+    top: -2rem !important;
+    overflow: hidden;
+    background: $white;
+    font-size: 1.125rem;
+    min-height: 28rem;
+    margin-bottom: -2rem;
+    transition: box-shadow 0.2s ease;
+    box-shadow: $nav-drop-shadow;
+    &#search-sub-nav {
+      min-height: 15rem;
+    }
+    &.is-open {
+      z-index: 10;
+    }
+    > .grid-x {
+      padding-top: 2.25rem;  // to offset some of the negative top magin on the subnav;
+      > .cell {
+        position: relative;
+      }
+    }
+  }
+  @include breakpoint(xxlarge){
+    min-height: 29rem;
+  }
+  .match-menu-anchor {
+    padding: $menu-items-padding;
+    line-height: 1;
+    @include breakpoint(xlarge only) {
+      padding-bottom: rem-calc(10);
+    }
+  }
+  .menu a {
+    @include breakpoint(xlarge only) {
+      padding-bottom: rem-calc(10);
+    }
+    &:hover {
+      color: $anchor-color-hover;
+      text-decoration: underline;
+      cursor: pointer;
+      line-height: 1;
+    }
+  }
+  .card {
+    @include breakpoint(xlarge) {
+      margin-bottom: 0;
+      font-size: rem-calc(13);
+      .card-category {
+        font-size: inherit;
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .menu-close {
+    position: absolute;
+    top:0;
+    right: 0;
+    overflow: visible;
+    button {
+      position: relative;
+      top: rem-calc(-10);
+      right: 0;
+      font-size: inherit;
+    }
+  }
+  ul li {
+    @include breakpoint(xlarge) {
+      color: $black;
+      font-weight: 300;
+      letter-spacing: 0;
+      a:not(:visited):not(:hover):not(:focus) {
+        color: inherit;
+      }
+    }
+  }
+}
+
+.dropdown-wrapper{
+  background-color: $white;
+  overflow: visible;
+  border: none;
+  position: absolute;
+  top: 9.5rem;
+  left:0;
+  right:0;
+  width: 100%;
+  margin-top: -7rem;
+  margin-bottom: 0;
+  min-height: 10rem;
+  z-index: 2;
+  padding-top: 5rem;
+  padding-bottom: 0;
+  .card-section h3,.card-section h4 {
+    font-size: rem-calc(14);
+    padding-bottom: rem-calc(5);
+  }
+  .card.background-white .card-section{
+    padding:.5em 0 0;
+  }
+  .align-self-bottom {
+      align-self: flex-start;
+
+    .arrow-text{
+      position: relative;
+      right: calc(100% - 2.6rem);
+      transition: right .25s ease;
+      span::after{
+        width: 2rem;
+        height: 2px;
+      }
+    }
+  }
+  a:hover .arrow-text{
+    right: 0 !important;
+  }
+}
+
+.menu-indent {
+  @include breakpoint(xxlarge){
+    // margin-left: rem-calc(60);
+  }
+}
+// **************************************//
+// -------   SEARCH SECTION  ------- //
+// **************************************//
+
+.search-form {
+  padding: rem-calc(24 0);
+  @include breakpoint(xlarge) {
+    margin: rem-calc(32 42 0);
+  }
+}
+
+input.search-input {
+  margin: 0;
+  background-color: inherit;
+  border-width: 0;
+  line-height: 2;
+  border-left: rem-calc(4px) solid map-get($colors, blue4);
+  border-radius: 0;
+
+  &:focus {
+    background: $light-gray;
+    border: 0;
+  }
+  &::-webkit-search-cancel-button {
+    color: $dark-gray;
+    opacity: 0.7;
+  }
+  &[type="search"]{
+    box-shadow: none;
+    caret-color: map-get($colors, blue3);
+    font-size: rem-calc(20);
+  }
+  @include breakpoint(xlarge) {
+    &[type="search"]{
+      font-size: rem-calc(25);
+    }
+  }
+}
+
+.search-icon-desktop{
+  // rejiggered to prevent icon from causing search link to be a tad taller than the others and giving us a gap below the other links
+  padding:rem-calc(0 1px);
+  vertical-align: top;
+  transform: scale(1.15);
+  // isntead of sizing the svg larger than text sized, we're transforming it so line height isn't modified.
+  transform-origin: bottom center;
+}
+
+/* ------------------------DIVIDER------------------------- */
+.tb-megamenu-nav > li:nth-last-child(2) > a{
+  padding-right: 2.5rem;
+  position: relative;
+  &::after {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    content: "|";
+    color: $black;
+    .white & {
+      color: $white;
+    }
+    .white .nav-expanded-overlay &,
+    .white .position-fixed & {
+      color: $black;
+    }
+  }
+}
+
+.tb-megamenu-nav li:last-of-type a {
+  padding-right: 0;
+  padding-left: 2.5rem;
+}
+.tb-megamenu-nav a:hover {
+  z-index: 380;
+}
+
+// TB Megamenu 3.x version adds classes and CSS declarations that interfere.
+// Override the contrib css with an additional layer of specificity.
+.tb-megamenu-dropdown-wrapper {
+  .tbm-submenu.sub-nav {
+    position: relative;
+    border-top: none;
+  }
+}
+.tb-megamenu-nav {
+  .tbm-link.level-1:hover,
+  .tbm-link.level-1:focus {
+    background-color: inherit;
+  }
+}
+
+
+// **************************************//
+// -------   LOCK  ------- //
+// **************************************//
+.scroll-lock {
+  position:fixed;
+}

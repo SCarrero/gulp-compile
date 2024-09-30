@@ -1,0 +1,189 @@
+//// Expands a button to make it full-width.
+/// @param {Boolean} $expand [true] - Set to `true` to enable the expand behavior. Set to `false` to reverse this behavior.
+@mixin button-expand($expand: true) {
+  @if $expand {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  @else {
+    display: inline-block;
+    width: auto;
+    margin: $button-margin;
+  }
+}
+
+/// Adds disabled styles to a button by fading the element and reseting the cursor.
+/// @param {Number} $opacity [$button-opacity-disabled] - Opacity of the disabled button.
+@mixin button-disabled(
+  $opacity: $button-opacity-disabled
+) {
+  opacity: $button-opacity-disabled;
+  cursor: not-allowed;
+}
+
+a.button { // sass-lint:disable-line no-qualifying-elements
+  text-decoration: none !important;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: $white;
+  }
+}
+
+.button, #tb-megamenu-main .button {
+  color: $button-color;
+}
+.button, #tb-megamenu-main a.button {
+  @include disable-mouse-outline;
+  display: inline-block;
+  vertical-align: middle;
+  margin: $button-margin;
+  text-transform: uppercase;
+  @if (type-of($button-padding) == 'map') {
+    @each $size, $padding in $button-padding {
+      @include breakpoint($size) {
+        padding: $padding;
+      }
+    }
+  }
+  @else {
+    padding: $button-padding;
+  }
+  border: $button-border;
+  border-radius: $button-radius;
+  transition: $button-transition;
+  font-size: map-get($button-sizes, default);
+  background: map-get($button-palette, default);
+  color: $button-color;
+  font-weight: $global-weight-medium;
+  -webkit-appearance: none; // sass-lint:disable-line no-vendor-prefixes
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: rem-calc(1px);
+  &:visited {
+    color: $button-color;
+  }
+  &:hover, &:focus {
+    background: map-get($button-hover-palette, default);
+  }
+  // Sizes
+  @each $size, $value in map-remove($button-sizes, default) {
+    &.#{$size} {
+      font-size: $value;
+    }
+  }
+  // Colors
+  @each $name, $color in map-remove($button-palette, default) {
+    &.#{$name} {
+      background-color: $color;
+      color: color-pick-contrast($color, ($button-color, $button-color-alt));
+      &:visited {
+        color: color-pick-contrast($color, ($button-color, $button-color-alt));
+      }
+      &:hover,
+      &:focus {
+        background-color: map-get($button-hover-palette, $name);
+        color: color-pick-contrast($color, ($button-color, $button-color-alt));
+      }
+    }
+  }
+  &.square {
+    border-radius: 0;
+  }
+  &.icon-only {
+    display: inline-flex;
+    @include flex-align(center, middle);
+    padding: rem-calc(0 10);
+    min-height: rem-calc(38);
+    svg {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+  //small
+  &.small {
+    padding: rem-calc(11 12 10);
+  }
+  //expanded
+  &.expanded {
+    @include button-expand;
+  }
+  // Adding the expanded button classes back in.
+  @if $button-responsive-expanded {
+    @each $size in $breakpoint-classes {
+      @include breakpoint(#{$size} only) {
+        &.#{$size}-only-expanded {
+          @include button-expand;
+        }
+      }
+      @if $size != $-zf-zero-breakpoint {
+        @include breakpoint(#{$size} down) {
+          &.#{$size}-down-expanded {
+            @include button-expand;
+          }
+        }
+
+        @include breakpoint(#{$size}) {
+          &.#{$size}-expanded {
+            @include button-expand;
+          }
+        }
+      }
+    }
+  }
+  &:not([disabled]) {
+    opacity: 1 !important;
+  }
+  // Disabled state
+  &[disabled] {
+    @include button-disabled;
+  }
+}
+
+.button ~ .button {
+  margin-left: 2.5rem;
+}
+.button > .filemarker {
+  padding-left: 0.25em;
+  font-size: 0.9em;
+}
+
+.input-group a,
+.input-group button,
+.input-group input,
+.input-group label {
+  height: rem-calc(41.5);
+}
+
+.icon-toggle {
+  svg {
+    transform-origin: center right;
+    width: 1.2em;
+    height: 0.8em;
+    opacity: 0.9;
+  }
+  &.rotate {
+    svg {
+      transform: scaleY(-1);
+    }
+  }
+}
+@media print {
+  .button {
+    border-width: 0px !important;
+  }
+  .filemarker {
+    display: none;
+  }
+}
+
+.vertical-chevron-icon {
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  text-align: left;
+  border-radius: 0;
+  background-color: $white;
+  @include vertical-chevron-icon();
+}

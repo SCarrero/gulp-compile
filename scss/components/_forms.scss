@@ -1,0 +1,593 @@
+label {
+  padding-bottom: rem-calc(3px);
+  line-height: 1.3;
+}
+select {
+  line-height: 1.1875;
+  box-shadow: $input-shadow;
+  position: relative;
+  &:not([multiple]) {
+    background-image: icon(chevron-down, $input-placeholder-color, 24, 16, 0, 100, 800, 300);
+    background-position: $global-right center;
+    background-repeat: no-repeat;
+    background-origin: padding-box;
+    padding-right: 1.5rem;
+    background-size: 1.5rem 1rem;
+  }
+}
+
+input[type="email"] {
+  position: relative;
+  background-image: icon(email, $input-placeholder-color, 24, 24, 0, 3, 24, 24);
+  background-position: $global-right 0.5rem center;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  padding-right: 2.1rem;
+  background-size: 1.5rem 1.5rem;
+}
+legend {
+  font-weight: $form-label-font-weight;
+}
+fieldset {
+  margin-bottom: rem-calc(18);
+  &.fieldset  {
+    border-radius: $input-radius;
+    legend {
+      background: inherit; // override foundation default
+    }
+  }
+}
+.help-text  {
+  opacity: 0.8;
+  margin: (($form-spacing * 0.75) * -1) 0 1rem !important;
+}
+.form {
+  margin: $fieldset-margin;
+  .input-group {
+    > :first-child {
+      border-radius: $input-radius 0 0 $input-radius;
+    }
+    > :last-child {
+      border-radius: 0 $input-radius $input-radius 0;
+      > * {
+        border-radius: 0 $input-radius $input-radius 0;
+      }
+    }
+    .input-group-label {
+      padding: 0.53125rem 1rem;
+      min-height: rem-calc(41.2);
+      line-height: 1;
+      @include breakpoint(small only) {
+        padding: 0 0.875rem;
+        font-size: rem-calc(14);
+      }
+    }
+    .input-group-field {
+      min-height: rem-calc(41.2);
+      line-height: 1;
+      @include breakpoint(small only) {
+        font-size: rem-calc(14);
+      }
+    }
+  }
+}
+ // Styles for input/label siblings
+[type="radio"] ,
+[type="checkbox"] {
+  @include element-invisible;
+  // since these are visually hidden, shift keyboard accessibility focus state to label
+  [data-whatinput="keyboard"] &:focus + label {
+    outline: 2px solid rgba($light-gray, 0.75);
+    outline: -webkit-focus-ring-color auto 2px;
+  }
+  + label {
+    margin-left: 0;
+    padding-top: rem-calc(3px);
+    line-height: 1.6;
+  }
+  + label::before {
+    background: $white;
+    border: 2px solid $medium-gray;
+    content: '\2003';
+    display: inline-block;
+    font-weight: 700;
+    height: 1.25em;
+    width: 1.25em;
+    font-size: 1em;
+    line-height: 1;
+    margin: 0 0.5em 0 0;
+    text-align: center;
+  }
+  &:checked + label {
+    color: $fm-green;
+    &::before {
+      color: $white;
+      border-color: $fm-green;
+    }
+  }
+  + label.multiline {
+    margin-left: 1.75em;
+    margin-right: 0;
+    @include clearfix;
+    &::before {
+      margin-left: -1.75em;
+      margin-top: 2px;
+      display: block;
+      float: left;
+    }
+  }
+  &.pds-radiobutton {  //overrides for polldaddy's radio buttons
+    position: relative !important;
+    height: auto;
+    width: auto;
+  }
+
+  &[disabled] {
+    + label::before {
+        background: $medium-gray;
+    }
+  }
+  .switch & {
+    + label::before {
+      display: none;
+    }
+  }
+  .block-options & {
+    + label {
+      font-weight: 300;
+      color: $body-font-color;
+      background-color: $white;
+      border: 1px solid $medium-gray;
+      border-radius: none;
+      padding: rem-calc(14 23);
+      min-width: rem-calc(200);
+      text-align: center;
+      margin-top: rem-calc(10);
+    }
+    &.large + label {
+      width: 100%;
+      @include breakpoint(medium) {
+        min-width: rem-calc(300);
+      }
+    }
+    + label::before {
+      display: none;
+    }
+    &:hover + label,
+    &:focus + label {
+      border: 2px solid $body-font-color;
+      padding: rem-calc(13 22);
+    }
+    &:checked + label {
+      color: map-get($colors, blue5);
+      background-color: rgba(map-get($colors, blue5), 0.08);
+      border: 2px solid map-get($colors, blue5);
+      padding: rem-calc(13 22);
+    }
+    &.error:not(:checked) + label {
+      color: $fm-red;
+      border-color: currentColor;
+    }
+  }
+}
+[type="radio"]:checked + label::before {
+    background: $fm-green;
+    background: radial-gradient(ellipse at center, $fm-green 0%,$fm-green 55%,$white 55%);
+}
+[type="radio"] + label::before {
+  border-radius: 50%;
+}
+[type="checkbox"]:checked + label::before {
+    content: '\2713';
+    background: $fm-green;
+}
+[type="radio"]:checked + label::before {
+    background: $fm-green;
+    background: radial-gradient(ellipse at center, $fm-green 0%,$fm-green 55%,$white 55%);
+}
+.is-invalid-input:not(:focus)::placeholder {
+  opacity: 0.5;
+}
+
+.outline {
+  select:not(:active):not(:focus),
+  input:not(:active):not(:focus),
+  textarea:not(:active):not(:focus)  {
+   color: $white;
+   &.is-invalid-input {
+    color: $input-background-invalid;
+   }
+  }
+  [type="text"]:not(.is-invalid-input),
+  [type="password"]:not(.is-invalid-input),
+  [type="date"]:not(.is-invalid-input),
+  [type="datetime"]:not(.is-invalid-input),
+  [type="datetime-local"]:not(.is-invalid-input),
+  [type="month"]:not(.is-invalid-input),
+  [type="week"]:not(.is-invalid-input),
+  [type="email"]:not(.is-invalid-input),
+  [type="number"]:not(.is-invalid-input),
+  [type="search"]:not(.is-invalid-input),
+  [type="tel"]:not(.is-invalid-input),
+  [type="time"]:not(.is-invalid-input),
+  [type="url"]:not(.is-invalid-input),
+  [type="color"]:not(.is-invalid-input),
+  select:not(.is-invalid-input),
+  textarea:not(.is-invalid-input) {
+    border: 1px solid $white;
+    background-color: transparent;
+    &:active,
+    &:focus {
+      background-color: $white;
+    }
+  }
+  input[type="email"]:not(:focus) {
+    background-image: icon(email, $white, 24, 24, 0, 3, 24, 24);
+  }
+  select:not([multiple]):not(:focus) {
+    background-image: icon(chevron-down, $white, 24, 16, 0, 100, 800, 300);
+  }
+  .fieldset,
+  .input-group-label,
+  [type="radio"] + label::before,
+  [type="checkbox"] + label::before {
+    border-color: $white;
+  }
+  [type="radio"] + label::before {
+    border-width: 0;
+  }
+  [type="radio"]:checked + label,
+  [type="checkbox"]:checked + label {
+    color: $white;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba($white, 0.8);
+  }
+}
+
+.form-error {    // override defaults
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+.is-invalid-input + .help-text,
+.is-invalid-input + .description,
+label.is-invalid-label + .description {
+  color: $form-label-color-invalid;
+}
+label.is-invalid-label {
+    padding-left: 0.15em;
+    padding-right: 0.15em;
+    background: rgba($white, 0.5);
+ }
+
+[type="text"].error,
+[type="password"].error,
+[type="date"].error,
+[type="datetime"].error,
+[type="datetime-local"].error,
+[type="month"].error,
+[type="week"].error,
+[type="email"].error,
+[type="number"].error,
+[type="search"].error,
+[type="tel"].error,
+[type="time"].error,
+[type="url"].error,
+[type="color"].error,
+select.error,
+textarea.error,
+.error [type="radio"],
+.error [type="checkbox"] {
+  @include form-input-error;
+ }
+ .error legend {
+  color: $form-label-color-invalid;
+ }
+ .webform-element {
+   display: block;
+   padding: 0.5rem 0 0.5rem 1.5rem;
+   label:first-child {
+     margin-left: -1.5rem;
+     font-weight: 500;
+     display: block;
+   }
+ }
+.filter-field {
+  &::-ms-clear{
+    display: none;  // hide the X inserted by IE
+  }
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none; // hide the X inserted by Chrome
+  }
+  + .reset-filter {
+    display: block;
+    position: absolute;
+    background: transparent;
+    border-radius: 0;
+    width:2em;
+    height: 2em;
+    top: 0.25em;
+    right: 0.75em;
+    outline: 0;
+    &:-moz-focusring {
+      outline: 0 dotted ButtonText;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0.5em;
+      right: 0.5em;
+      background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, lighten($medium-gray, 10%), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
+      height: 1rem;
+      width: 1rem;
+      transition: background 0.25s ease-out;
+    }
+    &:hover,
+    &:focus {
+      &::after {
+        background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, darken($medium-gray, 5%), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
+      }
+    }
+  }
+  &:not(:placeholder-shown) + .reset-filter::after{
+    background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, lighten($dark-gray, 10%), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
+  }
+}
+
+.module-form {
+  border: 2px solid darken($light-gray, 3.7%);
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  margin-bottom: $gutter;
+  padding: rem-calc(9 0 0);
+  @include breakpoint(xlarge) {
+    padding: rem-calc(17 0 0 10);
+  }
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $light-gray;
+    height: rem-calc(9);
+    border-radius: 5px 5px 0 0;
+  }
+  .module-control {
+    display: inline-block;
+    .button-expand,
+    .button-collapse  {
+      position: relative;
+      display: inline-block;
+      line-height: 1;
+      padding: rem-calc(10);
+      @include breakpoint(medium) {
+        padding: rem-calc(10 20);
+      }
+      color: map-get($colors, blue5);
+      background: $light-gray;
+      text-transform: uppercase;
+      font-weight: $global-weight-medium;
+      font-family: inherit;
+      &::after {
+        content: ' ';
+        background: transparent icon(chevron-dbl-down, map-get($colors, blue5), 13px, 13px, 0, 0, 14, 14) no-repeat center center / cover;
+        width: 0.85em;
+        height: 0.85em;
+        display: inline-block;
+        position: relative;
+        margin-left: 0.5em;
+      }
+      &:hover,
+      &:focus {
+        background: scale-color($light-gray, $lightness: -5%);
+      }
+    }
+    .button-collapse::after {
+      transform: rotate(180deg);
+    }
+  }
+}
+[type="email"]::-ms-clear {
+  display: none;
+}
+textarea {
+  line-height: 1.15;
+}
+
+input:-internal-autofill-selected {
+  background-color: $input-background !important;
+}
+
+// Hide automatically generated "webform required" message on corp_subs.
+.webform-submission-corp-subs-form > .webform-required {
+  display: none;
+}
+
+// Override default style for text field with UI Datepicker.
+[type="text"].hasDatepicker {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=);
+  background-origin: content-box;
+  background-position: center right;
+  background-repeat: no-repeat;
+  padding-right: 0.4375rem;
+}
+
+// Override style for webform help elements.
+.webform-element-help {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 0.25em;
+  text-align: center;
+  vertical-align: baseline;
+  color: $white;
+  border-radius: 50%;
+  background: map-get($colors, blue5);
+  border: rem-calc(2) solid map-get($colors, blue5);
+  font-size: 0.75em;
+  font-weight: $global-weight-bold;
+  line-height: 1;
+  &:hover, &:active, &:focus{
+    cursor: help;
+    background: map-get($colors, blue4);
+    border-color: map-get($colors, blue4);
+  }
+  .has-tip:has( & ) {
+    border-bottom-width: 0;
+  }
+}
+
+// Increasing opacity because +/- buttons lack contrast on our table background.
+.webform-multiple-table td.webform-multiple-table--operations input { opacity: 0.685; }
+
+// Adding this to support BEF dropdown radio button selection highligting.
+.filter-bar-dropdown {
+  .form-item {
+    [type="checkbox"]:checked + label:not(.switch-paddle),
+    [type="radio"]:checked + label:not(.switch-paddle) {
+      color: $body-font-color;
+    }
+  }
+}
+
+// Override Webform .webform-readonly css so it uses our style variables.
+.webform-readonly input[type="date"],
+.webform-readonly input[type="datetime-local"],
+.webform-readonly input[type="email"],
+.webform-readonly input[type="number"],
+.webform-readonly input[type="password"],
+.webform-readonly input[type="search"],
+.webform-readonly input[type="tel"],
+.webform-readonly input[type="text"],
+.webform-readonly input[type="time"],
+.webform-readonly input[type="url"],
+.webform-readonly textarea {
+  color: $input-color;
+  border: $input-border;
+  background: $input-background-disabled;
+}
+.webform-table td {
+  vertical-align: middle;
+}
+.form-number {
+  text-align: right;
+}
+.calculator-form {
+  .webform-confirmation {
+    details > .webform-element label:first-child {
+      margin-left: 0;
+    }
+  }
+  .field-prefix,
+  .field-suffix {
+    display: block;
+    width: auto;
+    font-size: 1rem;
+    height: 2.875rem;
+    padding: 0.625rem;
+    box-sizing: border-box;
+    border: $input-border;
+    background-color: $input-background;
+    flex: 0 0 auto;
+    width: rem-calc(20);
+    text-align: center;
+  }
+  .field-prefix {
+    border-right-width: 0;
+    padding: 0.625rem 0;
+  }
+  .field-suffix {
+    border-left-width: 0;
+    padding: 0.625rem 0;
+  }
+  input[readonly] {
+    font-weight: $global-weight-medium;
+    background: $input-background-disabled;
+  }
+  input[readonly] + .field-suffix,
+  div:has(input[readonly]) > .field-prefix {
+    background: $input-background-disabled;
+  }
+  table.grid-x {
+    @include breakpoint(470px down) {
+      overflow-x: auto;
+      tbody, thead {
+        min-width: rem-calc(410);
+      }
+    }
+    tbody tr {
+      border: rem-calc(1) solid $light-gray;
+      border-width: rem-calc(1 2);
+    }
+    tr {
+      > .shrink {
+        width: rem-calc(100);
+      }
+      > .large-shrink {
+        @include breakpoint(large) {
+          width: rem-calc(250);
+        }
+      }
+    }
+    tr:has(> :nth-child(4):last-child) {
+      td, th {
+        @include breakpoint(large) {
+          &:nth-child(2) {
+            order: 4;
+          }
+          &:nth-child(3) {
+            order: 2;
+          }
+          &:nth-child(4) {
+            order: 3;
+          }
+        }
+      }
+    }
+    tr:has(> :nth-child(3):last-child) {
+      @include breakpoint(large) {
+        td, th {
+          &:nth-child(2) {
+            order: 3;
+          }
+          &:nth-child(3) {
+            order: 2;
+          }
+        }
+      }
+    }
+    thead th.large-auto {
+      @include breakpoint(medium down) {
+        border-bottom-width: rem-calc(1);
+      }
+    }
+    td.grid-x.large-shrink > div.large-shrink{
+      flex: auto;
+    }
+  }
+  tr.background-concrete, tr:nth-child(odd).background-concrete{
+    background: $light-gray;
+  }
+  &.simple-readonly{
+    input[readonly]{
+      border: none;
+      background: none;
+      font-weight: normal;
+    }
+    div:has(input[readonly])>.field-prefix, input[readonly]+.field-suffix{
+      border: none;
+      background: none;
+    }
+  }
+  .weight-medium {
+    input[readonly], input[readonly]>.field-prefix, input[readonly]+.field-suffix{
+      font-weight: $global-weight-medium;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+
+// these should all be retired once we update template on the reskinned pages.
+
+.box-right-40 {
+  @media screen and #{breakpoint(medium)} {
+    float: right;
+    width: 40%;
+    margin-left: $gutter;
+    display: inline-block;
+  }
+}
+.box-left-40 {
+  @media screen and #{breakpoint(medium)} {
+    float: left;
+    width: 40%;
+    margin-right: $gutter;
+    display: inline-block;
+  }
+}
+
+.box-right-fixed300 {
+  @media screen and #{breakpoint(medium)} {
+    float: right;
+    width: rem-calc(300);
+    margin-left: $global-margin;
+    display: inline-block;
+  }
+}
+
+.box-left-fixed300 {
+  @media screen and #{breakpoint(medium)} {
+    float: left;
+    width: rem-calc(300);
+    margin-right: $global-margin;
+    display: inline-block;
+  }
+}

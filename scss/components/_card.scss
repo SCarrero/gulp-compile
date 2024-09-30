@@ -1,0 +1,270 @@
+/// card
+.card {
+  position: relative;
+  padding: 0;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: rem-calc(16);
+  .overlay,
+  .modal-launch,
+  .video-modal {
+    width: 100%;
+  }
+
+  .avatar {
+    @media screen {
+      position: relative;
+      top: 1.25rem;
+      margin: 0;
+      display: flex;
+    }
+  }
+  h2,h3,h4 {
+    margin-bottom: 0.35em;
+  }
+  .sidebar & {
+    margin-bottom: 0;
+  }
+}
+.card-background-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  &.aspect-4x3 {
+    padding-bottom: 75%;
+    &.bordered {
+      padding-bottom: calc(75% - #{rem-calc(2)});  // ofset the border
+    }
+  }
+  &.aspect-8x5 {
+    padding-bottom: 62.5%;
+  }
+  &.aspect-16x9 {
+    padding-bottom: 56.25%;
+  }
+  &.framed {
+    margin: rem-calc(20 20 0);
+    background-color: $white;
+    align-self: stretch;
+    background-size: contain !important;
+    padding-bottom: calc(75% - #{rem-calc(20)});
+    width: calc(100% - #{rem-calc(40)});
+  }
+  // &.contained {
+  //   background-color: $white;
+  //   align-self: stretch;
+  //   background-size: contain !important;
+  // }
+
+  &.bordered {
+    border: rem-calc(1) solid darken($light-gray, 9.8%);
+    .sub-nav & {
+      background-size: contain !important;
+    }
+  }
+}
+.divider-flex {
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  h2,
+  h3 {
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    margin-bottom: 0;
+  }
+}
+
+.card-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  align-self: stretch;
+  &.hollow {
+    border: $callout-border;
+  }
+  > :first-child {
+    margin-top: 0;
+    + h3.h4 {
+      margin-top: rem-calc(6);
+    }
+  }
+  *:nth-last-child(2) {
+    // .align-self-bottom not working? make 2nd to last card element take up space so the arrow/link can be on the bottom
+    flex-grow: 1;
+  }
+  .sidebar & {
+    padding-left:0;
+    padding-right: 0;
+    padding-bottom: 0;
+    // background: $light-gray;
+  }
+  + .card-section {
+    padding-top: 0;
+  }
+  &.media-object-section {
+    padding-top: 0;
+    padding-right: 0;
+    align-self: flex-start;
+    @include breakpoint(small only) {
+      padding-left: rem-calc(10);
+    }
+    @include breakpoint(medium only) {
+      padding-left: rem-calc(20);
+    }
+  }
+  &.align-self-stretch {
+    justify-content: stretch;
+  }
+}
+.card-divider {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  align-self: stretch;
+}
+.perspectives {
+  @media screen {
+    figcaption.reduce {
+      font-size: rem-calc(15);
+    }
+  }
+}
+.pre-footer-promo.background-concrete {
+  @media screen {
+    .card {
+      position: relative;
+      > .card-divider:not([data-equalizer-watch]) {
+        margin-bottom: $gutter;
+      }
+    }
+  }
+}
+.card-category {
+  color: map-get($colors, navy1);
+  font-weight: $global-weight-medium;
+  + span {
+    padding-left: rem-calc(10);
+    &::before {
+      content: "|";
+      display: inline;
+      padding-right: rem-calc(10);
+    }
+  }
+}
+.card-image {
+  width: 100%;
+  &.center {
+    position: relative;
+    background: white;
+    width: 90%;
+    margin: auto;
+    padding-top: 55%;
+    margin-top: 5%;
+    img {
+      width: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.card-image {
+  img {
+    width: 100%;
+    object-fit: fill;
+  }
+  &.round {
+    padding: 1.6875rem 1.875rem 0;
+    img {
+      width: rem-calc(160px);
+      aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+  }
+}
+
+.toggle-cards {
+  .card,
+  .media-object {
+    transform: scale(1);
+    transition: transform 0.25s ease-in-out;
+    margin-bottom: rem-calc(20);
+  }
+  .cell + .cell .media-object {
+    border-top: 1px solid $light-gray;
+    padding-top: rem-calc(20);
+  }
+  .card {
+    background-color: $light-gray;
+    .card-blurb {
+      display: none;
+    }
+    .card-section :nth-last-child(2) {
+      flex: 1 0 auto;
+    }
+  }
+  .shrink {
+    transform: scale(0);
+  }
+  .reverse .media-object {
+    flex-direction: row-reverse;
+  }
+  .media-object .card-blurb {
+    @include breakpoint(medium only) {
+      display: none;
+    }
+  }
+  .card-image.media-object-section {
+    overflow: hidden;
+    @media screen and (max-width: -zf-bp-to-em(map-get($breakpoints, medium) - 150px)) {
+      max-width: 17%;
+      img {
+        object-fit: cover;
+        object-position: 85% 50%;
+        width: rem-calc(70);
+        height: rem-calc(60);
+      }
+    }
+    @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium) - 149px)) {
+      max-width: 20%;
+      img {
+        object-fit: cover;
+        object-position: 60% 50%;
+        width: rem-calc(90);
+        height: rem-calc(90);
+      }
+    }
+    @include breakpoint(medium) {
+      width: 22%;
+      img {
+        object-position: 50% 50%;
+        width: 100%;
+        height: rem-calc(110);
+      }
+    }
+    @include breakpoint(large) {
+      max-width: 24%;
+      img {
+        width: 100%;
+        height: rem-calc(180);
+      }
+    }
+    @include breakpoint(xlarge) {
+      max-width: 27%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    @include breakpoint(xxlarge) {
+      max-width: 26%;
+    }
+  }
+}

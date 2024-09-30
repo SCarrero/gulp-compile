@@ -1,0 +1,13 @@
+html, body {
+  min-height: 100% !important;
+}
+
+body {
+  position: relative;
+  min-width: rem-calc(320);
+}
+
+div#body-wrapper {
+  overflow-x: hidden;
+  width: 100%;
+}

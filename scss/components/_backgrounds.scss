@@ -1,0 +1,155 @@
+$background-dark-palette: (
+  'teal': $fm-teal,
+  'green': $fm-green,
+  'blue': $primary-color,
+  'navy': map-get($colors, navy4),
+  'orange': map-get($colors, orange1),
+  'red': $fm-red,
+  'charcoal': $dark-gray,
+);
+$background-light-palette: (
+  'concrete': $light-gray,
+  'white': $white,
+);
+@each $name, $color in $background-dark-palette {
+  .background-#{$name},
+  [class*="background-"] .background-#{$name} {
+    background-color: $color;
+    color: color-pick-contrast($color, ($white, $black));
+    a:not(.button) {
+      color: color-pick-contrast($color, ($white, $black));
+      &:visited {
+        color: color-pick-contrast($color, (#d2d2d2, #3c3c3c));
+      }
+      &:hover,
+      &:focus {
+        color: currentColor;
+        background-color: rgba(invert-color(color-pick-contrast($color, ($white, $black))), 0.37);
+      }
+    }
+  }
+}
+@media screen {
+  .background-teal {
+    &.horizontal-chevron {
+      @include chevron-l-r($left: lighten($fm-teal, 3%), $right: $fm-teal);
+    }
+    &.offset-feature-panel {
+      @include chevron-h2(lighten($fm-teal, 3%), $fm-teal);
+      &.right-image {
+        @include chevron-h2-50(lighten($fm-teal, 3%), $fm-teal);
+      }
+    }
+    .offset-video-panel &.cell:first-of-type {
+      @include chevron-l-r(lighten($fm-teal, 4%), $fm-teal);
+    }
+  }
+  .background-green {
+    &.horizontal-chevron {
+      @include chevron-l-r($left: map-get($colors, green1), $right: map-get($colors, green3));
+    }
+    &.offset-feature-panel {
+      @include chevron-h2(map-get($colors, green2), map-get($colors, green3));
+      &.right-image {
+        @include chevron-h2-50(map-get($colors, green2), map-get($colors, green3));
+      }
+    }
+    &.vertical-chevrons {
+      @include chevron-v4(map-get($colors, green5), false);
+    }
+    &.vertical-chevrons-multi {
+      @include chevron-vmulti(map-get($colors, green3));
+    }
+    .offset-video-panel &.cell:first-of-type {
+      @include chevron-l-r(map-get($colors, green1), map-get($colors, green3));
+    }
+  }
+  .background-blue {
+    &.horizontal-chevron {
+      @include chevron-l-r(map-get($colors, blue5), lighten(map-get($colors, blue5), 3%));
+    }
+    &.offset-feature-panel {
+      @include chevron-h2(map-get($colors, blue5), lighten(map-get($colors, blue5), 3%));
+      &.right-image {
+        @include chevron-h2-50(map-get($colors, blue5), lighten(map-get($colors, blue5), 3%));
+      }
+    }
+    &.vertical-chevrons {
+      @include chevron-v4(map-get($colors, blue5), false);
+    }
+    .offset-video-panel &.cell:first-of-type {
+      @include chevron-l-r(map-get($colors, blue5), lighten(map-get($colors, blue5), 3%));
+    }
+  }
+  .background-navy {
+    &.horizontal-chevron {
+      @include chevron-l-r(map-get($colors, navy3), lighten(map-get($colors, navy3), 3%));
+    }
+    &.offset-feature-panel{
+      @include chevron-h2(map-get($colors, navy3), map-get($colors, navy4));
+      &.right-image {
+        @include chevron-h2-50(map-get($colors, navy3), map-get($colors, navy4));
+      }
+    }
+    &.vertical-chevrons {
+      @include chevron-v4(lighten(map-get($colors, navy5), 8%), true);
+    }
+    .offset-video-panel &.cell:first-of-type {
+      @include chevron-l-r(map-get($colors, navy3), map-get($colors, navy4));
+    }
+  }
+  .background-navy5 {
+    background-color: map-get($colors, navy5);
+    color: $white;
+    a {
+      color: currentColor;
+    }
+  }
+  .background-orange {
+    &.horizontal-chevron {
+      @include chevron-l-r(
+        $left: map-get($colors, orange1),
+        $right: map-get($colors, orange2)
+      );
+    }
+  }
+}
+@each $name, $color in $background-light-palette {
+  .background-#{$name} {
+    background-color: $color;
+    color: $body-font-color;
+  }
+}
+@each $name, $color in $background-light-palette {
+  [class*="background-"] .background-#{$name} {
+    background-color: $color;
+    color: $body-font-color;
+    a:not(.button) {
+      color: $anchor-color;
+      &:visited {
+        color: $anchor-color-visited;
+      }
+      &:hover,
+      &:focus {
+        color: $anchor-color-hover;
+        background-color: inherit;
+      }
+    }
+  }
+}
+// Legacy class names
+.background-black {
+  @extend .background-navy;
+}
+.background-primary {
+  @extend .background-blue;
+}
+.background-offwhite {
+  @extend .background-white;
+}
+.background-concrete {
+  &.horizontal-chevron {
+    color: $black;
+    @include chevron-l-r($left: $light-gray, $right: $medium-gray);
+  }
+}

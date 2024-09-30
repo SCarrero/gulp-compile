@@ -1,0 +1,36 @@
+// class .callout is in _callout.scss
+.promo-themed {
+  position: relative;
+  padding: rem-calc(40 30);
+  margin: rem-calc(20 0);
+  background: $light-gray;
+  > :first-child {
+    margin-top: 0;
+  }
+  > :last-child {
+    margin-bottom: 0;
+  }
+  &:not(.inverted)::after {
+    position: absolute;
+    right: rem-calc(20);
+    top:rem-calc(20);
+    display: inline-block;
+    width: rem-calc(39px);
+    height: rem-calc(24.5px);
+    content: ' ';
+    background: transparent icon(roofline, $fm-green, 39px, 24.5px, 0, 0, 833, 531, "") no-repeat center center/contain;
+    background: icon(roofline, $secondary-color, 833px, 531px, 0, 0, 833, 531) no-repeat center center/contain;
+  }
+  &.inverted {
+    color: map-get($colors, navy4);
+    background: none;
+    margin-bottom: 0;
+    margin-top: 0;
+    @include breakpoint(large) {
+      padding-left: rem-calc(60);
+    }
+    @include breakpoint(xlarge) {
+      padding-left: rem-calc(80);
+    }
+  }
+}

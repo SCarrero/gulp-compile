@@ -1,0 +1,50 @@
+/// Outputs a `margin-top` or `padding-top` CSS property
+///
+/// Generates vertical spacing helper classes (and extends) in increments a given number of times
+/// @param {String} $class ['top-'] - The base of the class name for each increment
+/// @param {Number} $count [4] - The total number of classes (increments) to generate
+/// @param {Number} $increment [1rem] - The base increment to be multiplied
+
+@mixin vertical-spacing-classes(
+  $class: '-top',
+  $count: 4,
+  $increment: rem-calc(16)
+) {
+  @for $i from 0 through $count {
+    @if ($i == 0) {
+      .#{'no-margin' + $class} {
+        margin-top: 0 !important;
+      }
+      .#{'no-padding' + $class} {
+        padding-top: 0 !important;
+      }
+    }
+    @else {
+      .#{'margin' + $class + '-' + $i} {
+        margin-top: #{$i * $increment};
+      }
+      .#{'padding' + $class + '-' + $i} {
+        padding-top: #{$i * $increment};
+      }
+    }
+  }
+  @include -zf-each-breakpoint($small: false) {
+    @for $i from 0 through $count {
+      .#{'margin' + $class + '-' + $i + '-' + $-zf-size} {
+        margin-top: #{$i * $increment};
+      }
+      .#{'padding' + $class + '-' + $i + '-' + $-zf-size} {
+        padding-top: #{$i * $increment};
+      }
+    }
+  }
+}
+
+@include vertical-spacing-classes();
+
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+.padding-top-8 {
+  padding-top: 8rem;
+}

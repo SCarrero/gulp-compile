@@ -1,0 +1,224 @@
+// **************************************//
+// -------   TOP NAV RIBBON  ------- //
+// **************************************//
+
+.position-fixed {
+  // repeated from shims for stand alone implementation
+  position: fixed;
+}
+.menu li {
+  margin: 0;
+  padding: 0;
+}
+.ribbon-wrapper {
+  position: relative;
+  z-index: 20;
+  .menu {
+    z-index: 21;
+    @include breakpoint(xlarge){
+      justify-content: flex-end;
+    }
+    .menu {
+      z-index:22;
+    }
+  }
+}
+
+/******* TOP NAV GRADIENT *********/
+.ribbon-wrapper {
+  background-color: map-get($colors, navy5);
+  @include breakpoint(xlarge) {
+    background: map-get($colors, navy5)
+    repeating-linear-gradient(147deg,
+    lighten(map-get($colors, navy5), 8%) 0%,
+    lighten(map-get($colors, navy5), 8%) 21.5%,
+    lighten(map-get($colors, navy5), 5%) 21.5%,
+    lighten(map-get($colors, navy5), 5%) 39.25%,
+    lighten(map-get($colors, navy5), 2%) 39.25%,
+    map-get($colors, navy5) 100%);
+  }
+  @include breakpoint(large down) {
+    padding-right: 0;
+    padding-left: 0;
+    font-size: rem-calc(15);
+  }
+}
+.ribbon-nav {
+  width: 100%;
+  padding: 1.0625rem 0 1rem;
+  @include breakpoint(large) {
+    min-height: rem-calc(40);
+  }
+  @include breakpoint(xlarge) {
+    padding: 0;
+    p {
+      font-weight: 500;
+      font-size: 1.125rem;
+    }
+  }
+  .ribbon-icon {
+    display: inline-block;
+    position: relative;
+    transition: .2s;
+    cursor: pointer;
+    .icon-chevron-down {
+      padding-right: 1.5rem;
+    }
+  }
+  a {
+    color: $white;
+    padding: 1.0625rem .625rem 1rem 1.875rem;
+    text-decoration: none;
+    &.active {
+      color: $white;
+    }
+    &:visited {
+      color: $white;
+    }
+  }
+  &.is-mobile-expanded {
+    .ribbon-icon {
+      .icon-chevron-down::after {
+        transform: rotate(180deg);
+        margin-left: .4rem;
+        margin-bottom: .0625rem;
+      }
+    }
+  }
+  &.is-mobile-expanded {
+    @include breakpoint(large down) {
+      min-height: 100vh;
+      .accordion-menu {
+        overflow-y: scroll;
+        height: calc(100vh);
+        max-height: calc(100vh);
+        padding-bottom: rem-calc(150);
+      }
+    }
+  }
+}
+.ribbon-nav .accordion-menu {
+  align-items: flex-start;
+  font-size: rem-calc(18);
+  margin-top: 1rem;
+  @include breakpoint(xlarge) {
+    font-size:.9375rem;
+    right: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:0;
+  }
+  .is-accordion-submenu-parent {
+    width: 100%;
+    span.icon-chevron-down {
+      @include breakpoint(large down) {
+        float: right;
+        padding-right: 1rem;
+      }
+    }
+  }
+  .submenu {
+    background: rgba($black, 0.4);
+    font-size: rem-calc(15);
+    @include breakpoint(large down) {
+      margin-top: 0.5rem;
+      padding-top: 1rem;
+      p + span {
+        display: none;
+      }
+    }
+    li {
+      width: 100%;
+      a {
+        @include breakpoint(xlarge){
+          padding: .75rem .625rem .8125rem 1rem;
+        }
+      }
+    }
+  }
+}
+.dropdown.menu.vertical>li .is-dropdown-submenu {
+  background-color: map-get($colors, navy5);
+  li + li {
+    @include breakpoint(xlarge){
+    border-top: .0625rem solid lighten(map-get($colors, navy3), 2%);
+    }
+  }
+  a {
+    padding: 1.625rem 1.875rem 1.875rem 1rem;
+    color: $white;
+    &:hover{
+    > p {
+      color: map-get($colors, blue3);
+      }
+    }
+  }
+}
+.dropdown {
+  &.menu {
+    &.xlarge-horizontal {
+      > li {
+        &.is-dropdown-submenu-parent {
+          a {
+            padding-right: 1.7rem;
+            &::after{
+              margin-left: .4rem;
+              margin-bottom: rem-calc(1);
+              transition: .3s;
+              right: rem-calc(1);
+              transition: rotate(0deg);
+            }
+          }
+          &.is-active {
+            > a {
+
+              &:hover,
+              :focus {
+                color: $white;
+              }
+            }
+          }
+        }
+        /* HS desktop menu override. */
+        a {
+          color: rgba($white, .7);
+          font-weight: 300;
+          font-size: rem-calc(15);
+          &:hover,
+          :focus {
+            color: $white;
+            p {
+              color: map-get($colors, blue1);
+            }
+          }
+          + ul {
+            box-shadow: none;
+            border: none;
+          }
+          &.active{ // Set active class based on theme.
+            color: $white;
+          }
+        }
+        &.opens-right {
+          >.is-dropdown-submenu {
+            width: rem-calc(300);
+            position: absolute;
+            right: -1.3rem;
+            left: auto;
+          }
+        }
+        &.is-active {
+          a {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+body.position-fixed {
+  width: 100%;
+}
+

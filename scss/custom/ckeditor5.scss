@@ -1,0 +1,150 @@
+/*! (c) Kruftwerk
+Used to add styles to CKEditor5.
+*/
+
+@charset 'utf-8';
+@import '../settings_corp';
+@import '../../node_modules/foundation-sites/scss/foundation';
+@import '../mixins';
+
+/* Prefix our content styles with .ck-content. */
+.ck-content {
+  @include foundation-global-styles;
+  @include foundation-forms;
+  @include foundation-typography;
+  @include foundation-xy-grid-classes;
+  @include foundation-close-button;
+  @include foundation-label;
+  @include foundation-switch;
+  @include foundation-table;
+  @include foundation-card;
+  @include foundation-tooltip;
+  @include foundation-media-object;
+  @include foundation-orbit;
+  @include foundation-responsive-embed;
+  @include foundation-float-classes;
+  @include foundation-flex-classes;
+  @include foundation-visibility-classes;
+  @import '../components/globals';
+  @import '../components/icons';
+  @import '../components/reveal';
+  @import '../components/text';
+  @import '../components/typography';
+  @import '../components/buttons';
+  @import '../components/button-group';
+  @import '../components/button-row';
+  @import '../components/callouts';
+  @import '../components/articles';
+  @import '../components/forms';
+  @import '../components/flex';
+  @import '../components/lists';
+  @import '../components/avatar';
+  @import '../components/asides';
+  @import '../components/images';
+  @import '../components/card';
+  @import '../components/data-table';
+  @import '../components/anchors';
+  @import '../components/close-button';
+  @import '../components/tooltips';
+  @import '../components/backgrounds';
+  @import '../components/media-object';
+  @import '../components/display';
+  @import '../components/vertical-spacing';
+  @import '../components/panel';
+  @import '../components/shims';
+  /* Override Claro's styles. */
+  tr:hover, tr:focus, th {
+    color: inherit;
+    background-color: inherit;
+  }
+  /* Override CKEditor5's very opinionated styles. */
+  thead tr,
+  .draggable-table.tabledrag-disabled tr {
+    color: $white;
+  }
+  blockquote:not([class]) {
+    border-left: $blockquote-border;
+    padding: $blockquote-padding;
+    font-style: initial;
+    footer {
+      p {
+        display: inline;
+      }
+    }
+  }
+  ul:not([class]) {
+    list-style-type: inherit;
+  }
+  .responsive-embed {
+    .html-object-embed.ck-widget {
+      display: block;
+      video {
+        height: auto;
+      }
+    }
+  }
+  .reveal {
+    opacity: 0.7;
+    outline: 2px dashed $medium-gray;
+  }
+  .orbit-container {
+    height: unset;
+    .orbit-slide {
+      position: relative;
+    }
+  }
+}
+
+// Trick .form-textarea-wrapper into not widening the parent table.
+.form-textarea-wrapper {
+  max-width: calc(100% - 2px);
+}
+// Bump up width of the layout region for users with large monitors.
+@media screen and (min-width: 95rem) {
+  .layout-region.layout-region--node-main .layout-region__content,
+  .layout-region.layout-region--node-footer .layout-region__content {
+    max-width: 65rem;
+  }
+}
+// Make CKEditor5 taller when empty by padding the temporary placeholder.
+p:has(br[data-cke-filler]) {
+  padding-bottom: 2rem;
+}
+// Show placeholder for SVG objects in CKE admin view.
+// Sourcing definitions from existing CK HTML Object styling.
+.ck.ck-editor__editable span[data-ck-unsafe-element] {
+  font-size: var(--ck-font-size-base);
+  min-width: calc(76px + var(--ck-spacing-standard));
+  padding: var(--ck-spacing-small);
+  padding-top: calc(var(--ck-font-size-tiny) + var(--ck-spacing-large));
+  display: inline-block !important;
+  position: relative;
+  outline: var(--ck-html-object-embed-unfocused-outline-width) dashed var(--ck-color-widget-blurred-border);
+}
+.ck.ck-editor__editable span[data-ck-unsafe-element="svg"] {
+  background-color: pink;
+}
+.ck.ck-editor__editable span[data-ck-unsafe-element="style"] {
+  background-color: lightgreen;
+}
+// Explicitly defining because compiler was somehow missing the nesting.
+.ck.ck-editor__editable span[data-ck-unsafe-element]::before {
+  background: #999;
+  border-radius: 0 0 var(--ck-border-radius) var(--ck-border-radius);
+  color: #fff;
+  content: ' ';
+  font-family: var(--ck-font-face);
+  font-size: var(--ck-font-size-tiny);
+  font-style: normal;
+  font-weight: 400;
+  left: var(--ck-spacing-standard);
+  padding: calc(var(--ck-spacing-tiny) + var(--ck-html-object-embed-unfocused-outline-width)) var(--ck-spacing-small) var(--ck-spacing-tiny);
+  position: absolute;
+  top: 0;
+}
+.ck.ck-editor__editable span[data-ck-unsafe-element="svg"]::before {
+  content: 'SVG object';
+}
+.ck.ck-editor__editable span[data-ck-unsafe-element="style"]::before {
+  content: 'Style object';
+}

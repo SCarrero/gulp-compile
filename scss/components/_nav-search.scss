@@ -1,0 +1,56 @@
+@use 'sass:math';
+.nav-search  {
+  @include breakpoint(xlarge) {
+    position: relative;
+    transition-duration: 1ms !important;
+  }
+  @include breakpoint(small only) {
+    input[type="search"] {
+      margin-right: $gutter;
+    }
+  }
+  @include breakpoint(large down) {
+    .nav-global & {
+      position: absolute;
+      margin-top: rem-calc(80);
+      top: 0;
+      width: 100%;
+      z-index: 399;
+    }
+    padding: rem-calc($gutter * 0.5 $gutter * 1.5 $gutter * 0.5 $gutter * 1.5);
+    border-top: 1px solid darken($light-gray, 9.8039);
+    border-bottom: 1px solid $fm-yellow;
+    background-color: $fm-yellow;
+    max-height: rem-calc(96);
+    form {
+      width: 100%;
+      margin: 0;
+    }
+    input[type="search"] {
+      background: $white;
+      border-radius: rem-calc(5);
+      margin: 0;
+      width: 100%;
+      height: rem-calc($gutter * 2.5);
+    }
+    button[type="submit"] {
+      color: $white;
+      font-size: rem-calc(14);
+      width: auto;
+      height: ($gutter * 2.5);
+      margin: 0;
+      padding: rem-calc(math.div($gutter, 1.25) 0 math.div($gutter, 1.25) math.div($gutter, 2));
+    }
+    [type="submit"] {
+      background: transparent;
+    }
+    &.has-transition {
+      transition: margin-top 0.35s ease;
+    }
+    &.is-expanded {
+      margin-top: 0;
+      transition: margin-top 0.4s ease;
+    }
+  }
+}
+

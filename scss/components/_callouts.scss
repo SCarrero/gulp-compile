@@ -1,0 +1,106 @@
+.callout {
+  margin: $callout-margin;
+  background-color: $callout-background;
+  position: relative;
+  padding: rem-calc(30);
+  &.flex {
+    @include flex;
+    @include flex-direction(column);
+  }
+  &.large {
+    @include breakpoint(large) {
+      padding: rem-calc(40);
+    }
+  }
+  &.small,
+  &.xsmall {
+    padding: rem-calc(10);
+  }
+  &.xlarge {
+    @include breakpoint(large) {
+      padding: rem-calc(50);
+    }
+    @include breakpoint(xlarge) {
+      padding: rem-calc(80);
+    }
+    .reveal & {
+      @include breakpoint(xlarge) {
+        padding: 7rem;
+      }
+    }
+  }
+  &.small-no-sides {
+    @include breakpoint(small only) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  &.medium-no-sides {
+    @include breakpoint(medium only) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    + h2,
+    + h3,
+    + h4 {
+      margin-top: rem-calc(20);
+    }
+  }
+  > :first-child:not(.button) {
+    margin-top: 0;
+  }
+  > :last-child {
+    margin-bottom: 0;
+  }
+  .close-button {
+    color: currentColor;
+  }
+
+  &.hollow-thin,
+  &.hollow {
+    border: $callout-border;
+  }
+  &.border-white {
+    border: 2px solid $white;
+  }
+  &.callout-overlay {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  &.alert {
+    background-color: mix($fm-red, $white, 10%);
+    border: 2px solid $fm-red;
+  }
+  &.primary {
+    background-color: mix($primary-color, $white, 10%);
+    border: 2px solid $primary-color;
+  }
+  .avatar {
+    @media screen {
+      position: relative;
+      left: 0;
+      right: $gutter;
+      bottom: $gutter * -1.5;
+      margin: 0;
+      display: flex;
+      &.author-quote {
+        position: static;
+        figcaption {
+          font-size: inherit;
+          max-height: initial;
+          strong span.quote-author-title{
+            &:last-child {
+              font-weight: $global-weight-normal;
+            }
+          }
+        }
+      }
+    }
+  }
+}

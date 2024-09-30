@@ -1,0 +1,29 @@
+.notification {
+  z-index: 305;
+  position: relative;
+  &.hide {
+    transition-duration: 0ms;
+  }
+  .notification-alert {
+    font-size: rem-calc(18px);
+    padding: rem-calc(20 0 10);
+    @include breakpoint(large){
+      padding: rem-calc(30 0 20);
+    }
+  }
+  .button {
+    @include breakpoint(small only) {
+      padding: rem-calc(13 22 12);
+    }
+    + .button {
+      margin-left: rem-calc(10);
+      @include breakpoint(large){
+        margin-left: rem-calc(20);
+      }
+    }
+  }
+  img{
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}

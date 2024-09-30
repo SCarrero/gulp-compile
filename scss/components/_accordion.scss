@@ -1,0 +1,264 @@
+@use 'sass:math';
+/// styles for the accordion title when active/expanded
+/// Drop +/- and carets
+@mixin accordion-faq {
+  @include accordion-container($white);
+  counter-reset: section;
+  margin-bottom: $gutter;
+  .accordion-title {
+    @include accordion-title(0.5rem 0.5rem 0.5rem 2.5rem, rem-calc(18), $anchor-color, 0, $white);
+    line-height: inherit;
+    border-width: 0 !important;
+    font-weight: $global-weight-normal;
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      color: $anchor-color-hover;
+    }
+    &::before {
+      counter-increment: section;
+      content: counters(section, ".", decimal) ". ";
+      display: inline-block;
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      background: none;
+      margin-top: 0;
+    }
+    &::after {
+      @include css-triangle(0.35em, currentColor, down);
+      display: inline-block;
+      margin-left: 0.4rem;
+      margin-bottom: rem-calc(2);
+      transform: rotate(0deg);
+      transition: .3s;
+    }
+  }
+  .accordion-item {
+      margin: 0;
+      background: $white;
+    &.is-active {
+      background: $white;
+      margin: 0 0 $gutter;
+      .accordion-title {
+        background: $white;
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  :last-child:not(.is-active) > .accordion-title {
+    border-bottom-width: 0;
+  }
+  .accordion-content {
+    @include accordion-content(0.5rem $gutter 1rem 2.5rem, 0, transparent, $body-font-color);
+    @media screen and (max-width: 25em) {
+      padding: 0.5rem 0.8rem 1rem;
+    }
+    :last-child {
+      margin-bottom: 0;
+    }
+   }
+}
+
+a.accordion-title {
+  text-decoration: none;
+}
+
+///styles for .accordion-pointer
+.accordion,
+.accordion-pointer {
+  margin-left: 0;
+  list-style-type: none;
+  .accordion-title {
+    @include vertical-chevron-icon(0.125rem, transparent);
+    font-weight: $global-weight-medium;
+    color: $primary-color;
+    transition: background 0.2s ease;
+    &:hover,
+    &:focus {
+      background-color: $accordion-item-background-hover;
+      color: $anchor-color-hover;
+    }
+  }
+  &.large {
+    margin: rem-calc(30 0 40);
+    > li:only-child .accordion-title {
+      font-weight: $global-weight-normal;
+      line-height: math.div(26, 22);
+      font-size: rem-calc(22);
+      padding: 0.625rem 2.5rem 0.75rem 1rem;
+    }
+  }
+
+  .accordion-item {
+    margin: 0;
+    background: $accordion-background;
+    &:not(:first-child){
+      border-top: rem-calc(1) solid $white;
+    }
+    &:not(:last-child):not(.is-last-visible){
+      border-bottom: rem-calc(1) solid $white;
+    }
+    &.is-active{
+      border-bottom-width: 0;
+      background-color: $white;
+      .accordion-title {
+        border-color: $accordion-background;
+        border-bottom-width: 0;
+        &:hover,
+        &:focus {
+          background-color: inherit;
+          color: inherit;
+        }
+      }
+      + .accordion-item {
+        border-top-width: 0;
+      }
+    }
+    &:last-child, &.is-last-visible {
+      .accordion-content {
+        border-bottom: rem-calc(2) solid $accordion-background;
+      }
+    }
+  }
+
+  .accordion-content {
+    border-left: rem-calc(2) solid $accordion-background;
+    border-right: rem-calc(2) solid $accordion-background;
+    ul:first-child {
+      margin-top: 0;
+      li:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.accordion .accordion-faq,
+.accordion.accordion-faq {
+  @include accordion-faq;
+}
+
+button.accordion-toggle-all{
+  color: $primary-color;
+  text-decoration: underline;
+  &:hover{
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+section.sidebar, .tab-wrapper[data-equalizer]{
+  button.accordion-toggle-all{
+    display: none;
+  }
+}
+
+details {
+  background-color: $white;
+  summary {
+    position: relative;
+    padding: 0.8rem 0.5rem 0.7rem 2em;
+    color: $white;
+    cursor: pointer;
+    font-weight: $global-weight-regular;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    transition: background-color 250ms,color 250ms;
+    background-color: map-get($colors, blue5);
+    border-bottom: rem-calc(2) solid $white;
+    &:hover {
+      background-color: map-get($colors, blue4);
+    }
+    &::marker,
+    &::after {
+      content: none;
+    }
+    &::-webkit-details-marker{
+      display: none;
+    }
+    &::before {
+      content: " ";
+      font-size: 120%;
+      width: 1.25em;
+      height: 1.1em;
+      display: block;
+      left: 0.25em;
+      @include vertical-center;
+      transition: background-image 250ms;
+      background:transparent icon(toggleCollapsed, "none", 1.1em, 1.1em, 0, 0, 34, 34, $white, 2) no-repeat center center/1em 1em;
+    }
+    > * {
+      @supports not (-ms-ime-align: auto) {
+        display: inline;
+      }
+    }
+  }
+  &[open] summary {
+    border-bottom-width: 0;
+    &::before {
+      background:transparent icon(toggleExpanded, "none", 1.1em, 1.1em, 0, 0, 34, 34, $white, 2) no-repeat center center/1em 1em;
+    }
+  }
+  > fieldset,
+  > .webform-flexbox,
+  > .js-form-item:not(.js-form-type-webform-table) {
+    padding: rem-calc(10 15) !important;
+  }
+  > .form-wrapper {
+    padding: rem-calc(10 15) !important;
+    border: rem-calc(2) solid $light-gray;
+  }
+  > .js-form-type-webform-table {
+    table {
+      margin-bottom: 0;
+      border-width: 0;
+      border-collapse: collapse;
+      border-style: hidden;
+      thead, tbody, tfoot {
+        border-width: 0;
+      }
+      tbody tr {
+        border-width: rem-calc(1);
+      }
+      thead {
+        border-style: hidden;
+        border-collapse: collapse;
+        background-color: $light-gray;
+        color: $body-font-color;
+        th {
+          border: rem-calc(1) solid rgba($white, 0.8);
+          border-width: 0 rem-calc(1);
+        }
+      }
+      tbody tr:nth-child(odd) {
+        background-color: $white;
+      }
+      input {
+        margin-bottom: 0;
+      }
+      [type="text"],
+      [type="password"],
+      [type="date"],
+      [type="datetime"],
+      [type="datetime-local"],
+      [type="month"],
+      [type="week"],
+      [type="email"],
+      [type="number"],
+      [type="search"],
+      [type="tel"],
+      [type="time"],
+      [type="url"],
+      [type="color"],
+      select,
+      textarea,
+      [type="radio"],
+      [type="checkbox"] {
+        font-size: 1rem;
+      }
+    }
+  }
+}

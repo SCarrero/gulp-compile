@@ -1,0 +1,143 @@
+@use 'sass:math';
+$tertiary-gap: $gutter * 1.5;
+$tertiary-border-color:  rgba($medium-gray, 0.6);  //scale-color($light-gray, $lightness: -5%);
+
+.tertiary-nav {
+  background: $fm-green;
+  color: $dark-gray;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.875rem;
+  font-size: 1.125rem;
+  @media print {
+    display: none;
+  }
+  h2 {
+    color: $black;
+    padding: 0;
+    margin: 0;
+    line-height: math.div(38, 28);
+    font-weight: $global-weight-light;
+    @include fluid-type(21px, 28px, xlarge);
+  }
+  a {
+    color: inherit;
+    display: block;
+    padding: rem-calc(25 30);
+    @include disable-mouse-outline;
+    &:not(:hover) {
+      text-decoration: none;
+    }
+    &:visited {
+      color: inherit;
+    }
+  }
+  nav {
+    background: $white;
+    border-left: 1px solid $tertiary-border-color;
+    border-right: 1px solid $tertiary-border-color;
+  }
+  ul {
+    margin: 0;
+    a {
+      font-weight: $global-weight-normal;
+      &:hover,
+      &:focus {
+        color: $black;
+      }
+      &.active {
+        color: $black;
+        font-weight: $global-weight-medium;
+        background: $light-gray;
+      }
+    }
+    li {
+      margin: 0;
+    }
+    li + li::before {
+        content: "";
+        display: block;
+        border-top: 1px solid $tertiary-border-color;
+    }
+    ul {
+      a {
+        text-transform: none;
+        padding: rem-calc(25 30);
+        font-weight: $global-weight-light;
+      }
+      li + li::before {
+        margin: 0 $tertiary-gap;
+      }
+    }
+  }
+  li.parent {
+    background: rgba($light-gray, 0.5);
+    color: $black;
+  }
+  li.data-expanded {
+    > a {
+      padding-bottom: rem-calc(25);
+    }
+  }
+}
+button[data-toggle="tertiary-horizontal"] {
+  @include vertical-chevron-icon;
+  padding: 1rem 2rem 1rem 1rem;
+}
+.tertiary-horizontal {
+  @include breakpoint(small only) {
+    display: none;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+    li {
+      border: 1px solid rgba($dark-gray, 0.25);
+      border-top-width: 0;
+    }
+    a {
+      display: block;
+      padding: 1rem;
+      background: $white;
+      &:visited {
+        color: initial;
+      }
+    }
+  }
+  a.is-active {
+    color: rgba($dark-gray, 0.6);
+    pointer-events: none;
+  }
+  @include breakpoint(medium) {
+    position: relative;
+    margin: rem-calc(12 0 8);
+    font-size: rem-calc(15);
+    font-weight: $global-weight-medium;
+    line-height: 1.2;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom:0;
+      border-bottom: rem-calc(2) solid $light-gray;
+    }
+    a {
+      padding: rem-calc(13 18);
+      border-bottom: rem-calc(2) solid transparent;
+      color: $anchor-color;
+      &:visited {
+        color: $anchor-color;
+      }
+      &:hover,
+      &:focus {
+        color: $anchor-color-hover;
+        border-bottom-color: currentColor;
+      }
+    }
+    li.is-active a {
+      color: $dark-gray;
+      border-bottom-color: currentColor;
+    }
+  }
+}

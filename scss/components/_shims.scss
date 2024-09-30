@@ -1,0 +1,189 @@
+// shims to override some defaults
+// next go around replace with something more robust like vertical spacing in newsites
+.no-border {
+  border-width: 0 !important;
+}
+.no-margin {
+  margin: 0 !important;
+}
+.no-margin-top {
+  margin-top: 0 !important;
+}
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+.no-padding {
+  padding: 0 !important;
+}
+.no-padding-sides {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.no-padding-xxlarge{
+  @include breakpoint(xxlarge){
+    padding: 0 !important;
+  }
+}
+.no-padding-top {
+  padding-top: 0 !important;
+}
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+.no-wrap {
+  white-space: nowrap;
+}
+.half-margin-bottom {
+  margin-bottom: 0.5em;
+}
+//use these classes to create variable padding on elements like cards and callouts
+.small-to-default {
+  padding: rem-calc($gutter) * 0.5;
+  @include breakpoint(medium) {
+    padding: rem-calc($gutter) * 0.75;
+  }
+  @include breakpoint(large) {
+    padding: rem-calc($gutter);
+  }
+  + .small-to-default {
+    padding-top: 0;
+  }
+}
+.small-to-large {
+  padding: rem-calc($gutter) * 0.5;
+  @include breakpoint(medium) {
+    padding: rem-calc($gutter);
+  }
+  @include breakpoint(large) {
+    padding: rem-calc($gutter) * 1.25;
+  }
+  @include breakpoint(xlarge) {
+    padding: rem-calc($gutter) * 1.5;
+  }
+  + .small-to-large {
+    padding-top: 0;
+  }
+}
+// content classes to add paddings, margins, gutters etc as needed.
+// for variable padding by breakpoint, look in overrides
+.gutter-top {
+  padding-top: rem-calc($gutter);
+}
+.gutter-bottom {
+  padding-bottom: rem-calc($gutter);
+}
+.gutter-left {
+  padding-left: rem-calc($gutter);
+}
+.gutter-right {
+  padding-right: rem-calc($gutter);
+}
+.gutter-all {
+  padding: rem-calc($gutter);
+}
+// Allow gutters to be added only at or below a certain breakpoint.
+@each $size in $breakpoint-classes {
+  @include breakpoint(#{$size} only) {
+    .gutter-top-#{$size}-only {
+      padding-top: rem-calc($gutter);
+    }
+    .gutter-bottom-#{$size}-only {
+      padding-bottom: rem-calc($gutter);
+    }
+    .gutter-left-#{$size}-only {
+      padding-left: rem-calc($gutter);
+    }
+    .gutter-right-#{$size}-only {
+      padding-right: rem-calc($gutter);
+    }
+    .gutter-all-#{$size}-only {
+      padding: rem-calc($gutter);
+    }
+  }
+  @if $size != $-zf-zero-breakpoint {
+    @include breakpoint(#{$size}) {
+      .gutter-top-#{$size} {
+        padding-top: rem-calc($gutter);
+      }
+      .gutter-bottom-#{$size} {
+        padding-bottom: rem-calc($gutter);
+      }
+      .gutter-left-#{$size} {
+        padding-left: rem-calc($gutter);
+      }
+      .gutter-right-#{$size} {
+        padding-right: rem-calc($gutter);
+      }
+      .gutter-all-#{$size} {
+        padding: rem-calc($gutter);
+      }
+    }
+  }
+}
+
+// Allow gutters to be added only at or below a certain breakpoint.
+@each $size in $breakpoint-classes {
+  @if $size != $-zf-zero-breakpoint {
+    @include breakpoint(#{$size}) {
+      .no-margin-bottom-#{$size} {
+        margin-bottom: 0 !important;
+      }
+      .no-padding-bottom-#{$size} {
+        padding-bottom: 0 !important;
+      }
+    }
+    @include breakpoint(#{$size} down) {
+      .no-padding-bottom-#{$size}-down {
+        padding-bottom: 0 !important;
+      }
+      .no-padding-top-#{$size}-down {
+        padding-top: 0 !important;
+      }
+    }
+  }
+}
+
+
+.position-relative {
+  position: relative;
+}
+.position-fixed {
+  position: fixed;
+}
+.position-absolute{
+  position: absolute;
+}
+.center-horizontally {
+  @include horizontal-center;
+}
+.center-vertically {
+  @include vertical-center;
+}
+.center-vertically-large {
+  @include breakpoint(large){
+    @include vertical-center;
+  }
+}
+.center-absolute {
+  @include absolute-center;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.absolute-sw {
+  position: absolute;
+  bottom: rem-calc(20);
+  right: rem-calc(20);
+}
+
+.grid-x .xxlarge-3 {
+  @include breakpoint(xxlarge) {
+    width: 25%;
+  }
+}
+
+.inline-block-medium{
+  @include breakpoint(medium){
+    display: inline-block;
+  }
+}

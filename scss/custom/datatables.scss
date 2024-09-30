@@ -1,0 +1,64 @@
+/*! (c) Kruftwerk
+Used by cm_api modules.
+*/
+@import "../settings_corp";
+@import '../mixins';
+
+.sortable thead {
+  th,
+  td {
+    cursor: pointer;
+    position: relative;
+    padding-right: rem-calc(17);
+    &:active {
+      outline: none;
+    }
+  }
+}
+.sortable thead {
+  th[class*="sorting"] {
+    &::after,
+    &::before {
+      display: block;
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      right: 0.15rem;
+      top: calc(50% - 0.3rem);
+      border: inset 0.35rem;
+      transform: scale(0.7, 1);
+      opacity: 0.66;
+    }
+    &::before {
+      border-color: transparent transparent $light-gray;
+      margin-top: -0.3rem;
+      border-top-width: 0;
+      border-bottom-style: solid;
+    }
+    &::after {
+      border-color: $light-gray transparent transparent;
+      margin-top: 0.3rem;
+      border-bottom-width: 0;
+      border-top-style: solid;
+    }
+  }
+  th[class*="sorting_asc"]::before,
+  th[class*="sorting_desc"]::after {
+    opacity: 1;
+  }
+  th[class*="_disabled"]::before,
+  th[class*="_disabled"]::after {
+    display: none;
+  }
+}
+
+/*
+ * Control feature layout
+ */
+.dataTables_wrapper {
+  position: relative;
+  &::after {
+    @include clearfix();
+  }
+}

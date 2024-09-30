@@ -1,0 +1,660 @@
+// eventually ditch .stroke-anchor-on-dark
+.stroke-anchor-on-dark,
+.stroke-anchor {
+  fill: none;
+  stroke: currentColor;
+  vertical-align: middle;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  transition: stroke 0.25s ease-out;
+  &.baseline {
+    vertical-align: baseline;
+  }
+}
+// eventually ditch .fill-anchor-on-dark
+.fill-anchor-on-dark,
+.fill-anchor {
+  fill: currentColor;
+  stroke: none;
+  opacity: 0.8;
+  vertical-align: middle;
+  transition: fill 0.25s ease-out;
+  &.baseline {
+    vertical-align: baseline;
+  }
+}
+//
+// supporting function to icon()
+// wraps contents in a <path> element with provided parameters
+@function svg-path($path, $parameters) {
+  $fill: "";
+  $stroke: "";
+  $style: "";
+  @if (map-get($parameters, fill) != "") {
+    $fill: ' fill="#{map-get($parameters, color)}"';
+  }
+  @if (map-get($parameters, stroke-width) != 0) {
+    $stroke: ' stroke="#{map-get($parameters, stroke-color)}" stroke-width="#{map-get($parameters, stroke-width)}"';
+  }
+  @if (map-get($parameters, css) != "") {
+    $style: ' style="#{map-get($parameters, css)}"';
+  }
+  $icon: '<path#{$fill}#{$stroke}#{$style} d="#{$path}" />';
+  @return $icon;
+}
+//
+// supporting function to icon()
+// wraps contents in a <polygon> element with provided parameters
+@function svg-polygon($points, $parameters) {
+  $fill: "";
+  $stroke: "";
+  $style: "";
+  @if (map-get($parameters, fill) != "") {
+    $fill: ' fill="#{map-get($parameters, color)}"';
+  }
+  @if (map-get($parameters, stroke-width) != 0) {
+    $stroke: ' stroke="#{map-get($parameters, stroke-color)}" stroke-width="#{map-get($parameters, stroke-width)}"';
+  }
+  @if (map-get($parameters, css) != "") {
+    $style: ' style="#{map-get($parameters, css)}"';
+  }
+  $icon: '<polygon#{$fill}#{$stroke}#{$style} points="#{$points}"></polygon>';
+  @return $icon;
+}
+//
+// supporting function to icon()
+// wraps contents in a <g> element with provided parameters
+@function svg-group($group, $parameters) {
+  $fill: "";
+  $stroke-color: "";
+  $stroke: "";
+  $style: "";
+  @if (map-get($parameters, fill) != "") {
+    $fill: ' fill="#{map-get($parameters, color)}"';
+  }
+  @if (map-get($parameters, stroke-color) != "") {
+    $stroke-color: ' stroke="#{map-get($parameters, stroke-color)}"';
+  }
+  @if (map-get($parameters, stroke-width) != 0) {
+    $stroke: ' stroke-width="#{map-get($parameters, stroke-width)}"';
+  }
+  @if (map-get($parameters, css) != "") {
+    $style: ' style="#{map-get($parameters, css)}"';
+  }
+  $icon: "<g#{$fill}#{$stroke-color}#{$stroke}#{$style}>#{$group}</g>";
+  @return $icon;
+}
+
+//
+// supporting function to icon()
+// build svg icon markup
+@function svg-icon($inner, $w, $h, $x, $y, $vw, $vh) {
+  $icon: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="#{$w}" height="#{$h}" viewBox="#{$x} #{$y} #{$vw} #{$vh}">#{$inner}</svg>';
+  @return $icon;
+}
+
+//
+//  Function to replace characters in a string
+//
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+//
+//   supporting function to icon()
+//  Function to create an optimized svg url by replacing hte characters that are problematic
+//
+@function svg-url($svg) {
+  $svg: str-replace($svg, '"', "%22");
+  $svg: str-replace($svg, "<", "%3C");
+  $svg: str-replace($svg, ">", "%3E");
+  $svg: str-replace($svg, "&", "%26");
+  $svg: str-replace($svg, "#", "%23");
+  $svg: str-replace($svg, " ", "%20");
+  $svg: str-replace($svg, "{", "%7b");
+  $svg: str-replace($svg, "}", "%7d");
+  @return url("data:image/svg+xml;charset=utf8,#{$svg}");
+}
+
+// primary function for creating background svg icons
+// generate markup to apply an svg as a background element
+// use svg-path to apply parameters when the svg contains only 1 path
+// use svg-polygon to apply parameters when the svg contains only 1 polygon
+// use svg-group to apply parameters when the svg contains only 1 group
+// this aint meant for super complicated svgs - but it's a handy way to deal with simple ones
+@function icon($icon-name, $color, $width: 1rem, $height: 1rem, $vbox-min-x: 0, $vbox-min-y: 0, $vbox-width: 512, $vbox-height: 512, $stroke-color: "", $stroke-width: 0, $css: "") {
+  $parameters: (
+    "color": $color,
+    "stroke-color": $stroke-color,
+    "stroke-width": $stroke-width,
+    "css": $css,
+  );
+  $icons: (
+    chevron-down: svg-path("M256 298.3l174.2-167.2c4.3-4.2 11.4-4.1 15.8.2l30.6 29.9c4.4 4.3 4.5 11.3.2 15.5L264.1 380.9c-2.2 2.2-5.2 3.2-8.1 3-3 .1-5.9-.9-8.1-3L35.2 176.7c-4.3-4.2-4.2-11.2.2-15.5L66 131.3c4.4-4.3 11.5-4.4 15.8-.2L256 298.3z", $parameters),
+    chevron-up: svg-path("M256 213.7L256 213.7 256 213.7l174.2 167.2c4.3 4.2 11.4 4.1 15.8-0.2l30.6-29.9c4.4-4.3 4.5-11.3 0.2-15.5L264.1 131.1c-2.2-2.2-5.2-3.2-8.1-3 -3-0.1-5.9 0.9-8.1 3L35.2 335.3c-4.3 4.2-4.2 11.2 0.2 15.5L66 380.7c4.4 4.3 11.5 4.4 15.8 0.2L256 213.7z", $parameters),
+    chevron-dbl: svg-path('M12 22l10-10L12 2M2 22l10-10L2 2', $parameters),
+    //chevron-dbl-bg: svg-group('<polyline points="1.5 1.5 13 13 1.5 24.5"/><polyline points="13 1.5 24.5 13 13 24.5"/>', $parameters),
+    chevron-dbl-down: svg-group('<path d="M12.6 0L14 1.4 7 8 0 1.4 1.4 0 7 5.3 12.6 0z"/><path d="M12.6 5.4L14 6.7l-7 6.6-7-6.6 1.4-1.3L7 10.7l5.6-5.3z"/>', $parameters),
+    // angle-down: svg-polygon('366.6,160 386,180.7 196,352 6,180.7 25.3,160 196,310.5', $parameters),
+    chevron-right: svg-group('<polyline points="9,2.5 22,15 9,27.5"/>', $parameters),
+    chevron-left: svg-group('<polyline points="20,3.5 8,15 20,26.5"/>', $parameters),
+    //: svg-path('M0,0h0.5l11.3,15L0.5,30H0', $parameters),
+    // chevron-left: svg-path('M213.7 256L213.7 256 213.7 256 380.9 81.9c4.2-4.3 4.1-11.4-0.2-15.8l-29.9-30.6c-4.3-4.4-11.3-4.5-15.5-0.2L131.1 247.9c-2.2 2.2-3.2 5.2-3 8.1 -0.1 3 0.9 5.9 3 8.1l204.2 212.7c4.2 4.3 11.2 4.2 15.5-0.2l29.9-30.6c4.3-4.4 4.4-11.5 0.2-15.8L213.7 256z', $parameters),
+    close: svg-path("M83.7 0a83.7 83.7 0 1 0 83.7 83.7A83.7 83.7 0 0 0 83.7 0zm42.67 127.06a6.13 6.13 0 0 1-8.67-.07l-34-34.55L49.69 127a6.13 6.13 0 1 1-8.74-8.6L75.1 83.7 41 49a6.13 6.13 0 1 1 8.74-8.6L83.7 75l34-34.55a6.13 6.13 0 1 1 8.74 8.6L92.29 83.7l34.14 34.69a6.13 6.13 0 0 1-.06 8.67z", $parameters),
+    play: svg-group('<circle cx="100" cy="100" r="90"/><polygon points="70, 60 70, 145 145, 100" />', $parameters),
+    download: svg-path('m11.5 8.5-1-1-3.7 3.7V0H5.2v11.2L1.5 7.5l-1 1L6 14.1zM0 14.7h12v1.5H0z', $parameters),
+    external: svg-group('<path d="M9.2 0v1.5h4L5.7 9l1 1.1 7.5-7.5v4h1.5V0z"/><path d="M11 13.9H1.5V4.4h3.7V2.9H0v12.5h12.5v-5.2H11z"/>', $parameters),
+    // arrow-right: svg-path('M322.7 128.4l100.3 105c6 5.8 9 13.7 9 22.4s-3 16.5-9 22.4L322.7 383.6c-11.9 12.5-31.3 12.5-43.2 0-11.9-12.5-11.9-32.7 0-45.2l48.2-50.4h-217c-17 0-30.7-14.3-30.7-32s13.7-32 30.6-32h217l-48.2-50.4c-11.9-12.5-11.9-32.7 0-45.2 12-12.5 31.3-12.5 43.3 0z', $parameters),
+    // arrow-left: svg-path('M189.3 128.4L89 233.4c-6 5.8-9 13.7-9 22.4s3 16.5 9 22.4l100.3 105.4c11.9 12.5 31.3 12.5 43.2 0 11.9-12.5 11.9-32.7 0-45.2L184.4 288h217c16.9 0 30.6-14.3 30.6-32s-13.7-32-30.6-32h-217l48.2-50.4c11.9-12.5 11.9-32.7 0-45.2-12-12.5-31.3-12.5-43.3 0z', $parameters),
+    // triangle-down: svg-polygon('0,0 16,0 8,12', $parameters),
+    // triangle-up: svg-polygon('0,12 16,12 8,0', $parameters),
+    //megachevright: svg-path('M7.5-4.4L22 15.2 7.5 34.8', $parameters),
+    //triangle-right: svg-path('M.903.783L14.313 10 .904 19.217z', $parameters),
+    information: svg-path("M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1 15h-2v-6.8h2V17zm-1-8c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z", $parameters),
+    save: svg-path("M15.004 3H18v5h-2.996V3zM24 4v20H0V0h20l4 4zM5 9h14V2H5v7zm16 4H3v9h18v-9zm-2 2H5v1h14v-1zm0 2H5v1h14v-1zm0 2H5v1h14v-1z", $parameters),
+    trash: svg-group('<path d="M10 2.5H9v-1c0-.3-.2-.5-.5-.5h-3c-.3 0-.5.2-.5.5v1H4v-1C4 .7 4.7 0 5.5 0h3c.8 0 1.5.7 1.5 1.5v1z"/><path d="M13.5 2H.5c-.3 0-.5.2-.5.5s.2.5.5.5h.9l.7 11.3c.1 1 .8 1.7 1.7 1.7h6.3c.9 0 1.6-.7 1.7-1.7L12.6 3h.9c.3 0 .5-.2.5-.5s-.2-.5-.5-.5zM5 14c-.3 0-.5-.2-.5-.5l-.5-9c0-.2.2-.5.5-.5s.5.2.5.5l.5 9c0 .2-.2.5-.5.5zm2.5-.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-9c0-.3.2-.5.5-.5s.5.2.5.5v9zm2 0c0 .3-.2.5-.5.5s-.5-.3-.5-.5l.5-9c0-.3.3-.5.5-.5.3 0 .5.3.5.5l-.5 9z"/>', $parameters),
+    search: svg-path("M445 386.7l-84.8-85.9c13.8-24.1 21-50.9 21-77.9 0-87.6-71.2-158.9-158.6-158.9C135.2 64 64 135.3 64 222.9c0 87.6 71.2 158.9 158.6 158.9 27.9 0 55.5-7.7 80.1-22.4l84.4 85.6c1.9 1.9 4.6 3.1 7.3 3.1 2.7 0 5.4-1.1 7.3-3.1l43.3-43.8C449 397.1 449 390.7 445 386.7zM222.6 125.9c53.4 0 96.8 43.5 96.8 97 0 53.5-43.4 97-96.8 97 -53.4 0-96.8-43.5-96.8-97C125.8 169.4 169.2 125.9 222.6 125.9z", $parameters),
+    email: svg-path("M24 8.1c0-.6-.5-1.1-1.1-1.1H1.1C.5 7 0 7.5 0 8.1v14.8c0 .6.5 1.1 1.1 1.1h21.8c.6 0 1.1-.5 1.1-1.1V8.1zM8.2 16.5l3 2.9c.4.4 1.2.4 1.6-.1l3-2.8 5.3 5.5H2.9l5.3-5.5zM2 21.1V10l5.5 5.5L2 21.1zm14.5-5.6L22 10v11.1l-5.5-5.6zM22 9v-.4l-10 9.9L2 8.6V9h20z", $parameters),
+    mailto: svg-group('<path d="M1.9 3.9h19.2c.8 0 1.4.6 1.4 1.4v12.3c0 .8-.6 1.4-1.4 1.4H1.9c-.8 0-1.4-.6-1.4-1.4V5.4c0-.8.6-1.5 1.4-1.5z" /><path d="m.9 4.4 8.8 8.8c1 1 2.6 1 3.6 0l8.8-8.8M8.1 11.6 1 18.7M14.9 11.6l7.2 7.1" />', $parameters),
+    menu: svg-group('<rect width="28" height="3" rx="3" ry="3"/><rect y="10" width="28" height="3" rx="3" ry="3"/><rect y="20" width="28" height="3" rx="3" ry="3"/>', $parameters),
+    menu-close: svg-path("M443.6 387.1L312.4 255.4l131.5-130c5.4-5.4 5.4-14.2 0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4 -3.7 0-7.2 1.5-9.8 4L256 197.8 124.9 68.3c-2.6-2.6-6.1-4-9.8-4 -3.7 0-7.2 1.5-9.8 4L68 105.9c-5.4 5.4-5.4 14.2 0 19.6l131.5 130L68.4 387.1c-2.6 2.6-4.1 6.1-4.1 9.8 0 3.7 1.4 7.2 4.1 9.8l37.4 37.6c2.7 2.7 6.2 4.1 9.8 4.1 3.5 0 7.1-1.3 9.8-4.1L256 313.1l130.7 131.1c2.7 2.7 6.2 4.1 9.8 4.1 3.5 0 7.1-1.3 9.8-4.1l37.4-37.6c2.6-2.6 4.1-6.1 4.1-9.8C447.7 393.2 446.2 389.7 443.6 387.1z", $parameters),
+    chevron-right-circle: svg-group('<circle fill="none" stroke-width="4.5" cx="32" cy="32" r="29.5" /><path stroke-width="1" d="M26.4 47.4l-2.8-2.8L36.2 32 23.6 19.4l2.8-2.8L41.8 32"/>', $parameters),
+    rss: svg-group('<path d="M119.9 336.1c-30.8 0-55.9 25.1-55.9 55.8 0 30.8 25.1 55.6 55.9 55.6 30.9 0 55.9-24.9 55.9-55.6 0-30.7-25-55.8-55.9-55.8z"/><path d="M64 192v79.9c48 0 94.1 14.2 128 48.1 33.9 33.9 48 79.9 48 128h80c0-139.9-116-256-256-256z"/><path d="M64 64v79.9c171 0 303.9 133 303.9 304.1H448C448 236.3 276 64 64 64z"/>', $parameters),
+    padlock: svg-path("M86.4 480h339.2c12.3 0 22.4-9.9 22.4-22.1V246c0-12.2-10-22-22.4-22H404v-30.9c0-41.5-16.2-87.6-42.6-115.4-26.3-27.8-64-45.7-105.3-45.7h-.2c-41.3 0-79 17.9-105.3 45.6C124.2 105.4 108 151.5 108 193v31H86.4C74 224 64 233.9 64 246v211.9c0 12.2 10 22.1 22.4 22.1zM161 193.1c0-27.3 9.9-61.1 28.1-80.3v-.3C206.7 93.9 231 83 255.9 83h.2c24.9 0 49.2 10.9 66.8 29.5v.2l-.1.1c18.3 19.2 28.1 53 28.1 80.3V224H161v-30.9z", $parameters),
+    reset-field: svg-group('<line fill="none" stroke-width="3" x1="0.5" y1="0.5" x2="23.5" y2="23.5"/><line fill="none" stroke-width="3" x1="23.5" y1="0.5" x2="0.5" y2="23.5"/>', $parameters),
+    arrow: svg-group('<polygon points="31.9,6 23.9,0 23.9,5 0.1,5 0.1,7 23.9,7 23.9,12"/>', $parameters),
+    roofline: svg-group('<polygon class="st0" points="833.6,531 416.8,258.5 0,531 0,272.6 416.8,0 833.6,272.6 "/>', $parameters),
+    roof: svg-group('<path d="M29.5 14.3V9.6L14.7 0 0 9.6v4.7l14.7-9.6z"/><path d="M25.4 5.7V0h-4v3.1z"/>',$parameters),
+    enlarge: svg-group('<circle cx="36.99" cy="35.82" r="34.34" fill="#047eac"/><path fill="none" stroke="#fff" stroke-width="3" d="M36.99 18.65v34.34M54.17 35.82H19.82"/>',$parameters),
+    privacy: svg-group('<path fill="#FFF" fill-rule="evenodd" d="M7.4 13.3h6.8l3.1-11.6H7.4c-3.2 0-5.8 2.6-5.8 5.8s2.6 5.8 5.8 5.8z" clip-rule="evenodd"/><path fill="#06F" fill-rule="evenodd" d="M22.6.5H7.4c-3.9 0-7 3.1-7 7s3.1 7 7 7h15.2c3.9 0 7-3.1 7-7s-3.2-7-7-7zm-21 7c0-3.2 2.6-5.8 5.8-5.8h9.9l-3.1 11.6H7.4c-3.2 0-5.8-2.6-5.8-5.8z" clip-rule="evenodd"/><path fill="#FFF" d="M24.6 4.5c.2.2.2.6 0 .8l-2.1 2.2 2.2 2.2c.2.2.2.6 0 .8s-.6.2-.8 0l-2.2-2.2-2.2 2.2c-.2.2-.6.2-.8 0-.2-.2-.2-.6 0-.8l2.1-2.2-2.2-2.2c-.2-.2-.2-.6 0-.8.2-.2.6-.2.8 0l2.2 2.2 2.2-2.2c.2-.2.6-.2.8 0z"/><path fill="#06F" d="M12.7 4.6c.2.2.3.6.1.8l-4.2 4.9c-.1.1-.2.2-.3.2-.2.1-.5.1-.7-.1L5.4 8.2c-.2-.2-.2-.6 0-.8.2-.2.6-.2.8 0L8 9.1l3.8-4.5c.2-.2.6-.2.9 0z"/>',$parameters),
+    toggleCollapsed: svg-group('<circle cx="17" cy="17" r="16"/><path d="M17.5 10.9L17.3 23.9"/><path d="M24 17.6L11 17.4"/>',$parameters),
+    toggleExpanded: svg-group('<circle cx="17" cy="17" r="16"/><path d="M24 17.6L11 17.4"/>',$parameters),
+  );
+
+  $icon: svg-icon(map-get($icons, $icon-name), $width, $height, $vbox-min-x, $vbox-min-y, $vbox-width, $vbox-height);
+  @return svg-url("#{$icon}");
+}
+
+// overriding icons in mindbreeze
+.icon-star-empty {
+  position: relative;
+  overflow: visible;
+  &::after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    margin-left: 0.4em;
+    background: transparent icon(save, $anchor-color, 16px, 16px, 0, 0, 24, 24) no-repeat center center / contain;
+    width: rem-calc(16);
+    height: rem-calc(16);
+  }
+}
+.secured {
+  position: relative;
+  overflow: visible;
+  &:not(.button)::after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    margin-left: 0.3em;
+    background: transparent icon(padlock, $anchor-color, 32px, 32px) no-repeat center center / contain;
+    width: 1em;
+    height: 1em;
+    transform: translateY(13%);
+    transition: background 0.25s ease-out;
+  }
+  &.button {
+    &::before {
+      content: "";
+      position: relative;
+      display: inline-block;
+      background: transparent icon(padlock, $white, 32px, 32px) no-repeat center center / contain;
+      margin: 0 0.25em 0 -0.5em;
+      width: 1em;
+      height: 1em;
+      transform: translateY(10%);
+      transition: background 0.25s ease-out;
+    }
+    &.primary::before {
+      background: transparent icon(padlock, $black, 32px, 32px) no-repeat center center / contain;
+    }
+    &.small::before {
+      margin-left: -0.1em;
+    }
+  }
+}
+.secured-white:not(.button) {
+  position: relative;
+  overflow: visible;
+  color: $white;
+  &::after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    margin-left: 0.3em;
+    background: transparent icon(padlock, $white, 32px, 32px) no-repeat center center / contain;
+    width: 1em;
+    height: 1em;
+    transform: translateY(13%);
+    transition: background 0.25s ease-out;
+  }
+}
+
+.icon-chevron-right-double,
+.icon-chevron-right,
+.icon-chevron-right-white {
+  position: relative;
+  display: inline-block;
+  line-height: 1.1;
+  &::after {
+    @include css-triangle(0.35em, currentColor, right);
+    display: inline-block;
+    margin-left: 0.25em;
+  }
+  &:not(:hover):not(:focus){
+    text-decoration: none;
+  }
+}
+.icon-chevron-left {
+  position: relative;
+  display: inline-block;
+  line-height: 1.1;
+  &::before {
+  @include css-triangle(0.35em, currentColor, left);
+  display: inline-block;
+  margin-right: 0.25em;
+  }
+}
+.icon-chevron-down {
+  position: relative;
+  display: inline-block;
+  &::after {
+    @include css-triangle(0.35em, currentColor, down);
+    display: inline-block;
+    margin-left: 0.4rem;
+    margin-bottom: rem-calc(1);
+    transform: rotate(0deg);
+    transition: .3s;
+  }
+  &[aria-expanded="true"],
+  [aria-expanded="true"] a &,
+  .is-active & {
+    &::after {
+      transform: rotate(180deg);
+    }
+  }
+}
+.dropdown.menu > li.is-dropdown-submenu-parent.is-active > a::after {
+  transform: rotate(180deg);
+}
+.icon-download {
+  position: relative;
+  display: inline-block;
+  &::after {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 0.7em;
+    height: 1em;
+    margin-left: 0.375em;
+    background: transparent icon(download, $dark-gray, 12px, 17px, 0, 0, 12, 16.2) no-repeat right center / contain;
+  }
+}
+.button {
+  .icon-download::after {
+    background: transparent icon(download, $white, 12px, 17px, 0, 0, 12, 16.2) no-repeat right center / contain;
+    transform: translateY(15%);
+  }
+  &.primary {
+    .icon-download::after {
+      background: transparent icon(download, $black, 12px, 17px, 0, 0, 12, 16.2) no-repeat right center / contain;
+    }
+  }
+}
+.icon-offsite {
+  position: relative;
+  display: inline-block;
+  &::after {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 0.7em;
+    height: 0.7em;
+    margin-left: 0.375em;
+    background: transparent icon(external, $anchor-color, 16px, 16px, 0, 0, 16, 16) no-repeat right center / contain;
+  }
+}
+.icon-external {
+  padding-left: 0.375rem;
+  font-size: 1rem;
+  white-space: nowrap;
+  // Adding word joiner character before icon to prevent it from wrapping on its own.
+  &::before {
+    content: "\2060";
+  }
+  svg.external {
+    width: 0.7em;
+    height: 0.7em;
+    fill: currentColor;
+    stroke: none;
+    vertical-align: baseline;
+  }
+}
+.button {
+  // If Webform ever supports using <button> isntead of <input>, update and use pseudo elements to decorate.
+  &.icon-back,
+  &.icon-next {
+    position: relative;
+    line-height: 1.1;
+    border-radius: $button-radius;
+    border-width: 0;
+    color: $white;
+    background-color: map-get($colors, blue5);
+    background-repeat: no-repeat !important;
+    &:hover,
+    &:focus {
+      background-color: map-get($colors, blue4);
+      background-repeat: no-repeat !important;
+    }
+  }
+  &.icon-next {
+    padding: rem-calc(13 40 12 27);
+    background-image: icon(chevron-dbl, none, 14px, 14px, 0, 0, 30, 30, $white, 3)  !important;
+    background-position: right 1.4rem top 0.9rem !important;
+  }
+  &.icon-back {
+    padding: rem-calc(13 27 12 40);
+    background-image: icon(chevron-dbl, none, 14px, 14px, 0, 0, 30, 30, $white, 3, 'transform:rotate(180deg); transform-origin:center;')  !important;
+    background-position: left 1.4rem  bottom 0.9rem !important;
+  }
+  .icon-external {
+    font-size: 1em;  // Base on button text size, which varies by button class.
+    svg.external {
+      width: 0.85em;
+      height: 0.85em;
+    }
+  }
+}
+.icon-required,
+.form-required {
+  position: relative;
+  &::after {
+    content: "*";
+    display: inline-block;
+    position: relative;
+    width: 0.75em;
+    height: 1em;
+    color: $fm-red;
+    text-align: right;
+  }
+  .outline &:not(.is-invalid-label)::after {
+    color: $white;
+  }
+}
+
+.icon {
+  svg {
+    height: 1em;
+    width: 1em;
+    transition: fill 0.25s ease-out, stroke 0.25s ease-out;
+  }
+}
+.info-icon {
+  position:relative;
+  &::before {
+    background: transparent icon(information, "white", 1.25rem, 1.25rem, 0, 0, 24, 24) no-repeat center center / contain;
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+.mailto {
+  // class for anchors
+  position: relative;
+  display: inline-block;
+  &::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 1.25em;
+    height: 1.25em;
+    margin-right: 0.4em;
+    vertical-align: text-top;
+    background: transparent icon(mailto, none, 1.25em, 1.25em, 0, 0, 24, 24, $anchor-color, 1.35) no-repeat left bottom / contain;
+  }
+  &:hover,
+  &:focus {
+    &::before {
+      background: transparent icon(mailto, none, 1.25em, 1.25em, 0, 0, 24, 24, $anchor-color-hover, 1.35) no-repeat left bottom / contain;
+    }
+  }
+}
+
+.icon-calendar {
+  // class for svgs
+  width: rem-calc(72);
+  height: rem-calc(72);
+  fill: $fm-green;
+  text {
+    text-transform: uppercase;
+    text-anchor: middle;
+    font-family: $body-font-family;
+  }
+  .text1 {
+    fill: $medium-gray;
+    font-size: rem-calc(120px);
+    font-weight: $global-weight-medium;
+  }
+  .text2 {
+    fill: $white;
+    font-size: rem-calc(150px);
+    font-weight: $global-weight-medium;
+  }
+}
+.icon-application {
+  // class for svgs
+  width: rem-calc(30);
+  height: rem-calc(30);
+  padding: rem-calc(15);
+  .main-content.large-8 & {
+    @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium))) and (max-width: -zf-bp-to-em(map-get($breakpoints, medium) + 80px)) {
+      width: rem-calc(22px);
+      height: rem-calc(22px);
+      padding: rem-calc(15px 10px);
+    }
+    @include breakpoint(large only) {
+      width: rem-calc(25px);
+      height: rem-calc(25px);
+      padding: rem-calc(15px 10px);
+    }
+  }
+}
+
+.icon-file {
+  // class is appended by js
+  display: inline;
+  font-size: 75%;
+  font-variant: small-caps;
+  line-height: 0.8;
+  padding: 0 0 0 0.3em;
+  vertical-align: 20%;
+  font-weight: $global-weight-light;
+  white-space: nowrap;
+  // Adding word joiner character before filemarker to prevent it from wrapping on its own.
+  &::before {
+    content: "\2060";
+  }
+  span {
+    border: 0.0525em solid;
+    padding: 0 0.125em 0.125em;
+    display: inline-block;
+  }
+  .button & {
+    line-height: 0.9;
+    font-size: 80%;
+    padding-top: 0.125em;
+  }
+  @media print {
+    display: none;
+  }
+}
+
+li {
+  &.file-pdf,
+  &.file-zip,
+  &.file-csv,
+  &.file-doc,
+  &.file-xls,
+  &.file-ppt,
+  &.file-html {
+    background-repeat: no-repeat;
+    padding-left: 2em;
+    background-position: left top;
+  }
+  &.file-pdf {
+    background-image: url("https://freddiemac.widen.net/content/lkgpmed8do/svg/CC_ID_936433909_icon_file-pdf.svg");
+  }
+  &.file-zip {
+    background-image: url("https://freddiemac.widen.net/content/8ngoalahxi/svg/CC_ID_936433909_icon_file-zip.svg");
+  }
+  &.file-csv {
+    background-image: url("https://freddiemac.widen.net/content/u6yxo3arik/svg/CC_ID_936433909_icon_file-csv.svg");
+  }
+  &.file-doc {
+    background-image: url("https://freddiemac.widen.net/content/wmzz1odiwi/svg/CC_ID_936433909_icon_file-words.svg");
+  }
+  &.file-xls {
+    background-image: url("https://freddiemac.widen.net/content/tsvq9dmnch/svg/CC_ID_936433909_icon_file-excel.svg");
+  }
+  &.file-ppt {
+    background-image: url("https://freddiemac.widen.net/content/ghwnfnmgkt/svg/CC_ID_936433909_icon_file-powerpoint.svg");
+  }
+  &.file-html {
+    background-image: url("https://freddiemac.widen.net/content/gulfs4omfz/svg/CC_ID_936433909_icon_file-html.svg");
+  }
+}
+
+.icon-deal-marker {
+  font-weight: $global-weight-normal;
+  line-height: 1;
+  margin-bottom: 0.3125em;
+  @include fluid-type(18px, 24px, xlarge);
+  &.large {
+    @include fluid-type(24px, 32px, xlarge);
+  }
+  &.xlarge {
+    @include fluid-type(38px, 52px, xlarge);
+    .marker {
+      margin: 0 0.4em 0 0;
+    }
+  }
+  svg {
+    fill: none;
+    stroke: $medium-gray;
+    stroke-width: 2;
+  }
+  .marker {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    font-size: 83.3%;
+    border-radius: 999px;
+    font-weight: $global-weight-bold;
+    height: 2.05em;
+    width: 2.05em;
+    padding: 0.5em 0;
+    margin: 0.3125em 0.3em 0.25em 0;
+  }
+}
+[class*= "roofline-top-right"]{
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: rem-calc(47);
+    height: rem-calc(30);
+    top: 3rem;
+    right: 3rem;
+    background: icon(roofline, $secondary-color, 833px, 531px, 0, 0, 833, 531) no-repeat center center/contain;
+  }
+  // &-green{
+  //   background: icon(roofline, $secondary-color, 833px, 531px, 0, 0, 833, 531) no-repeat center center/contain;
+  // }
+}
+.roofline-top-right-white {
+  &::after {
+    width: rem-calc(19);
+    height: rem-calc(12);
+    top: 1rem;
+    right: 1rem;
+    background: icon(roofline, $white, 833px, 531px, 0, 0, 833, 531) no-repeat center center/contain;
+  }
+}
+.roofline-top-right-navy {
+  &::after {
+    background: icon(roofline, map-get($colors, navy4), 833px, 531px, 0, 0, 833, 531) no-repeat center center/contain;
+  }
+}
+[class*= "roofline-top-right"] {
+  .callout & {
+    height: 0;
+    &::after{
+      top: - rem-calc(9);
+      right: - rem-calc(4);
+      height: rem-calc(29);
+      width: rem-calc(34);
+    }
+    &::before {
+      content: "";
+      float: right;
+      height: rem-calc(20);
+      width: rem-calc(34);
+    }
+  }
+  .callout.small &,
+  .callout.small-to-default & ,
+  .callout.small-to-large & {
+    &::after,
+    &::before {
+      display: none;
+    }
+  }
+  .callout.large & {
+    @include breakpoint(large) {
+      &::after{
+        top: - rem-calc(21);
+        right: - rem-calc(14);
+      }
+      &::before {
+        height: rem-calc(8);
+        width: 100%;
+      }
+    }
+  }
+  .callout.xlarge & {
+    @include breakpoint(large) {
+      &::after{
+        top: - rem-calc(31);
+        right: - rem-calc(24);
+      }
+      &::before {
+        display: none;
+      }
+    }
+    @include breakpoint(xlarge) {
+      &::after{
+        top: - rem-calc(51);
+        right: - rem-calc(44);
+      }
+    }
+  }
+}

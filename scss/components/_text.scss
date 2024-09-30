@@ -1,0 +1,389 @@
+@use 'sass:math';
+// headers inherit weight from $header-font-weight
+// and line-height from  $header-lineheight
+// and bottom margin from $header-margin-bottom
+h1,
+.h1 {
+  @include fluid-type(35px, 45px, xlarge);
+  line-height: calc(50/45);
+  font-weight: $global-weight-light;
+  &.jumbo {
+    line-height: math.div(80, 65);
+    @include fluid-type(35px, 65px, xlarge);
+    font-weight: $global-weight-light;
+  }
+  .hero-roofline & {
+    margin-bottom: 0.14em;
+  }
+}
+.split-hero h1 {
+  @include fluid-type(35px, 45px, xlarge);
+  line-height: math.div(50, 45);
+  margin-bottom: 0.33em;
+  @include breakpoint(large) {
+    @include fluid-type(28px, 45px, xlarge);
+  }
+  &.h2 {
+    font-size: rem-calc(28);
+    @include breakpoint(xlarge) {
+      font-size: rem-calc(32);
+    }
+  }
+}
+h2, .h2 {
+  font-size: rem-calc(28);
+  margin-bottom: 0.25em;
+  font-weight: $global-weight-normal;
+  &:not(:first-child) {
+    margin-top: 0.75em;
+    &.h1 {
+      margin-top: 0.475em;
+    }
+  }
+}
+h3,
+.h3 {
+  line-height: 1.3;
+  @include fluid-type(20px, 22px, medium);
+  margin-bottom: 0.25em;
+  font-weight: $global-weight-medium;
+}
+//articles prefer to use h3 instead of h2, since they feel h2 is too large, and they want their H3 to be heavier weight
+h4,
+.h4 {
+  font-size: rem-calc(18);
+  margin-bottom: 0.25em;
+  font-weight: $global-weight-medium;
+}
+h5,
+.h5 {
+  font-size: rem-calc(15);
+  margin-bottom: 0.25em;
+  font-weight: $global-weight-medium;
+}
+h6,
+.h6 {
+  line-height: 1.36;
+  font-size: rem-calc(18);
+  margin-bottom: 0.25em;
+}
+
+// temporary solution for reskinned articles, this chunk can go away once they are redone.
+p:not([class]) + h2:not([class]),
+figure:not([class]) + h2 {
+  margin-top: 0.75em;
+}
+// end of article reskin fix
+
+.jumbo {
+  @include fluid-type(50px, 80px, xlarge);
+}
+article {
+  @include fluid-type(16px, 18px, medium);
+}
+
+sup {
+  font-size: 62%;
+  top: -0.55em;
+}
+.intro {
+  @include fluid-type(18px, 22px, xlarge);
+}
+.filemarker {
+  font-variant: small-caps;
+  opacity: 0.8;
+}
+blockquote {
+  @include fluid-type(17px, 18px, medium);
+  footer {
+    font-weight: $global-weight-light;
+    font-style: italic;
+    font-size: 90%;
+    padding: 0;
+    @include breakpoint(large) {
+      font-size: 80%;
+    }
+    &::before {
+      content: "\2014 \0020";
+    }
+  }
+}
+figcaption {
+  blockquote {
+    padding: rem-calc(1 15 1 10);
+  }
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+.callout-footer-title {
+  line-height: math.div(50, 45);
+  @include fluid-type(30px, 45px, xlarge);
+  font-weight: $global-weight-light;
+}
+.subtitle {
+  @include fluid-type(18px, 26px, xlarge);
+  font-weight: $global-weight-bold;
+  margin: 0.25em 0 0.375em;
+  @include breakpoint(xxlarge) {
+    @include fluid-type(22px, 32px, xxlarge);
+  }
+}
+.feature-subtitle {
+  @include fluid-type(18px, 26px, xlarge);
+  font-weight: $global-weight-normal;
+  margin: 0.25em 0 0.375em;
+}
+.sidebar-title {
+  line-height: math.div(38, 28);
+  @include fluid-type(21px, 28px, xlarge);
+  margin-bottom: 0.5em;
+}
+
+.sidebar-subtitle {
+  @include fluid-type(17px, 24px, xxlarge);
+  font-weight: $global-weight-medium;
+  margin: 0 0 0.375em;
+  line-height: 1.2;
+}
+.sidebar-headline {
+  font-size: rem-calc(18px);
+  line-height: 1.2;
+  font-weight: $global-weight-normal;
+  .card & {
+    font-weight: $global-weight-medium;
+  }
+}
+.stat-points {
+  @include fluid-type(14px, 16px, xlarge);
+  font-weight: $global-weight-normal;
+  margin-bottom: 0;
+  @include breakpoint(large) {
+    margin-bottom: 0.5em;
+    font-weight: $global-weight-bold;
+  }
+}
+.section-subtitle {
+  @include fluid-type(18px, 22px, xxlarge);
+  color: inherit;
+  font-weight: inherit;
+  margin-bottom: 0.25rem;
+  + .section-subtitle {
+    margin-top: 0.5em;
+  }
+}
+.article-headline {
+  margin: 0.15em 0 0.45em;
+  @include fluid-type(16px, 22px, xxlarge);
+  @if variable-exists(global-weight-regular) {
+    font-weight: $global-weight-regular;
+  }
+  strong {
+    font-weight: $global-weight-medium;
+  }
+  .article-date-lg + & {
+    margin-top: 0;
+  }
+}
+
+.article-date-lg + h2 {
+  margin-top: 0;
+}
+.xsmall {
+  font-size: rem-calc(15);
+  line-height: 1.3;
+}
+.article-category,
+.article-date,
+.article-date-lg {
+  @include fluid-type(14px, 16px, medium);
+  font-weight: $global-weight-normal;
+  color: inherit;
+  margin: 0.25em 0;
+  line-height: 1.2;
+  .sidebar:not(.events) & {
+    margin-bottom: 0.65em;
+  }
+}
+.sidebar .article-category {
+  color: map-get($colors, navy1);
+}
+.article-date {
+  margin-bottom: 0.6em;
+}
+.article-category {
+  font-weight: $global-weight-medium;
+}
+.article-byline {
+  @include fluid-type(15px, 16px, medium);
+  color: inherit;
+  line-height: 1.2;
+  font-weight: inherit;
+  margin-top: 0.6em;
+}
+.article-byline-strong {
+  color: $dark-gray;
+  line-height: 1.2;
+  font-size: rem-calc(16);
+}
+.article-byline-small {
+  @include fluid-type(13px, 14px, medium);
+  line-height: 1.25;
+  strong {
+    font-weight: $global-weight-regular;
+  }
+}
+.flex-up {
+  @include fluid-type(16px, 18px, large);
+}
+.flex-down {
+  @include fluid-type(14px, 16px, large);
+}
+.article-blurb {
+  display: none;
+}
+.article-blurb-lg {
+  @include show-for(medium);
+  @include fluid-type(14px, 18px, xxlarge);
+  font-weight: inherit;
+  line-height: 1.3;
+  margin: 0.8em 0;
+  @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium))) and (max-width: -zf-bp-to-em(map-get($breakpoints, medium) + 80px)) {
+    overflow: hidden;
+    max-height: 3.9em; /* (Number of lines you want visible) * (line-height) */
+  }
+}
+.header-card-text {
+  font-size: rem-calc(14);
+  padding-bottom: rem-calc(5);
+}
+.article-date-feature {
+  @include fluid-type(14px, 18px, xxlarge);
+  font-weight: $global-weight-medium;
+  color: inherit;
+}
+.hero-subtitle {
+  @include fluid-type(20px, 28px, xxlarge);
+  font-weight: inherit;
+  margin-bottom: $global-margin * 2;
+  line-height: 1.2;
+}
+.hero-date {
+  @include fluid-type(16px, 20px, xxlarge);
+  font-weight: $global-weight-medium;
+}
+.stat-sm {
+  @include fluid-type(18px, 28px, xxlarge);
+  line-height: 1.1;
+  width: 100%;
+  font-weight: $global-weight-bold;
+  white-space: nowrap;
+}
+.stat {
+  @include fluid-type(28px, 58px, xxlarge);
+  letter-spacing: rem-calc(-1.15px);
+}
+p.stat {
+  margin-bottom: 0.2em;
+}
+.large-text {
+  font-size: rem-calc(20);
+  @include breakpoint(medium){
+    font-size: rem-calc(22);
+  }
+}
+.page-subtitle {
+  margin: 0.5em 0;
+  @include fluid-type(18px, 22px, xlarge);
+}
+.cross-promo-title {
+  line-height: math.div(38, 28);
+  @include fluid-type(22px, 28px, xlarge);
+  font-weight: $global-weight-normal;
+}
+.card-title {
+  line-height: math.div(25, 20);
+  @include fluid-type(18px, 22px, xlarge);
+  color: inherit;
+  font-weight: $global-weight-normal;
+  margin-bottom: 0.45rem;
+  .card-section &:nth-last-child(2) {
+    flex-grow: 0;
+  }
+
+  strong {
+    font-weight: $global-weight-medium;
+  }
+}
+.card-subtitle {
+  margin: 0.5em 0;
+}
+
+.card-blurb {
+  @include show-for(medium);
+}
+.card-blurb-large {
+  @include show-for(medium);
+  @include fluid-type(14px, 16px, xxlarge);
+  font-weight: inherit;
+  display: none;
+}
+.video-length {
+  @include fluid-type(16px, 21px, xxlarge);
+  line-height: 1;
+  font-weight: $global-weight-normal;
+}
+.snug {
+  line-height: 1.1;
+  margin-bottom: 0.75em;
+}
+.file-flag {
+  color: get-color(alert);
+  font-variant: small-caps;
+  padding-left: 0.25em;
+  font-weight: $global-weight-medium;
+}
+.accent-navy {
+  color: map-get($colors, navy4);
+}
+.accent-primary {
+  color: $primary-color;
+}
+.accent-blue {
+  color: map-get($colors, blue1) !important; // keeps coming out navy without !important
+}
+.accent-red,
+.accent-alert {
+  color: $fm-red;
+}
+.accent-green {
+  color: map-get($colors, green1) !important;
+}
+.accent-teal {
+  color: $fm-teal;
+}
+.accent-black {
+  color: $black;
+}
+.accent-white {
+  color: $white;
+  &:hover, &:focus {
+    color: $white;
+  }
+}
+.accent-dark-gray {
+  color: $dark-gray;
+}
+
+// Custom classes for footer boilerplate instances.
+.our-leader-footer-boilerplate > p {
+  // matches .reduce + .weight-light
+  font-size: .9375rem;
+  line-height: 1.25;
+  font-weight: 200 !important;
+}
+.research-pmms-footer-boilerplate > p {
+  // matches .xsmall
+  font-size: rem-calc(15);
+  line-height: 1.3;
+}

@@ -1,0 +1,19 @@
+// add on options for motion-ui
+.animate-from-center {  
+  transform-origin: 50% 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.1s !important;
+    transition-delay: 0.1s !important;
+    animation-duration: 0.1s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  .hide-for-reduced-motion {
+    display: none !important;
+  }
+}
