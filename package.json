@@ -10,7 +10,7 @@
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "foundation-sites": "^6.8.1",
-    "gulp": "^4",
+    "gulp": "^5",
     "gulp-cleaner-css": "^4.3.2",
     "gulp-mode": "^1.1.0",
     "gulp-postcss": "^10.0.0",
