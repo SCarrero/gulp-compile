@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:color';
 /// @param {Number} $n - Number of elements to display per row.
 @mixin block-tabs($n) {
   display: flex;
@@ -44,7 +45,6 @@
 }
 .tabs-title {
   margin: 0;
-  @include fluid-type(16px, 18px, medium);
   font-weight: $global-weight-medium;
   background: $tab-background;
   border-style: solid;
@@ -80,6 +80,7 @@
       }
     }
   }
+  @include fluid-type(16px, 18px, medium);
 }
 .tabs:not(.vertical) {
   @include breakpoint(medium) {

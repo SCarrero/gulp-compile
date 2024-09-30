@@ -1,3 +1,4 @@
+@use 'sass:color';
 // **************************************//
 // -------   TOP NAV RIBBON  ------- //
 // **************************************//
@@ -30,11 +31,11 @@
   @include breakpoint(xlarge) {
     background: map-get($colors, navy5)
     repeating-linear-gradient(147deg,
-    lighten(map-get($colors, navy5), 8%) 0%,
-    lighten(map-get($colors, navy5), 8%) 21.5%,
-    lighten(map-get($colors, navy5), 5%) 21.5%,
-    lighten(map-get($colors, navy5), 5%) 39.25%,
-    lighten(map-get($colors, navy5), 2%) 39.25%,
+    color.scale(map-get($colors, navy5), $lightness:  8%) 0%,
+    color.scale(map-get($colors, navy5), $lightness:  8%) 21.5%,
+    color.scale(map-get($colors, navy5), $lightness:  5%) 21.5%,
+    color.scale(map-get($colors, navy5), $lightness:  5%) 39.25%,
+    color.scale(map-get($colors, navy5), $lightness:  2%) 39.25%,
     map-get($colors, navy5) 100%);
   }
   @include breakpoint(large down) {
@@ -143,7 +144,7 @@
   background-color: map-get($colors, navy5);
   li + li {
     @include breakpoint(xlarge){
-    border-top: .0625rem solid lighten(map-get($colors, navy3), 2%);
+    border-top: .0625rem solid color.scale(map-get($colors, navy3), $lightness: 2%);
     }
   }
   a {

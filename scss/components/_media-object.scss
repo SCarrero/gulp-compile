@@ -1,3 +1,4 @@
+@use 'sass:color';
 .media-object-section .background-image-feature {
   @include breakpoint(small) {
     padding-bottom: 74%;
@@ -151,7 +152,7 @@
     }
   }
   .section-divided {
-    border-bottom: 1px solid darken($light-gray, 5%);
+    border-bottom: 1px solid color.scale($light-gray, $lightness: -5%); //darken($light-gray, 5%);
   }
   // missing bit of code from Foundation
   .media-object-section {

@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:color';
 /// styles for the accordion title when active/expanded
 /// Drop +/- and carets
 @mixin accordion-faq {

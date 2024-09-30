@@ -1,3 +1,4 @@
+@use 'sass:color';
 $animateSpeed: .2s;
 // **************************************//
 // -------   MOBILE MAIN NAV   ------- //
@@ -90,7 +91,7 @@ $animateSpeed: .2s;
   }
   .vertical li {
     &:not(.js-drilldown-back):not(.nested-close-button){
-      border-bottom: 1px solid darken($light-gray, 9.8%);
+      border-bottom: 1px solid color.scale($light-gray, $lightness: -9.8%); // darken($light-gray, 9.8%);
     }
     .header {
       background-color: $light-gray;
