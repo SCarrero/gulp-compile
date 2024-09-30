@@ -2,4 +2,4 @@
 /.git
 /node_modules
 /css
-package-lock.json
+/package-lock.json
