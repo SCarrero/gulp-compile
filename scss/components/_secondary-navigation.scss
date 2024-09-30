@@ -1,3 +1,4 @@
+@use 'sass:color';
 // If a page has secondary nav, then remove the top margin of
 // page title component so it can go above the secondary nav wrapper.
 .secondary-nav-wrapper + .hero-roofline {
@@ -90,7 +91,7 @@ ul.menu.secondary-menu-parent {
     align-items: center;
     @include breakpoint(xlarge) {
       .svg-spacer {
-        color: darken($light-gray, 9.5%);
+        color: color.scale($light-gray, $lightness: -9.5%); // darken($light-gray, 9.5%);
         height: 100%;
         margin: 0 0.3125rem 0 1rem;
         svg {

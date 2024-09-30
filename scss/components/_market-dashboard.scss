@@ -5,11 +5,11 @@
   }
 }
 .md-data{
-  @include fluid-type(30px, 40px, xlarge);
   padding: rem-calc(10 0);
   text-align: right;
   font-weight: $global-weight-medium;
   white-space: nowrap;
+  @include fluid-type(30px, 40px, xlarge);
   @include breakpoint(medium){
     text-align: left;
     @include fluid-type(22px, 40px, xlarge);
@@ -38,9 +38,9 @@
 }
 .esg-graphic-content {
   p{
+    width:rem-calc(250);
     font-size: rem-calc(18px);
     // @include fluid-type(18px, 15px);
-    width:rem-calc(250);
     @include breakpoint (large){
       font-size: rem-calc(15px);
       max-width: rem-calc(180);

@@ -2,10 +2,6 @@
   margin: 0;
   padding-top: $gutter;
   padding-bottom: 1rem;
-  @include breakpoint (large) {
-    padding-bottom: $global-padding * 2;
-    padding-top: $global-padding * 2;
-  }
   position: relative;
   figure {
     @include breakpoint(small only){
@@ -16,6 +12,10 @@
       padding-right: $gutter;
     }
   }
+  @include breakpoint (large) {
+    padding-bottom: $global-padding * 2;
+    padding-top: $global-padding * 2;
+  }
 }
 .footer-promo {
   padding-top: 2.5rem;
@@ -24,11 +24,6 @@
   position: relative;
   background: map-get($colors, navy4);
   color: $white;
-  @include fluid-type(16px, 22px, xlarge);
-  @include breakpoint(large) {
-    padding-top: rem-calc(70);
-    padding-bottom: rem-calc(70);
-  }
   &[class^="background"] {
     background: $primary-color;
     color: $white;
@@ -51,6 +46,11 @@
   }
   > .column {
     position: relative;
+  }
+  @include fluid-type(16px, 22px, xlarge);
+  @include breakpoint(large) {
+    padding-top: rem-calc(70);
+    padding-bottom: rem-calc(70);
   }
 }
 .footer-promo-cta {

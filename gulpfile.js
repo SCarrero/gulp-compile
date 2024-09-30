@@ -13,7 +13,7 @@ function compileCss(done) {
   // Define a task to compile main SCSS
   gulp.src('scss/style.scss')
     .pipe((mode.development(sourcemaps.init())))
-    .pipe(sass().on('error', sass.logError)) 
+    .pipe(sass({api: "modern"}).on('error', sass.logError)) 
     .pipe(postcss(postCssPlugins))
     .pipe((mode.production(cleancss())))
     .pipe((mode.development(sourcemaps.write())))
@@ -21,7 +21,7 @@ function compileCss(done) {
   // Define a task to compile Custom standaone SCSS
   gulp.src('scss/custom/*.scss')
     .pipe((mode.development(sourcemaps.init())))
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({api: "modern"}).on('error', sass.logError))
     .pipe(postcss(postCssPlugins))
     .pipe((mode.production(cleancss())))
     .pipe((mode.development(sourcemaps.write())))

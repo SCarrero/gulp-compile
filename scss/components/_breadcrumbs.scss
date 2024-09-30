@@ -1,3 +1,5 @@
+@use 'sass:math';
+@use 'sass:color';
 #breadcrumb-wrapper {
   font-weight: $global-weight-regular;
   margin-bottom: 1.25rem;
@@ -40,7 +42,7 @@
 }
 .page-title {
   .breadcrumbs li {
-    background: darken(map-get($colors, blue5), 2%);
+    background: color.scale(map-get($colors, blue5), $lightness: -2%); // darken(map-get($colors, blue5), 2%);
     color: rgba($white, .85); // less that .85 fails accessibility
     &:not(:last-child)::after {
       color: inherit;

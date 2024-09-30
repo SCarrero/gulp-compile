@@ -1,3 +1,4 @@
+@use 'sass:color';
 $divider-color: map-get($colors, navy5);
 // fix for table hover striping affecting header rows
 table.hover:not(.unstriped) {
@@ -150,7 +151,7 @@ table.large-stack {
     tr:nth-child(n) {
       background: #fff;
       td {
-        border: 1px solid darken($light-gray, 5%);
+        border: 1px solid color.scale($light-gray, $lightness: -5%);; // darken($light-gray, 5%);
       }
     }
   }
@@ -162,7 +163,7 @@ tr.row-subheader {
   }
   &:hover {
     th, td {
-      background: lighten(map-get($colors, blue5), 3%);
+      background: color.scale(map-get($colors, blue5), $lightness: 3%); //lighten(map-get($colors, blue5), 3%);
     }
   }
 }

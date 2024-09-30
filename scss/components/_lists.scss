@@ -1,3 +1,6 @@
+@use 'sass:color';
+$dividercolor: color.scale($light-gray, $lightness: -5%); // darken($light-gray, 5%);
+
 ol.leading-zero {
   list-style-type: decimal-leading-zero;
   margin-left: 1.75rem;
@@ -38,23 +41,23 @@ li.menu-item {
   padding: rem-calc($gutter 0 ($gutter * 0.5));
 }
 .list-divided {
-  @include list-divided(darken($light-gray, 5%), $gutter, false);
+  @include list-divided($dividercolor, $gutter, false);
   .sidebar & {
-    @include list-divided(darken($light-gray, 5%), $gutter, true);
+    @include list-divided($dividercolor, $gutter, true);
   }
 }
 .list-divided-white {
   @include list-divided(rgba($white, 0.3), ($global-padding * 0.5), false);
 }
 .list-divided-gray {
-  @include list-divided(darken($light-gray, 5%), ($global-padding * 0.5), false);
+  @include list-divided($dividercolor, ($global-padding * 0.5), false);
   .tabs-pagination & > li {
     padding: 0.625rem 0;
-    border-bottom: 1px solid darken($light-gray, 5%);
+    border-bottom: 1px solid $dividercolor;
   }
 }
 .clipping-block {   // divides news archive entries
-  @include list-divided(darken($light-gray, 5%), $gutter * 1.5, true);
+  @include list-divided($dividercolor, $gutter * 1.5, true);
   + hr { border-width: 0; }
 }
 
@@ -85,9 +88,9 @@ dt {
 }
 .description-block {
   padding: $gutter 0 0;
-  border-bottom: 1px solid darken($light-gray, 5%);
+  border-bottom: 1px solid $dividercolor;
   dt {
-    border-top: 1px solid darken($light-gray, 5%);
+    border-top: 1px solid $dividercolor;
     padding: $gutter $gutter 0;
     margin: 0;
   }

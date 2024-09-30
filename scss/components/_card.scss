@@ -1,3 +1,4 @@
+@use 'sass:color';
 /// card
 .card {
   position: relative;
@@ -58,7 +59,7 @@
   // }
 
   &.bordered {
-    border: rem-calc(1) solid darken($light-gray, 9.8%);
+    border: rem-calc(1) solid color.scale($light-gray, $lightness: -9.8%); //darken($light-gray, 9.8%);
     .sub-nav & {
       background-size: contain !important;
     }

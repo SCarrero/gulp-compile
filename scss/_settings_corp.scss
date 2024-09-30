@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:color';
 //  Foundation for Sites Settings
 //  -----------------------------
 //
@@ -340,10 +341,10 @@ $button-palette: (
 $button-hover-palette: (
   primary: map-get($colors, green1),
   secondary: map-get($colors, blue4),
-  tertiary: lighten(map-get($colors, navy1), 4%),
-  alert: lighten($fm-red, 12%),
+  tertiary: color.scale(map-get($colors, navy1), $lightness: 4%),  //lighten(map-get($colors, navy1), 4%),
+  alert: color.scale($fm-red, $lightness: 12%), // lighten($fm-red, 12%),
   default: rgba($dark-gray, 0.6),
-  // warning: lighten($fm-yellow, 12%),
+  // warning: color.scale($fm-yellow, $lightness: 12%), // lighten($fm-yellow, 12%),
 );
 $button-opacity-disabled: 0.35;
 //$button-background-hover-lightness: 20%;
@@ -365,7 +366,7 @@ $buttongroup-radius-on-each: false;
 
 $callout-background: none;
 $callout-background-fade: 0%;  // don't use
-$callout-border: 2px solid darken($light-gray, 5%);
+$callout-border: 2px solid color.scale($light-gray, $lightness: -5%); // darken($light-gray, 5%);
 $callout-margin: 0 0 1rem;
 $callout-padding: 1.25rem;
 $callout-font-color: currentColor;  // don't use
@@ -831,15 +832,15 @@ $table-color-scale: 4%;
 $table-border: 1px solid $white;  //stripes below thead, tfoot and tbody
 $table-padding: rem-calc(8 10 10);
 $table-hover-scale: 1%;
-$table-row-hover: darken($table-background, $table-hover-scale);
+$table-row-hover: color.scale($table-background, $lightness: -($table-hover-scale)); // darken($table-background, $table-hover-scale);
 $table-striped-background: $white;
-$table-row-stripe-hover: lighten($table-background, $table-hover-scale);
+$table-row-stripe-hover: color.scale($table-background, $lightness: $table-hover-scale); // lighten($table-background, $table-hover-scale);
 $table-is-striped: true;
 $table-stripe: even;
 $table-head-background: map-get($colors, navy3); // MF color is different
-$table-head-row-hover: darken($table-head-background, $table-color-scale);
+$table-head-row-hover: color.scale($table-background, $lightness: -($table-color-scale)); //darken($table-head-background, $table-color-scale);
 $table-foot-background: $table-background;
-$table-foot-row-hover: darken($table-foot-background, $table-hover-scale);
+$table-foot-row-hover: color.scale($table-background, $lightness: -($table-hover-scale)); // darken($table-foot-background, $table-hover-scale);
 $table-head-font-color: $white;
 $table-foot-font-color: $body-font-color;
 $show-header-for-stacked: false;

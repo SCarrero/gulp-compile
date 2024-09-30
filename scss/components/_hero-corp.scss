@@ -1,4 +1,5 @@
-$hero-shade: darken(map-get($colors, blue5), 2%);
+@use 'sass:color';
+$hero-shade: color.scale(map-get($colors, blue5), $lightness: -2%); // darken(map-get($colors, blue5), 2%);
 
 // only apply color and backgrounds on screen, not in print
 .page-title,
@@ -20,10 +21,6 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
   color: $white;
   position: relative;
   min-height: rem-calc(170);
-  @include breakpoint(medium) {
-    min-height: rem-calc(200);
-  }
-  @include title-background();
   .hero-date {
     margin-top: 1em;
     margin-bottom: 0.5em;
@@ -38,15 +35,19 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
   p {
     margin: 0;
   }
+  @include breakpoint(medium) {
+    min-height: rem-calc(200);
+  }
+  @include title-background(color.scale(map-get($colors, blue5), $lightness: -2%));
 }
 .page-title {
   padding: rem-calc(0 0 50);
   h1 {
-    @include fluid-type(30px, 45px, xlarge);
     line-height: 1.23;
     margin: 0.25em 0;
     font-weight: $global-weight-light;
     max-width: 92%;
+    @include fluid-type(30px, 45px, xlarge);
   }
   @include breakpoint(large) {
     p,
@@ -94,7 +95,6 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
     }
   }
   .hero-blended-content {
-    @include fluid-type(18px, 22px, xlarge);
     max-width: 92%;
     @include breakpoint(large) {
       max-width: 63%;
@@ -105,6 +105,7 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
     :last-child:not(figure) {
       margin-bottom: 0;
     }
+    @include fluid-type(18px, 22px, xlarge);
   }
 }
 
@@ -165,7 +166,9 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
 
   .hero-roofline-content {
     padding: 0 0 2.5rem;
-    @include fluid-type(18px, 22px, xlarge);
+    > :last-child {
+      margin-bottom: 0;
+    }
     @include breakpoint(medium) {
       max-width: calc(100% - 7.5rem);
       padding-bottom: 3rem;
@@ -177,9 +180,7 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
     @include breakpoint(xlarge) {
       max-width: 72%;
     }
-    > :last-child {
-      margin-bottom: 0;
-    }
+    @include fluid-type(18px, 22px, xlarge);
     // Use for sustainability navigation only
     &.hero-nav-wrapper{
       @include breakpoint(xlarge) {max-width: 82%;}
@@ -200,49 +201,46 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
   // needed to customize chevron-v4 background a lot for this application
   // can probably build out the functionality of those mixin functions more later
   // just sticking this all in here for now to keep life simple...
-
+  background-size: 50% 80%, 50% 80%;
+  background-position: 0 0, 100% 0;
+  background-repeat: no-repeat;
+  padding-bottom: rem-calc(50);
   background-color: map-get($colors, blue5);
   background-image: repeating-linear-gradient(
       147deg,
-      lighten(map-get($colors, blue5), 8%) 0%,
-      lighten(map-get($colors, blue5), 8%) 40%,
-      lighten(map-get($colors, blue5), 5%) 40%,
-      lighten(map-get($colors, blue5), 5%) 60%,
-      lighten(map-get($colors, blue5), 2%) 60%,
-      lighten(map-get($colors, blue5), 2%) 80%,
+      color.scale(map-get($colors, blue5), $lightness:  8%) 0%,
+      color.scale(map-get($colors, blue5), $lightness:  8%) 40%,
+      color.scale(map-get($colors, blue5), $lightness:  5%) 40%,
+      color.scale(map-get($colors, blue5), $lightness:  5%) 60%,
+      color.scale(map-get($colors, blue5), $lightness:  2%) 60%,
+      color.scale(map-get($colors, blue5), $lightness:  2%) 80%,
       map-get($colors, blue5) 80%,
       map-get($colors, blue5) 100%
     ),
     repeating-linear-gradient(
       -147deg,
-      lighten(map-get($colors, blue5), 8%) 0%,
-      lighten(map-get($colors, blue5), 8%) 40%,
-      lighten(map-get($colors, blue5), 5%) 40%,
-      lighten(map-get($colors, blue5), 5%) 60%,
-      lighten(map-get($colors, blue5), 2%) 60%,
-      lighten(map-get($colors, blue5), 2%) 80%,
+      color.scale(map-get($colors, blue5), $lightness:  8%) 0%,
+      color.scale(map-get($colors, blue5), $lightness:  8%) 40%,
+      color.scale(map-get($colors, blue5), $lightness:  5%) 40%,
+      color.scale(map-get($colors, blue5), $lightness:  5%) 60%,
+      color.scale(map-get($colors, blue5), $lightness:  2%) 60%,
+      color.scale(map-get($colors, blue5), $lightness:  2%) 80%,
       map-get($colors, blue5) 80%,
       map-get($colors, blue5) 100%
     ),
     none;
-  background-size: 50% 80%, 50% 80%;
-  background-position: 0 0, 100% 0;
-  background-repeat: no-repeat;
-
   @include breakpoint(xlarge) {
     background: map-get($colors, blue5)
       repeating-linear-gradient(
         147deg,
-        lighten(map-get($colors, blue5), 8%) 0%,
-        lighten(map-get($colors, blue5), 8%) 12%,
-        lighten(map-get($colors, blue5), 5%) 12%,
-        lighten(map-get($colors, blue5), 5%) 22%,
-        lighten(map-get($colors, blue5), 2%) 22%,
+        color.scale(map-get($colors, blue5), $lightness:  8%) 0%,
+        color.scale(map-get($colors, blue5), $lightness:  8%) 12%,
+        color.scale(map-get($colors, blue5), $lightness:  5%) 12%,
+        color.scale(map-get($colors, blue5), $lightness:  5%) 22%,
+        color.scale(map-get($colors, blue5), $lightness:  2%) 22%,
         map-get($colors, blue5) 100%
       );
   }
-
-  padding-bottom: rem-calc(50);
   @include breakpoint(xlarge) {
     padding-top: rem-calc(54px); // add padding to the hero to account for the header space
     padding-bottom: rem-calc(60);
@@ -254,6 +252,11 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
   }
   .cell:first-of-type {
     padding: rem-calc(25px) rem-calc(20px);
+    + .cell {
+      @include breakpoint(large) {
+        width: 62%;
+      }
+    }
     @include breakpoint(large) {
       padding: 2rem 1.5rem 1rem 2rem;
       width: 38%;
@@ -263,11 +266,6 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
     }
     @include breakpoint(xxlarge) {
       padding: 4.25rem;
-    }
-    + .cell {
-      @include breakpoint(large) {
-        width: 62%;
-      }
     }
   }
   h1 {
@@ -301,12 +299,12 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
 
 
 .split-hero.alt{
+  img{
+    margin-bottom: rem-calc(25);
+  }
   .roofline-accent.blue-roof{
     background: $light-gray;
     padding: 1.5625rem 1.25rem;
-    @include breakpoint(large){
-      padding: 5% 7% 2.5%;
-    }
     &::after{
       bottom: 4.5%;
       background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108.17 68.91'%3E%3Cpolygon points='108.17 68.91 108.17 35.37 54.08 0 0 35.37 0 68.91 54.08 33.54 108.17 68.91' style='fill:%2300A3DC'/%3E%3C/svg%3E")
@@ -319,9 +317,9 @@ $hero-shade: darken(map-get($colors, blue5), 2%);
     p{
       max-width: rem-calc(430);
     }
-  }
-  img{
-    margin-bottom: rem-calc(25);
+    @include breakpoint(large){
+      padding: 5% 7% 2.5%;
+    }
   }
 }
 .hero-download{

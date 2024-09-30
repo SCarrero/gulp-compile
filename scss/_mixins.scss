@@ -1,3 +1,4 @@
+@use 'sass:color';
 /// Adds styles for an orbit slide caption.
 @mixin orbit-caption-custom(
   $edge: bottom,
@@ -20,7 +21,6 @@
   color: color-pick-contrast($background);
 }
 
-
 @mixin nav-submenu-parent-hover(){
 }
 
@@ -38,6 +38,7 @@
     border-bottom-color: $activecolor;
   }
 }
+
 @mixin chevron-h2($left: map-get($colors, green4), $right: map-get($colors, green5)){
   transition: background-size 350ms ease-in, background-position 350ms ease-in;
   background-color: $right;
@@ -52,8 +53,8 @@
       background-position: -40% 0, -40% 100%;
     }
   }
-
 }
+
 @mixin chevron-h2-50($left: map-get($colors, green4), $right: map-get($colors, green5)){
   transition: background-size 350ms ease-in;
   background-color: $right;
@@ -68,6 +69,7 @@
     }
   }
 }
+
 @mixin chevron-l-r($left: map-get($colors, green1), $right: map-get($colors, green3)){
   transition: background-size 350ms ease-in, background-position 350ms ease-in;
   background-color: $right;
@@ -83,6 +85,7 @@
     }
   }
 }
+
 @mixin chevron-v4($shade: map-get($colors, blue5), $darker-on-bottom: false){
   background-color: $shade;
   background-size: 50% 100%, 50% 100%;
@@ -92,42 +95,42 @@
     background-image: repeating-linear-gradient(147deg,
     $shade 0%,
     $shade 40%,
-    darken($shade, 2%) 40%,
-    darken($shade, 2%) 60%,
-    darken($shade, 5%) 60%,
-    darken($shade, 5%) 80%,
-    darken($shade, 8%) 80%,
-    darken($shade, 8%) 100%),
+    color.scale($shade, $lightness: -2%) 40%,
+    color.scale($shade, $lightness: -2%) 60%,
+    color.scale($shade, $lightness: -5%) 60%,
+    color.scale($shade, $lightness: -5%) 80%,
+    color.scale($shade, $lightness: -8%) 80%,
+    color.scale($shade, $lightness: -8%) 100%),
     repeating-linear-gradient(-147deg,
     $shade 0%,
     $shade 40%,
-    darken($shade, 2%) 40%,
-    darken($shade, 2%) 60%,
-    darken($shade, 5%) 60%,
-    darken($shade, 5%) 80%,
-    darken($shade, 8%) 80%,
-    darken($shade, 8%) 100%),
+    color.scale($shade, $lightness: -2%) 40%,
+    color.scale($shade, $lightness: -2%) 60%,
+    color.scale($shade, $lightness: -5%) 60%,
+    color.scale($shade, $lightness: -5%) 80%,
+    color.scale($shade, $lightness: -8%) 80%,
+    color.scale($shade, $lightness: -8%) 100%),
     none;
   }
   @if($darker-on-bottom == false){
     background-image: repeating-linear-gradient(147deg,
     $shade 0%,
     $shade 40%,
-    lighten($shade, 2%) 40%,
-    lighten($shade, 2%) 60%,
-    lighten($shade, 5%) 60%,
-    lighten($shade, 5%) 80%,
-    lighten($shade, 8%) 80%,
-    lighten($shade, 8%) 100%),
+    color.scale($shade, $lightness: 2%) 40%,
+    color.scale($shade, $lightness: 2%) 60%,
+    color.scale($shade, $lightness: 5%) 60%,
+    color.scale($shade, $lightness: 5%) 80%,
+    color.scale($shade, $lightness: 8%) 80%,
+    color.scale($shade, $lightness: 8%) 100%),
     repeating-linear-gradient(-147deg,
     $shade 0%,
     $shade 40%,
-    lighten($shade, 2%) 40%,
-    lighten($shade, 2%) 60%,
-    lighten($shade, 5%) 60%,
-    lighten($shade, 5%) 80%,
-    lighten($shade, 8%) 80%,
-    lighten($shade, 8%) 100%),
+    color.scale($shade, $lightness: 2%) 40%,
+    color.scale($shade, $lightness: 2%) 60%,
+    color.scale($shade, $lightness: 5%) 60%,
+    color.scale($shade, $lightness: 5%) 80%,
+    color.scale($shade, $lightness: 8%) 80%,
+    color.scale($shade, $lightness: 8%) 100%),
     none;
   }
   &.tall-content-band,
@@ -154,47 +157,47 @@
   repeating-linear-gradient(147deg,
   $shade 0%,
   $shade 20%,
-  lighten(saturate($shade,4%), 2%) 20%,
-  lighten(saturate($shade,4%), 2%) 40%,
-  lighten(saturate($shade,8%), 6%) 40%,
-  lighten(saturate($shade,8%), 6%) 60%,
-  lighten(saturate($shade,2%), 1%) 60%,
-  lighten(saturate($shade,2%), 1%) 100%),
+  color.scale(color.scale($shade, $saturation:4%), $lightness: 2%) 20%,
+  color.scale(color.scale($shade, $saturation:4%), $lightness: 2%) 40%,
+  color.scale(color.scale($shade, $saturation:8%), $lightness: 6%) 40%,
+  color.scale(color.scale($shade, $saturation:8%), $lightness: 6%) 60%,
+  color.scale(color.scale($shade, $saturation:2%), $lightness: 1%) 60%,
+  color.scale(color.scale($shade, $saturation:2%), $lightness: 1%) 100%),
   repeating-linear-gradient(-147deg,
   $shade 0%,
   $shade 20%,
-  darken(desaturate($shade,3%), 4%) 20%,
-  darken(desaturate($shade,3%), 4%) 40%,
+  color.scale(color.scale($shade, $saturation:-3%), $lightness: -4%) 20%,
+  color.scale(color.scale($shade, $saturation:-3%), $lightness: -4%) 40%,
   $shade 40%,
   $shade 60%,
-  darken(desaturate($shade,3%), 4%) 60%,
-  darken(desaturate($shade,3%), 4%) 100%),
+  color.scale(color.scale($shade, $saturation:-3%), $lightness: -4%) 60%,
+  color.scale(color.scale($shade, $saturation:-3%), $lightness: -4%) 100%),
   none;
   &.tall-content-band {
     @include breakpoint(large) {
       background-size: 90vw 100%, 75vw 100%, 75vw 100%;
       background-position: 0 0, 0 0, 75vw 0;
       background-image:
-      linear-gradient(to right, $shade 50%, transparent 50%),
-      repeating-linear-gradient(147deg,
-      $shade 0%,
-      $shade 50%,
-      lighten(saturate($shade,4%), 2%) 50%,
-      lighten(saturate($shade,4%), 2%) 67%,
-      lighten(saturate($shade,8%), 6%) 67%,
-      lighten(saturate($shade,8%), 6%) 85%,
-      lighten(saturate($shade,2%), 1%) 85%,
-      lighten(saturate($shade,2%), 1%) 100%),
-      repeating-linear-gradient(-147deg,
-      $shade 0%,
-      $shade 50%,
-      darken(desaturate($shade,3%), 4%) 50%,
-      darken(desaturate($shade,3%), 4%) 67%,
-      $shade 67%,
-      $shade 85%,
-      darken(desaturate($shade,3%), 4%) 85%,
-      darken(desaturate($shade,3%), 4%) 100%),
-      none;
+        linear-gradient(to right, $shade 50%, transparent 50%),
+        repeating-linear-gradient(147deg,
+        $shade 0%,
+        $shade 50%,
+        color.scale(color.scale($shade, $saturation:4%), $lightness: 2%) 50%,
+        color.scale(color.scale($shade, $saturation:4%), $lightness: 2%) 67%,
+        color.scale(color.scale($shade, $saturation:8%), $lightness: 6%) 67%,
+        color.scale(color.scale($shade, $saturation:8%), $lightness: 6%) 85%,
+        color.scale(color.scale($shade, $saturation:2%), $lightness: 1%) 85%,
+        color.scale(color.scale($shade, $saturation:2%), $lightness: 1%) 100%),
+        repeating-linear-gradient(-147deg,
+        $shade 0%,
+        $shade 50%,
+        color.scale(color.scale($shade, $saturation:-3%), $lightness: 4%) 50%,
+        color.scale(color.scale($shade, $saturation:-3%), $lightness: 4%) 67%,
+        $shade 67%,
+        $shade 85%,
+        color.scale(color.scale($shade, $saturation:-3%), $lightness: 4%) 85%,
+        color.scale(color.scale($shade, $saturation:-3%), $lightness: 4%) 100%), 
+        none;
     }
     @include breakpoint(xxlarge) {
       background-size: 90vw 100%, 78vw 100%, 78vw 100%;
@@ -202,26 +205,28 @@
     }
   }
 }
-@mixin title-background($shade: darken(map-get($colors, blue5), 2%)){
-  background: $shade;
-  background-size: 120% 100%, 120% 100%;
-  background-position: 0 0, 120% 0;
-  background-repeat: no-repeat;
-  background-image: repeating-linear-gradient(147deg,
-  $shade 0%,
-  $shade 70%,
-  lighten($shade, 2%) 70%,
-  lighten($shade, 2%) 85%,
-  lighten($shade, 5%) 85%,
-  lighten($shade, 5%) 100%),
-  repeating-linear-gradient(-147deg,
-  $shade 0%,
-  $shade 70%,
-  lighten($shade, 2%) 70%,
-  lighten($shade, 2%) 85%,
-  lighten($shade, 5%) 85%,
-  lighten($shade, 5%) 100%),
-  none;
+@mixin title-background($shade){
+  & {
+    background: $shade;
+    background-size: 120% 100%, 120% 100%;
+    background-position: 0 0, 120% 0;
+    background-repeat: no-repeat;
+    background-image: repeating-linear-gradient(147deg,
+    $shade 0%,
+    $shade 70%,
+    color.scale($shade, $lightness: 2%) 70%,
+    color.scale($shade, $lightness: 2%) 85%,
+    color.scale($shade, $lightness: 5%) 85%,
+    color.scale($shade, $lightness: 5%) 100%),
+    repeating-linear-gradient(-147deg,
+    $shade 0%,
+    $shade 70%,
+    color.scale($shade, $lightness: 2%) 70%,
+    color.scale($shade, $lightness: 2%) 85%,
+    color.scale($shade, $lightness: 5%) 85%,
+    color.scale($shade, $lightness: 5%) 100%),
+    none;
+  }
   @include breakpoint(large) {
     background-size: 105% 100%, 105% 100%;
     background-position: 0 0, 105% 0;
@@ -235,7 +240,11 @@
     background-position: 0 0, 70em 0;
   }
 }
-@mixin list-divided($color: darken($light-gray, 5%), $padding-base: $global-padding, $last-border: false){
+@mixin list-divided(
+  $color: color.scale($light-gray, $lightness: -5%),
+  $padding-base: $global-padding, 
+  $last-border: false
+){
   > li {
     margin: 0;
     padding-bottom: rem-calc($padding-base);
@@ -277,6 +286,10 @@
   margin: 0;
   padding-left: rem-calc(30);
   padding-right: rem-calc(30);
+  > .column {
+    padding-left: 0;
+    padding-right: 0;
+  }
   @include breakpoint(large){
     padding-right: rem-calc(map-get($grid-container-padding, large)/2);
     padding-left: rem-calc(map-get($grid-container-padding, large)/2);
@@ -290,10 +303,6 @@
   @include breakpoint(xxlarge){
     padding-right: rem-calc(map-get($grid-container-padding, xxlarge)/2);
     padding-left: rem-calc(map-get($grid-container-padding, xxlarge)/2);
-  }
-  > .column {
-    padding-left: 0;
-    padding-right: 0;
   }
 }
 // mixin to add rss feed icon to links in a list
@@ -334,8 +343,8 @@
       $hue: $hue + 360;
     }
     $hue2: adjust-hue($a, -$hue * $shift);
-    $sat2: if($sat > 0, desaturate($hue2, abs($sat) * $shift), saturate($hue2, abs($sat) * $shift));
-    $lig2:  if($lig > 0, darken($sat2, abs($lig) * $shift), lighten($sat2, abs($lig) * $shift));
+    $sat2: if($sat > 0,  color.scale($hue2, $saturation: -abs($sat) * $shift), color.scale($hue2, $saturation: abs($sat) * $shift));
+    $lig2:  if($lig > 0, color.scale($sat2, $lightness: -abs($lig) * $shift), color.scale($sat2, $lightness: abs($lig) * $shift));
     @return $lig2;
   }
 }
@@ -360,16 +369,17 @@
 @mixin fluid-type(
     $min-font-size: 16px,
     $max-font-size: 32px,
-    $max-bp: xxlarge
+    $max-bp: xxlarge,
+    $fontsize: calc(#{$min-font-size} + #{strip-unit($max-font-size) - strip-unit($min-font-size)} * 
+      ((100vw - #{$global-width-min}) / #{strip-unit($global-width) - strip-unit($global-width-min)}))
   ) {
-  font-size: $min-font-size;
-  font-size: calc(
-    #{$min-font-size} + #{strip-unit($max-font-size) - strip-unit($min-font-size)} *
-   ((100vw - #{$global-width-min}) / #{strip-unit($global-width) - strip-unit($global-width-min)})
-  );
-  @include breakpoint($max-bp) {
-    font-size: rem-calc($max-font-size);
-  }
+  & {
+    font-size: $min-font-size;
+    font-size: $fontsize;  
+    @include breakpoint($max-bp) {
+      font-size: rem-calc($max-font-size);
+    }
+  }  
 }
 
 // Moved blue chevrons for expand/collapse items into a Mixin so they are easier to reuse.
