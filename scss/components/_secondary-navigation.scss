@@ -91,7 +91,7 @@ ul.menu.secondary-menu-parent {
     align-items: center;
     @include breakpoint(xlarge) {
       .svg-spacer {
-        color: color.scale($light-gray, $lightness: -9.5%); // darken($light-gray, 9.5%);
+        color: color.adjust($light-gray, $lightness: -9.5%, $space: hsl); // darken($light-gray, 9.5%);
         height: 100%;
         margin: 0 0.3125rem 0 1rem;
         svg {

@@ -33,16 +33,16 @@ $background-light-palette: (
 @media screen {
   .background-teal {
     &.horizontal-chevron {
-      @include chevron-l-r($left: color.scale($fm-teal, $lightness: 3%), $right: $fm-teal);
+      @include chevron-l-r($left: color.adjust($fm-teal, $lightness: 3%, $space: hsl), $right: $fm-teal);
     }
     &.offset-feature-panel {
-      @include chevron-h2(color.scale($fm-teal, $lightness: 3%), $fm-teal);
+      @include chevron-h2(color.adjust($fm-teal, $lightness: 3%, $space: hsl), $fm-teal);
       &.right-image {
-        @include chevron-h2-50(color.scale($fm-teal, $lightness: 3%), $fm-teal);
+        @include chevron-h2-50(color.adjust($fm-teal, $lightness: 3%, $space: hsl), $fm-teal);
       }
     }
     .offset-video-panel &.cell:first-of-type {
-      @include chevron-l-r(color.scale($fm-teal, $lightness: 4%), $fm-teal);
+      @include chevron-l-r(color.adjust($fm-teal, $lightness: 4%, $space: hsl), $fm-teal);
     }
   }
   .background-green {
@@ -67,24 +67,24 @@ $background-light-palette: (
   }
   .background-blue {
     &.horizontal-chevron {
-      @include chevron-l-r(map-get($colors, blue5), color.scale(map-get($colors, blue5), $lightness: 3%));
+      @include chevron-l-r(map-get($colors, blue5), color.adjust(map-get($colors, blue5), $lightness: 3%, $space: hsl));
     }
     &.offset-feature-panel {
-      @include chevron-h2(map-get($colors, blue5), color.scale(map-get($colors, blue5), $lightness: 3%));
+      @include chevron-h2(map-get($colors, blue5), color.adjust(map-get($colors, blue5), $lightness: 3%, $space: hsl));
       &.right-image {
-        @include chevron-h2-50(map-get($colors, blue5), color.scale(map-get($colors, blue5), $lightness: 3%));
+        @include chevron-h2-50(map-get($colors, blue5), color.adjust(map-get($colors, blue5), $lightness: 3%, $space: hsl));
       }
     }
     &.vertical-chevrons {
       @include chevron-v4(map-get($colors, blue5), false);
     }
     .offset-video-panel &.cell:first-of-type {
-      @include chevron-l-r(map-get($colors, blue5), color.scale(map-get($colors, blue5), $lightness: 3%));
+      @include chevron-l-r(map-get($colors, blue5), color.adjust(map-get($colors, blue5), $lightness: 3%, $space: hsl));
     }
   }
   .background-navy {
     &.horizontal-chevron {
-      @include chevron-l-r(map-get($colors, navy3), color.scale(map-get($colors, navy3), $lightness:3%));
+      @include chevron-l-r(map-get($colors, navy3), color.adjust(map-get($colors, navy3), $lightness:3%, $space: hsl));
     }
     &.offset-feature-panel{
       @include chevron-h2(map-get($colors, navy3), map-get($colors, navy4));
@@ -93,7 +93,7 @@ $background-light-palette: (
       }
     }
     &.vertical-chevrons {
-      @include chevron-v4(color.scale(map-get($colors, navy5), $lightness:8%), true);
+      @include chevron-v4(color.adjust(map-get($colors, navy5), $lightness:8%, $space: hsl), true);
     }
     .offset-video-panel &.cell:first-of-type {
       @include chevron-l-r(map-get($colors, navy3), map-get($colors, navy4));

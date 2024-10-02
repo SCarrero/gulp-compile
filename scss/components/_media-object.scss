@@ -152,7 +152,7 @@
     }
   }
   .section-divided {
-    border-bottom: 1px solid color.scale($light-gray, $lightness: -5%); //darken($light-gray, 5%);
+    border-bottom: 1px solid color.adjust($light-gray, $lightness: -5%, $space: hsl); //darken($light-gray, 5%);
   }
   // missing bit of code from Foundation
   .media-object-section {

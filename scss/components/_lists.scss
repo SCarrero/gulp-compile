@@ -1,5 +1,5 @@
 @use 'sass:color';
-$dividercolor: color.scale($light-gray, $lightness: -5%); // darken($light-gray, 5%);
+$dividercolor: color.adjust($light-gray, $lightness: -5%, $space: hsl); // darken($light-gray, 5%);
 
 ol.leading-zero {
   list-style-type: decimal-leading-zero;

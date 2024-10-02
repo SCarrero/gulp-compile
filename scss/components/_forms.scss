@@ -321,7 +321,7 @@ textarea.error,
       display: block;
       top: 0.5em;
       right: 0.5em;
-      background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, color.scale($medium-gray, $lightness: 10%), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
+      background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, color.adjust($medium-gray, $lightness: 10%, $space: hsl), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
       height: 1rem;
       width: 1rem;
       transition: background 0.25s ease-out;
@@ -329,17 +329,17 @@ textarea.error,
     &:hover,
     &:focus {
       &::after {
-        background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, color.scale($medium-gray, $lightness: -5%), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
+        background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, color.adjust($medium-gray, $lightness: -5%, $space: hsl), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
       }
     }
   }
   &:not(:placeholder-shown) + .reset-filter::after{
-    background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, color.scale($dark-gray, $lightness: 10%), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
+    background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, color.adjust($dark-gray, $lightness: 10%, $space: hsl), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
   }
 }
 
 .module-form {
-  border: 2px solid color.scale($light-gray, $lightness: -3.7%); // darken($light-gray, 3.7%);
+  border: 2px solid color.adjust($light-gray, $lightness: -3.7%, $space: hsl); // darken($light-gray, 3.7%);
   border-radius: 6px 6px 0 0;
   position: relative;
   margin-bottom: $gutter;
@@ -380,7 +380,7 @@ textarea.error,
       }
       &:hover,
       &:focus {
-        background: scale-color($light-gray, $lightness: -5%);
+        background: scale-color($light-gray, $lightness: -5%, $space: hsl);
       }
       padding: rem-calc(10);
       color: map-get($colors, blue5);

@@ -19,7 +19,7 @@
       z-index: 399;
     }
     padding: rem-calc($gutter * 0.5 $gutter * 1.5 $gutter * 0.5 $gutter * 1.5);
-    border-top: 1px solid color.scale($light-gray, $lightness: -9.8039%); // darken($light-gray, 9.8039);
+    border-top: 1px solid color.adjust($light-gray, $lightness: -9.8039%, $space: hsl); // darken($light-gray, 9.8039);
     border-bottom: 1px solid $fm-yellow;
     background-color: $fm-yellow;
     max-height: rem-calc(96);

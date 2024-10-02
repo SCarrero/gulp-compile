@@ -59,7 +59,7 @@
   // }
 
   &.bordered {
-    border: rem-calc(1) solid color.scale($light-gray, $lightness: -9.8%); //darken($light-gray, 9.8%);
+    border: rem-calc(1) solid color.adjust($light-gray, $lightness: -9.8%, $space: hsl); //darken($light-gray, 9.8%);
     .sub-nav & {
       background-size: contain !important;
     }

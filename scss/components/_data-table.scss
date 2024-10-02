@@ -151,7 +151,7 @@ table.large-stack {
     tr:nth-child(n) {
       background: #fff;
       td {
-        border: 1px solid color.scale($light-gray, $lightness: -5%);; // darken($light-gray, 5%);
+        border: 1px solid color.adjust($light-gray, $lightness: -5%, $space: hsl); // darken($light-gray, 5%);
       }
     }
   }
@@ -163,7 +163,7 @@ tr.row-subheader {
   }
   &:hover {
     th, td {
-      background: color.scale(map-get($colors, blue5), $lightness: 3%); //lighten(map-get($colors, blue5), 3%);
+      background: color.adjust(map-get($colors, blue5), $lightness: 3%, $space: hsl); //lighten(map-get($colors, blue5), 3%);
     }
   }
 }

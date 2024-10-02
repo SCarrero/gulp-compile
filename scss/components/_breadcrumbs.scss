@@ -42,7 +42,7 @@
 }
 .page-title {
   .breadcrumbs li {
-    background: color.scale(map-get($colors, blue5), $lightness: -2%); // darken(map-get($colors, blue5), 2%);
+    background: color.adjust(map-get($colors, blue5), $lightness: -2%, $space: hsl); // darken(map-get($colors, blue5), 2%);
     color: rgba($white, .85); // less that .85 fails accessibility
     &:not(:last-child)::after {
       color: inherit;

@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use 'sass:math';
 /// Adds styles for an orbit slide caption.
 @mixin orbit-caption-custom(
   $edge: bottom,
@@ -95,42 +96,42 @@
     background-image: repeating-linear-gradient(147deg,
     $shade 0%,
     $shade 40%,
-    color.scale($shade, $lightness: -2%) 40%,
-    color.scale($shade, $lightness: -2%) 60%,
-    color.scale($shade, $lightness: -5%) 60%,
-    color.scale($shade, $lightness: -5%) 80%,
-    color.scale($shade, $lightness: -8%) 80%,
-    color.scale($shade, $lightness: -8%) 100%),
+    color.adjust($shade, $lightness: -2%, $space: hsl) 40%,
+    color.adjust($shade, $lightness: -2%, $space: hsl) 60%,
+    color.adjust($shade, $lightness: -5%, $space: hsl) 60%,
+    color.adjust($shade, $lightness: -5%, $space: hsl) 80%,
+    color.adjust($shade, $lightness: -8%, $space: hsl) 80%,
+    color.adjust($shade, $lightness: -8%, $space: hsl) 100%),
     repeating-linear-gradient(-147deg,
     $shade 0%,
     $shade 40%,
-    color.scale($shade, $lightness: -2%) 40%,
-    color.scale($shade, $lightness: -2%) 60%,
-    color.scale($shade, $lightness: -5%) 60%,
-    color.scale($shade, $lightness: -5%) 80%,
-    color.scale($shade, $lightness: -8%) 80%,
-    color.scale($shade, $lightness: -8%) 100%),
+    color.adjust($shade, $lightness: -2%, $space: hsl) 40%,
+    color.adjust($shade, $lightness: -2%, $space: hsl) 60%,
+    color.adjust($shade, $lightness: -5%, $space: hsl) 60%,
+    color.adjust($shade, $lightness: -5%, $space: hsl) 80%,
+    color.adjust($shade, $lightness: -8%, $space: hsl) 80%,
+    color.adjust($shade, $lightness: -8%, $space: hsl) 100%),
     none;
   }
   @if($darker-on-bottom == false){
     background-image: repeating-linear-gradient(147deg,
     $shade 0%,
     $shade 40%,
-    color.scale($shade, $lightness: 2%) 40%,
-    color.scale($shade, $lightness: 2%) 60%,
-    color.scale($shade, $lightness: 5%) 60%,
-    color.scale($shade, $lightness: 5%) 80%,
-    color.scale($shade, $lightness: 8%) 80%,
-    color.scale($shade, $lightness: 8%) 100%),
+    color.adjust($shade, $lightness: 2%, $space: hsl) 40%,
+    color.adjust($shade, $lightness: 2%, $space: hsl) 60%,
+    color.adjust($shade, $lightness: 5%, $space: hsl) 60%,
+    color.adjust($shade, $lightness: 5%, $space: hsl) 80%,
+    color.adjust($shade, $lightness: 8%, $space: hsl) 80%,
+    color.adjust($shade, $lightness: 8%, $space: hsl) 100%),
     repeating-linear-gradient(-147deg,
     $shade 0%,
     $shade 40%,
-    color.scale($shade, $lightness: 2%) 40%,
-    color.scale($shade, $lightness: 2%) 60%,
-    color.scale($shade, $lightness: 5%) 60%,
-    color.scale($shade, $lightness: 5%) 80%,
-    color.scale($shade, $lightness: 8%) 80%,
-    color.scale($shade, $lightness: 8%) 100%),
+    color.adjust($shade, $lightness: 2%, $space: hsl) 40%,
+    color.adjust($shade, $lightness: 2%, $space: hsl) 60%,
+    color.adjust($shade, $lightness: 5%, $space: hsl) 60%,
+    color.adjust($shade, $lightness: 5%, $space: hsl) 80%,
+    color.adjust($shade, $lightness: 8%, $space: hsl) 80%,
+    color.adjust($shade, $lightness: 8%, $space: hsl) 100%),
     none;
   }
   &.tall-content-band,
@@ -157,21 +158,21 @@
   repeating-linear-gradient(147deg,
   $shade 0%,
   $shade 20%,
-  color.scale(color.scale($shade, $saturation:4%), $lightness: 2%) 20%,
-  color.scale(color.scale($shade, $saturation:4%), $lightness: 2%) 40%,
-  color.scale(color.scale($shade, $saturation:8%), $lightness: 6%) 40%,
-  color.scale(color.scale($shade, $saturation:8%), $lightness: 6%) 60%,
-  color.scale(color.scale($shade, $saturation:2%), $lightness: 1%) 60%,
-  color.scale(color.scale($shade, $saturation:2%), $lightness: 1%) 100%),
+  color.adjust($shade, $saturation:4%, $lightness: 2%, $space: hsl) 20%,
+  color.adjust($shade, $saturation:4%, $lightness: 2%, $space: hsl) 40%,
+  color.adjust($shade, $saturation:8%, $lightness: 6%, $space: hsl) 40%,
+  color.adjust($shade, $saturation:8%, $lightness: 6%, $space: hsl) 60%,
+  color.adjust($shade, $saturation:2%, $lightness: 1%, $space: hsl) 60%,
+  color.adjust($shade, $saturation:2%, $lightness: 1%, $space: hsl) 100%),
   repeating-linear-gradient(-147deg,
   $shade 0%,
   $shade 20%,
-  color.scale(color.scale($shade, $saturation:-3%), $lightness: -4%) 20%,
-  color.scale(color.scale($shade, $saturation:-3%), $lightness: -4%) 40%,
+  color.adjust($shade, $saturation:-3%, $lightness: -4%, $space: hsl) 20%,
+  color.adjust($shade, $saturation:-3%, $lightness: -4%, $space: hsl) 40%,
   $shade 40%,
   $shade 60%,
-  color.scale(color.scale($shade, $saturation:-3%), $lightness: -4%) 60%,
-  color.scale(color.scale($shade, $saturation:-3%), $lightness: -4%) 100%),
+  color.adjust($shade, $saturation:-3%, $lightness: -4%, $space: hsl) 60%,
+  color.adjust($shade, $saturation:-3%, $lightness: -4%, $space: hsl) 100%),
   none;
   &.tall-content-band {
     @include breakpoint(large) {
@@ -182,21 +183,21 @@
         repeating-linear-gradient(147deg,
         $shade 0%,
         $shade 50%,
-        color.scale(color.scale($shade, $saturation:4%), $lightness: 2%) 50%,
-        color.scale(color.scale($shade, $saturation:4%), $lightness: 2%) 67%,
-        color.scale(color.scale($shade, $saturation:8%), $lightness: 6%) 67%,
-        color.scale(color.scale($shade, $saturation:8%), $lightness: 6%) 85%,
-        color.scale(color.scale($shade, $saturation:2%), $lightness: 1%) 85%,
-        color.scale(color.scale($shade, $saturation:2%), $lightness: 1%) 100%),
+        color.adjust($shade, $saturation:4%, $lightness: 2%, $space: hsl) 50%,
+        color.adjust($shade, $saturation:4%, $lightness: 2%, $space: hsl) 67%,
+        color.adjust($shade, $saturation:8%, $lightness: 6%, $space: hsl) 67%,
+        color.adjust($shade, $saturation:8%, $lightness: 6%, $space: hsl) 85%,
+        color.adjust($shade, $saturation:2%, $lightness: 1%, $space: hsl) 85%,
+        color.adjust($shade, $saturation:2%, $lightness: 1%, $space: hsl) 100%),
         repeating-linear-gradient(-147deg,
         $shade 0%,
         $shade 50%,
-        color.scale(color.scale($shade, $saturation:-3%), $lightness: 4%) 50%,
-        color.scale(color.scale($shade, $saturation:-3%), $lightness: 4%) 67%,
+        color.adjust($shade, $saturation:-3%, $lightness: 4%, $space: hsl) 50%,
+        color.adjust($shade, $saturation:-3%, $lightness: 4%, $space: hsl) 67%,
         $shade 67%,
         $shade 85%,
-        color.scale(color.scale($shade, $saturation:-3%), $lightness: 4%) 85%,
-        color.scale(color.scale($shade, $saturation:-3%), $lightness: 4%) 100%), 
+        color.adjust($shade, $saturation:-3%, $lightness: 4%, $space: hsl) 85%,
+        color.adjust($shade, $saturation:-3%, $lightness: 4%, $space: hsl) 100%), 
         none;
     }
     @include breakpoint(xxlarge) {
@@ -214,17 +215,17 @@
     background-image: repeating-linear-gradient(147deg,
     $shade 0%,
     $shade 70%,
-    color.scale($shade, $lightness: 2%) 70%,
-    color.scale($shade, $lightness: 2%) 85%,
-    color.scale($shade, $lightness: 5%) 85%,
-    color.scale($shade, $lightness: 5%) 100%),
+    color.adjust($shade, $lightness: 2%, $space: hsl) 70%,
+    color.adjust($shade, $lightness: 2%, $space: hsl) 85%,
+    color.adjust($shade, $lightness: 5%, $space: hsl) 85%,
+    color.adjust($shade, $lightness: 5%, $space: hsl) 100%),
     repeating-linear-gradient(-147deg,
     $shade 0%,
     $shade 70%,
-    color.scale($shade, $lightness: 2%) 70%,
-    color.scale($shade, $lightness: 2%) 85%,
-    color.scale($shade, $lightness: 5%) 85%,
-    color.scale($shade, $lightness: 5%) 100%),
+    color.adjust($shade, $lightness: 2%, $space: hsl) 70%,
+    color.adjust($shade, $lightness: 2%, $space: hsl) 85%,
+    color.adjust($shade, $lightness: 5%, $space: hsl) 85%,
+    color.adjust($shade, $lightness: 5%, $space: hsl) 100%),
     none;
   }
   @include breakpoint(large) {
@@ -241,7 +242,7 @@
   }
 }
 @mixin list-divided(
-  $color: color.scale($light-gray, $lightness: -5%),
+  $color: color.adjust($light-gray, $lightness: -5%, $space: hsl),
   $padding-base: $global-padding, 
   $last-border: false
 ){
@@ -332,19 +333,19 @@
     @return $b;
   }
   @else {
-    $shift: $step / $steps;
-    $sat: saturation($a) - saturation($b);
-    $lig: lightness($a) -  lightness($b);
-    $hue: hue($a) - hue($b);
+    $shift: math.div($step, $steps);
+    $sat: color.channel($a, "saturation", $space: hsl) - color.channel($b, "saturation", $space: hsl);
+    $lig: color.channel($a, "lightness", $space: hsl) -  color.channel($b, "lightness", $space: hsl);
+    $hue: color.channel($a, "hue") - color.channel($b, "hue");
     @if $hue > 180 {
       $hue: $hue - 360;
     }
     @else if $hue <= -180 {
       $hue: $hue + 360;
     }
-    $hue2: adjust-hue($a, -$hue * $shift);
-    $sat2: if($sat > 0,  color.scale($hue2, $saturation: -abs($sat) * $shift), color.scale($hue2, $saturation: abs($sat) * $shift));
-    $lig2:  if($lig > 0, color.scale($sat2, $lightness: -abs($lig) * $shift), color.scale($sat2, $lightness: abs($lig) * $shift));
+    $hue2: color.adjust($a, $hue: -$hue * $shift, $space: hsl); //adjust-hue($a, -$hue * $shift); 
+    $sat2: if($sat > 0,  color.adjust($hue2, $saturation: math.abs(-$sat) * $shift, $space: hsl), color.adjust($hue2, $saturation: math.abs($sat) * $shift, $space: hsl));
+    $lig2:  if($lig > 0, color.adjust($sat2, $lightness: math.abs(-$lig) * $shift, $space: hsl), color.adjust($sat2, $lightness: math.abs($lig) * $shift, $space: hsl));
     @return $lig2;
   }
 }
@@ -356,7 +357,7 @@
     display: block;
     content: "";
     width: 100%;
-    padding-top: ($height / $width) * 100%;
+    padding-top: math.div($height, $width) * 100%;
   }
 }
 

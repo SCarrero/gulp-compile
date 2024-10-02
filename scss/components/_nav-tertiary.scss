@@ -1,7 +1,7 @@
 @use 'sass:math';
 @use 'sass:color';
 $tertiary-gap: $gutter * 1.5;
-$tertiary-border-color:  rgba($medium-gray, 0.6);  //scale-color($light-gray, $lightness: -5%);
+$tertiary-border-color:  rgba($medium-gray, 0.6);
 
 .tertiary-nav {
   background: $fm-green;

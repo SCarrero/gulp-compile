@@ -31,11 +31,11 @@
   @include breakpoint(xlarge) {
     background: map-get($colors, navy5)
     repeating-linear-gradient(147deg,
-    color.scale(map-get($colors, navy5), $lightness:  8%) 0%,
-    color.scale(map-get($colors, navy5), $lightness:  8%) 21.5%,
-    color.scale(map-get($colors, navy5), $lightness:  5%) 21.5%,
-    color.scale(map-get($colors, navy5), $lightness:  5%) 39.25%,
-    color.scale(map-get($colors, navy5), $lightness:  2%) 39.25%,
+    color.adjust(map-get($colors, navy5), $lightness:  8%, $space: hsl) 0%,
+    color.adjust(map-get($colors, navy5), $lightness:  8%, $space: hsl) 21.5%,
+    color.adjust(map-get($colors, navy5), $lightness:  5%, $space: hsl) 21.5%,
+    color.adjust(map-get($colors, navy5), $lightness:  5%, $space: hsl) 39.25%,
+    color.adjust(map-get($colors, navy5), $lightness:  2%, $space: hsl) 39.25%,
     map-get($colors, navy5) 100%);
   }
   @include breakpoint(large down) {
@@ -144,7 +144,7 @@
   background-color: map-get($colors, navy5);
   li + li {
     @include breakpoint(xlarge){
-    border-top: .0625rem solid color.scale(map-get($colors, navy3), $lightness: 2%);
+    border-top: .0625rem solid color.adjust(map-get($colors, navy3), $lightness: 2%, $space: hsl);
     }
   }
   a {

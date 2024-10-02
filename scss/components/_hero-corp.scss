@@ -1,5 +1,5 @@
 @use 'sass:color';
-$hero-shade: color.scale(map-get($colors, blue5), $lightness: -2%); // darken(map-get($colors, blue5), 2%);
+$hero-shade: color.adjust(map-get($colors, blue5), $lightness: -2%, $space: hsl); // darken(map-get($colors, blue5), 2%);
 
 // only apply color and backgrounds on screen, not in print
 .page-title,
@@ -38,7 +38,7 @@ $hero-shade: color.scale(map-get($colors, blue5), $lightness: -2%); // darken(ma
   @include breakpoint(medium) {
     min-height: rem-calc(200);
   }
-  @include title-background(color.scale(map-get($colors, blue5), $lightness: -2%));
+  @include title-background(color.adjust(map-get($colors, blue5), $lightness: -2%, $space: hsl));
 }
 .page-title {
   padding: rem-calc(0 0 50);
@@ -208,23 +208,23 @@ $hero-shade: color.scale(map-get($colors, blue5), $lightness: -2%); // darken(ma
   background-color: map-get($colors, blue5);
   background-image: repeating-linear-gradient(
       147deg,
-      color.scale(map-get($colors, blue5), $lightness:  8%) 0%,
-      color.scale(map-get($colors, blue5), $lightness:  8%) 40%,
-      color.scale(map-get($colors, blue5), $lightness:  5%) 40%,
-      color.scale(map-get($colors, blue5), $lightness:  5%) 60%,
-      color.scale(map-get($colors, blue5), $lightness:  2%) 60%,
-      color.scale(map-get($colors, blue5), $lightness:  2%) 80%,
+      color.adjust(map-get($colors, blue5), $lightness:  8%, $space: hsl) 0%,
+      color.adjust(map-get($colors, blue5), $lightness:  8%, $space: hsl) 40%,
+      color.adjust(map-get($colors, blue5), $lightness:  5%, $space: hsl) 40%,
+      color.adjust(map-get($colors, blue5), $lightness:  5%, $space: hsl) 60%,
+      color.adjust(map-get($colors, blue5), $lightness:  2%, $space: hsl) 60%,
+      color.adjust(map-get($colors, blue5), $lightness:  2%, $space: hsl) 80%,
       map-get($colors, blue5) 80%,
       map-get($colors, blue5) 100%
     ),
     repeating-linear-gradient(
       -147deg,
-      color.scale(map-get($colors, blue5), $lightness:  8%) 0%,
-      color.scale(map-get($colors, blue5), $lightness:  8%) 40%,
-      color.scale(map-get($colors, blue5), $lightness:  5%) 40%,
-      color.scale(map-get($colors, blue5), $lightness:  5%) 60%,
-      color.scale(map-get($colors, blue5), $lightness:  2%) 60%,
-      color.scale(map-get($colors, blue5), $lightness:  2%) 80%,
+      color.adjust(map-get($colors, blue5), $lightness:  8%, $space: hsl) 0%,
+      color.adjust(map-get($colors, blue5), $lightness:  8%, $space: hsl) 40%,
+      color.adjust(map-get($colors, blue5), $lightness:  5%, $space: hsl) 40%,
+      color.adjust(map-get($colors, blue5), $lightness:  5%, $space: hsl) 60%,
+      color.adjust(map-get($colors, blue5), $lightness:  2%, $space: hsl) 60%,
+      color.adjust(map-get($colors, blue5), $lightness:  2%, $space: hsl) 80%,
       map-get($colors, blue5) 80%,
       map-get($colors, blue5) 100%
     ),
@@ -233,11 +233,11 @@ $hero-shade: color.scale(map-get($colors, blue5), $lightness: -2%); // darken(ma
     background: map-get($colors, blue5)
       repeating-linear-gradient(
         147deg,
-        color.scale(map-get($colors, blue5), $lightness:  8%) 0%,
-        color.scale(map-get($colors, blue5), $lightness:  8%) 12%,
-        color.scale(map-get($colors, blue5), $lightness:  5%) 12%,
-        color.scale(map-get($colors, blue5), $lightness:  5%) 22%,
-        color.scale(map-get($colors, blue5), $lightness:  2%) 22%,
+        color.adjust(map-get($colors, blue5), $lightness:  8%, $space: hsl) 0%,
+        color.adjust(map-get($colors, blue5), $lightness:  8%, $space: hsl) 12%,
+        color.adjust(map-get($colors, blue5), $lightness:  5%, $space: hsl) 12%,
+        color.adjust(map-get($colors, blue5), $lightness:  5%, $space: hsl) 22%,
+        color.adjust(map-get($colors, blue5), $lightness:  2%, $space: hsl) 22%,
         map-get($colors, blue5) 100%
       );
   }
