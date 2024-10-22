@@ -132,7 +132,7 @@ aside.large-4 {
 .visually-hidden:not(:focus) {
   margin: -1px;
 }
-// Replacement for centered since it's not part of grid-xy
+// Replacement for centered if it's still not part of grid-xy
 @include -zf-each-breakpoint { 
   .cell.#{$-zf-size}-centered {
     margin-left: auto;

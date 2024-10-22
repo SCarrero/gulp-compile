@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "browserlist": "^1.0.1",
-    "foundation-sites": "^6.8.1",
+    "foundation-sites": "^6.9.0",
     "gulp": "^5",
     "jquery": "^3.7.1",
     "motion-ui": "^2.0.5",
@@ -22,7 +22,7 @@
     "gulp-mode": "^1.1.0",
     "gulp-postcss": "^10.0.0",
     "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^2.6.5",
+    "gulp-sourcemaps": "^3.0.0",
     "sass-embedded": "^1.79.4"
   }
 }

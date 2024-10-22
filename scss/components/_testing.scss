@@ -1,0 +1,59 @@
+@use 'sass:color';
+@use 'sass:math';
+
+@function light-diff($a, $b) {
+  $lig: color.channel($b, "lightness", $space: hsl) - color.channel($a, "lightness", $space: hsl);
+  @return (
+    $lig
+  );
+}
+@function hu-diff($a, $b) {
+  $hu: color.channel($b, "hue", $space: hsl) - color.channel($a, "hue", $space: hsl);
+  @if( $hu > 360deg) {
+    $hu: $hu - 360deg;
+  }
+  @if( $hu < -360deg) {
+    $hu: $hu + 360deg;
+  }
+  @return (
+    $hu
+  );
+}
+@function sat-diff($a, $b) {
+  $sat: color.channel($b, "saturation", $space: hsl) - color.channel($a, "saturation", $space: hsl); 
+  @return (
+    $sat
+  );
+}
+@function apply-diff($a, $b) {
+  $light-diff: light-diff($a, $b);
+  $hu-dif: hu-diff($a, $b);
+  $sat-diff: sat-diff($a, $b);
+  $str: '';
+  $color: color.adjust($a, $hue: $hu-dif, $saturation: $sat-diff, $lightness: $light-diff, $space: hsl);
+  $red: math.round(color.channel($color, "red"));
+  $green: math.round(color.channel($color, "green"));
+  $blue: math.round(color.channel($color, "blue"));
+  @if (math.abs($light-diff) > 0.5) {
+    $str: $str + "$lightness: " + inspect(math.round($light-diff));
+  }
+  @if (math.abs($hu-dif) > 0.5) {
+    @if(str-length($str) > 0) {
+      $str: $str  + ', ';
+    }
+    $str: $str + "$hue: " + inspect(math.round($hu-dif));
+  }  
+  @if (math.abs($sat-diff) > 0.5) {
+    @if(str-length($str) > 0) {
+      $str: $str  + ', ';
+    }
+    $str: $str + "$saturation: " + inspect(math.round($sat-diff));
+  }  
+  @debug "Change from $a to $b to is: ";
+  @debug $str;
+  @return rgb($red, $green, $blue);
+}
+
+$a: $fm-teal; // orig color
+$b: #3cc6a1; // target color
+$c: apply-diff($a, $b);
